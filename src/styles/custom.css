@@ -606,23 +606,27 @@ header.main-header .header-sticky.active{
 .main-menu ul ul{
 	visibility: hidden;
 	opacity: 0;
-	transform: scale(1,0.8);
+	transform: scale(1,0.92) translateY(6px);
 	transform-origin: top;
-	padding: 0;
+	padding: 8px 0;
 	margin: 0;
 	list-style: none;
-	width: 235px;
-	border-radius: 12px;
+	min-width: 240px;
+	border-radius: 14px;
 	position: absolute;
 	left: 0;
 	top: 100%;
-	background: var(--accent-color);
-	transition: all 0.3s ease-in-out;
+	background: #002c1d;
+	border: 1px solid rgba(232, 175, 48, 0.25);
+	box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 	text-align: left;
 }
 
 .main-menu ul li.submenu:first-child ul{
-    width: 235px;
+    min-width: 240px;
 }
 
 .main-menu ul ul ul{
@@ -634,8 +638,8 @@ header.main-header .header-sticky.active{
 .main-menu ul li:hover > ul{
 	visibility: visible;
 	opacity: 1;
-	transform: scale(1,1);
-    padding: 5px 0;
+	transform: scale(1,1) translateY(0);
+    padding: 8px 0;
 }
 
 .main-menu ul li.submenu ul li.submenu > a:after{
@@ -649,16 +653,19 @@ header.main-header .header-sticky.active{
 }
 
 .main-menu ul ul li a{
-	color: var(--primary-color);
-	padding: 6px 20px !important;
-	transition: all 0.3s ease-in-out;
+	color: #e5e7eb;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 9px 22px !important;
+	display: block;
+	transition: all 0.2s ease-in-out;
 }
 
 .main-menu ul ul li a:hover,
 .main-menu ul ul li a:focus{
-	color: var(--white-color);
-	background-color: transparent;
-	padding: 6px 20px 6px 23px !important;
+	color: #E8AF30;
+	background-color: rgba(255, 255, 255, 0.05);
+	padding-left: 26px !important;
 }
 
 .main-menu ul li.highlighted-menu{
