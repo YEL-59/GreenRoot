@@ -1,37 +1,78 @@
 import type { NavLink } from "@/types";
 
+export interface DrawerCategory {
+  title: string;
+  items: NavLink[];
+}
+
 export const mainNav: NavLink[] = [
   {
     label: "Home",
     href: "/",
+  },
+  {
+    label: "About Us",
+    href: "/about",
+  },
+  {
+    label: "Services",
+    href: "/services",
     children: [
-      { label: "Home - Version 1", href: "/" },
-      { label: "Home - Version 2", href: "/" },
-      { label: "Home - Version 3", href: "/" },
+      { label: "All Services", href: "/services" },
+      { label: "Organic Farming", href: "/services/organic-farming" },
+      { label: "Service Details", href: "/services/organic-vegetable-farming" },
+      { label: "Farm Tours", href: "/services/farm-tours" },
     ],
   },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Blog", href: "/blog" },
   {
-    label: "Pages",
-    href: "#",
+    label: "Blog",
+    href: "/blog",
     children: [
-      { label: "Service Details", href: "/services/organic-vegetable-farming" },
+      { label: "Blog Grid", href: "/blog" },
       { label: "Blog Details", href: "/blog/true-benefits-of-organic" },
+    ],
+  },
+  {
+    label: "Contact Us",
+    href: "/contact",
+  },
+];
+
+export const drawerCategories: DrawerCategory[] = [
+  {
+    title: "Core Services",
+    items: [
+      { label: "Service Details", href: "/services/organic-vegetable-farming" },
+      { label: "Farm Tours", href: "/services/farm-tours" },
+      { label: "Agricultural Consulting", href: "/services/agricultural-consulting" },
+      { label: "Produce Delivery", href: "/services/fresh-produce-delivery" },
+    ],
+  },
+  {
+    title: "Products & Shop",
+    items: [
       { label: "Our Products", href: "/products" },
       { label: "Product Details", href: "/products/organic-basket" },
+    ],
+  },
+  {
+    title: "Company & People",
+    items: [
       { label: "Our Team", href: "/team" },
       { label: "Team Details", href: "/team/ramesh-patel" },
       { label: "Pricing Plan", href: "/pricing" },
       { label: "Testimonials", href: "/testimonials" },
+    ],
+  },
+  {
+    title: "Media & Help",
+    items: [
       { label: "Image Gallery", href: "/image-gallery" },
       { label: "Video Gallery", href: "/video-gallery" },
       { label: "FAQs", href: "/faqs" },
-      { label: "404", href: "/404" },
+      { label: "404 Error", href: "/404" },
     ],
   },
-  { label: "Contact Us", href: "/contact" },
 ];
 
 export const footerQuickLinks: NavLink[] = [
