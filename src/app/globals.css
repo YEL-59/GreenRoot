@@ -1,0 +1,13 @@
+/* Google Fonts Bricolage Grotesque */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
+
+/* Ensure HTML & body smoothly render the Soilux Gold theme */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
