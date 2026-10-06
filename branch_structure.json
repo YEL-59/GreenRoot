@@ -1,0 +1,33 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "dependabot/npm_and_yarn/multi-d49ef80a9c",
+    "dev",
+    "feature/about-page-and-navbar-drawer",
+    "feature/bilingual-i18n",
+    "feature/ecommerce-and-dashboards",
+    "feature/services-and-service-detail",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "dependabot/npm_and_yarn/multi-d49ef80a9c": "main",
+    "dev": "main",
+    "feature/about-page-and-navbar-drawer": "main",
+    "feature/bilingual-i18n": "main",
+    "feature/ecommerce-and-dashboards": "main",
+    "feature/services-and-service-detail": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "dependabot/npm_and_yarn/multi-d49ef80a9c",
+    "dev",
+    "feature/about-page-and-navbar-drawer",
+    "feature/bilingual-i18n",
+    "feature/ecommerce-and-dashboards",
+    "feature/services-and-service-detail",
+    "origin"
+  ]
+}
