@@ -241,7 +241,7 @@ a:focus{
     right: 24px;
     width: 12px;
     height: 12px;
-    background-image: url('../images/arrow-primary.svg');
+    background-image: url('/images/arrow-primary.svg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -286,7 +286,7 @@ a:focus{
 }
 
 .btn-default.btn-border::before{
-	background-image: url('../images/arrow-white.svg');
+	background-image: url('/images/arrow-white.svg');
 }
 
 .btn-default.btn-highlighted:hover:before{
@@ -295,7 +295,7 @@ a:focus{
 
 .hero-btn .btn-default.btn-border:hover:before{
 	filter: none;
-	background-image: url('../images/arrow-primary.svg');
+	background-image: url('/images/arrow-primary.svg');
 }
 
 .btn-default.btn-highlighted::after,
@@ -320,7 +320,7 @@ a:focus{
     top: 50%;
     right: 0;
 	transform: translateY(-50%);
-	background-image: url('../images/arrow-primary.svg');
+	background-image: url('/images/arrow-primary.svg');
 	background-repeat: no-repeat;
 	background-position: right center;
 	background-size: cover;
@@ -406,7 +406,7 @@ a:focus{
 
 .dark-section{
 	background-color: var(--primary-color);
-	background-image: url('../images/dark-section-bg-shape.png');
+	background-image: url('/images/dark-section-bg-shape.png');
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -787,7 +787,7 @@ header.main-header .header-sticky.active{
 
 .hero{
 	position: relative;
-	background: url('../images/hero-bg.jpg') no-repeat;
+	background: url('/images/hero-bg.jpg') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	margin-top: 20px;
@@ -1301,7 +1301,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .our-services{
-	background-image: url('../images/section-bg-1.png');
+	background-image: url('/images/section-bg-1.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -1705,7 +1705,7 @@ header.main-header .header-sticky.active{
 
 .intro-video{
 	position: relative;
-	background-image: url(../images/intro-video-bg.jpg);
+	background-image: url(/images/intro-video-bg.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1906,7 +1906,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .how-it-work{
-	background-image: url('../images/section-bg-1.png');
+	background-image: url('/images/section-bg-1.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -2483,7 +2483,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .our-testimonials{
-	background-image: url('../images/section-bg-2.png');
+	background-image: url('/images/section-bg-2.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -2681,7 +2681,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .main-footer{
-	background-image: url('../images/footer-bg.png');
+	background-image: url('/images/footer-bg.png');
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: 100% auto;
@@ -2924,7 +2924,7 @@ header.main-header .header-sticky.active{
 
 .page-header{
 	position: relative;
-	background: url('../images/page-header-bg.jpg') no-repeat;
+	background: url('/images/page-header-bg.jpg') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	padding: 265px 0 150px;
@@ -3343,8 +3343,8 @@ header.main-header .header-sticky.active{
 	mask-size: cover;
     mask-position: center center;
     mask-repeat: no-repeat;
-    mask-image: url(../images/our-advantage-image-shape.svg);
-    background-image: url(../images/our-advantage-image-shape.svg);
+    mask-image: url(/images/our-advantage-image-shape.svg);
+    background-image: url(/images/our-advantage-image-shape.svg);
     width: 100%;
     height: 100%;
 }
@@ -3517,7 +3517,7 @@ header.main-header .header-sticky.active{
     position: absolute;
     top: 5px;
     right: 0;
-	background: url('../images/arrow-primary.svg') no-repeat;
+	background: url('/images/arrow-primary.svg') no-repeat;
 	background-position: center center;
 	background-size: cover;
     width: 12px;
@@ -4021,7 +4021,7 @@ header.main-header .header-sticky.active{
 }
 
 .post-entry blockquote{
-	background: var(--secondary-color) url('../images/icon-blockquote.svg');
+	background: var(--secondary-color) url('/images/icon-blockquote.svg');
 	background-repeat: no-repeat;
 	background-position: 30px 30px;
     background-size: 45px;
@@ -6777,7 +6777,7 @@ header.main-header .header-sticky.active{
 
 .hero-gold{
 	position: relative;
-	background-image: url('../images/hero-bg-gold.png');
+	background-image: url('/images/hero-bg-gold.png');
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-size: 100% auto;
@@ -6827,7 +6827,7 @@ header.main-header .header-sticky.active{
 }
 
 .hero-btn-gold .btn-default.btn-highlighted:before{
-	background-image: url('../images/arrow-white.svg');
+	background-image: url('/images/arrow-white.svg');
 }
 
 .hero-btn-gold .btn-default.btn-highlighted:hover:before{
@@ -7226,7 +7226,7 @@ header.main-header .header-sticky.active{
 }
 
 .service-item-btn-gold .readmore-btn::before{
-	background-image: url('../images/arrow-accent.svg');
+	background-image: url('/images/arrow-accent.svg');
 }
 
 .service-item-btn-gold .readmore-btn:hover:before{
@@ -7285,7 +7285,7 @@ header.main-header .header-sticky.active{
 .why-choose-images-gold{
 	position: relative;
 	height: 100%;
-	background-image: url('../images/why-choose-image-box-bg.png');
+	background-image: url('/images/why-choose-image-box-bg.png');
 	background-repeat: no-repeat;
 	background-position: bottom 75px left;
 	background-size: auto;
@@ -7307,8 +7307,8 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	width: 12px;
     height: 12px;
-	mask: url('../images/why-choose-image-corner-shape-gold.svg');
-	-webkit-mask: url('../images/why-choose-image-corner-shape-gold.svg');
+	mask: url('/images/why-choose-image-corner-shape-gold.svg');
+	-webkit-mask: url('/images/why-choose-image-corner-shape-gold.svg');
 	background-color: var(--bg-color);
 	mask-repeat: no-repeat;
 	mask-size: cover;
@@ -7376,8 +7376,8 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	width: 12px;
     height: 12px;
-	mask: url('../images/why-choose-counter-box-corner-shape-gold.svg');
-	-webkit-mask: url('../images/why-choose-counter-box-corner-shape-gold.svg');
+	mask: url('/images/why-choose-counter-box-corner-shape-gold.svg');
+	-webkit-mask: url('/images/why-choose-counter-box-corner-shape-gold.svg');
 	background-color: var(--bg-color);
 	mask-repeat: no-repeat;
 	mask-size: cover;
@@ -7603,7 +7603,7 @@ header.main-header .header-sticky.active{
 
 .our-story-gold{
 	position: relative;
-	background-image: url('../images/our-story-bg-image-gold.jpg');
+	background-image: url('/images/our-story-bg-image-gold.jpg');
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -8143,23 +8143,23 @@ header.main-header .header-sticky.active{
 }
 
 .how-works-item-gold.box-1 .how-works-item-image-gold figure{
-	background-image: url(../images/work-item-shape-1.svg);
-	mask-image: url(../images/work-item-shape-1.svg);
+	background-image: url(/images/work-item-shape-1.svg);
+	mask-image: url(/images/work-item-shape-1.svg);
 }
 
 .how-works-item-gold.box-2 .how-works-item-image-gold figure{
-	background-image: url(../images/work-item-shape-2.svg);
-	mask-image: url(../images/work-item-shape-2.svg);
+	background-image: url(/images/work-item-shape-2.svg);
+	mask-image: url(/images/work-item-shape-2.svg);
 }
 
 .how-works-item-gold.box-3 .how-works-item-image-gold figure{
-	background-image: url(../images/work-item-shape-3.svg);
-	mask-image: url(../images/work-item-shape-3.svg);
+	background-image: url(/images/work-item-shape-3.svg);
+	mask-image: url(/images/work-item-shape-3.svg);
 }
 
 .how-works-item-gold.box-4 .how-works-item-image-gold figure{
-	background-image: url(../images/work-item-shape-4.svg);
-	mask-image: url(../images/work-item-shape-4.svg);
+	background-image: url(/images/work-item-shape-4.svg);
+	mask-image: url(/images/work-item-shape-4.svg);
 }
 
 .how-works-item-image-gold figure img{
@@ -8429,7 +8429,7 @@ header.main-header .header-sticky.active{
 
 .our-testimonials-gold{
 	position: relative;
-	background-image: url('../images/our-testimonials-bg-gold.jpg');
+	background-image: url('/images/our-testimonials-bg-gold.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -9591,7 +9591,7 @@ header.main-header .header-sticky.active{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: url('../images/hero-bg-metal.png') no-repeat;
+	background: url('/images/hero-bg-metal.png') no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
 }
@@ -9848,7 +9848,7 @@ header.main-header .header-sticky.active{
 }
 
 .our-services-metal{
-	background-image: url('../images/section-bg-1.png');
+	background-image: url('/images/section-bg-1.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -10095,7 +10095,7 @@ header.main-header .header-sticky.active{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-image: url('../images/our-core-value-bg-metal.png');
+	background-image: url('/images/our-core-value-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-size: 100% auto;
@@ -10187,7 +10187,7 @@ header.main-header .header-sticky.active{
 }
 
 .core-value-cta-box-metal{
-	background: var(--white-color) url('../images/core-value-cta-box-bg-metal.png');
+	background: var(--white-color) url('/images/core-value-cta-box-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: bottom left;
 	background-size: 100% auto;
@@ -10239,7 +10239,7 @@ header.main-header .header-sticky.active{
 	height: 100%;
 	max-width: 450px;
 	height: 100%;
-	background-image: url('../images/core-value-cta-box-image-bg-metal.png');
+	background-image: url('/images/core-value-cta-box-image-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: center bottom;
 	background-size: 100% auto;
@@ -10256,7 +10256,7 @@ header.main-header .header-sticky.active{
 }
 
 .our-team-metal{
-	background-image: url('../images/our-team-bg-metal.png');
+	background-image: url('/images/our-team-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -10473,7 +10473,7 @@ header.main-header .header-sticky.active{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-image: url('../images/our-testimonial-bg-metal.png');
+	background-image: url('/images/our-testimonial-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;
@@ -10651,7 +10651,7 @@ header.main-header .header-sticky.active{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-image: url('../images/footer-bg-metal.png');
+	background-image: url('/images/footer-bg-metal.png');
 	background-repeat: no-repeat;
 	background-position: bottom center;
 	background-size: 100% auto;

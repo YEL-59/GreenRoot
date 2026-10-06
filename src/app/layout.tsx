@@ -28,14 +28,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* Template CSS Stylesheets */}
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/slicknav.min.css" />
-        <link rel="stylesheet" href="/css/all.min.css" />
-        <link rel="stylesheet" href="/css/animate.css" />
-        <link rel="stylesheet" href="/css/magnific-popup.css" />
-        <link rel="stylesheet" href="/css/mousecursor.css" />
-        <link rel="stylesheet" href="/css/custom.css" />
+
       </head>
       <body>
         {/* Preloader animation */}
