@@ -5,9 +5,11 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { NavMenu } from "./NavMenu";
 import { MobileMenu } from "./MobileMenu";
+import { SideDrawer } from "./SideDrawer";
 
 export const Header: React.FC = () => {
   const [stickyState, setStickyState] = useState<"" | "active" | "hide">("");
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,24 +28,29 @@ export const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="main-header header-gold active-sticky-header">
-      <div className={`header-sticky bg-section ${stickyState}`}>
-        <nav className="navbar navbar-expand-lg">
-          <div className="container">
-            {/* Logo Start */}
-            <Link className="navbar-brand" href="/">
-              <img src={siteConfig.logo} alt={siteConfig.name} />
-            </Link>
-            {/* Logo End */}
+    <>
+      <header className="main-header header-gold active-sticky-header">
+        <div className={`header-sticky bg-section ${stickyState}`}>
+          <nav className="navbar navbar-expand-lg">
+            <div className="container">
+              {/* Logo Start */}
+              <Link className="navbar-brand" href="/">
+                <img src={siteConfig.logo} alt={siteConfig.name} />
+              </Link>
+              {/* Logo End */}
 
-            {/* Desktop Navigation */}
-            <NavMenu />
+              {/* Desktop Navigation */}
+              <NavMenu onOpenDrawer={() => setIsDrawerOpen(true)} />
 
-            {/* Mobile Navigation */}
-            <MobileMenu />
-          </div>
-        </nav>
-      </div>
-    </header>
+              {/* Mobile Navigation */}
+              <MobileMenu onOpenDrawer={() => setIsDrawerOpen(true)} />
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* Right-Side Offcanvas Drawer with All Pages & Info */}
+      <SideDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+    </>
   );
 };

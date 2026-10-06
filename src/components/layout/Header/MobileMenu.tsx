@@ -5,7 +5,11 @@ import Link from "next/link";
 import { mainNav } from "@/data/navigation";
 import type { NavLink } from "@/types";
 
-export const MobileMenu: React.FC = () => {
+interface MobileMenuProps {
+  onOpenDrawer?: () => void;
+}
+
+export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
@@ -15,7 +19,19 @@ export const MobileMenu: React.FC = () => {
 
   return (
     <>
-      <div className="navbar-toggle">
+      <div className="navbar-toggle flex items-center gap-2">
+        {onOpenDrawer && (
+          <button
+            type="button"
+            onClick={onOpenDrawer}
+            className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8AF30] border border-white/20 text-white hover:text-black flex items-center justify-center transition-all duration-200 mr-1"
+            aria-label="Open Explore Side Menu"
+            title="Explore All Pages"
+          >
+            <i className="fa-solid fa-bars-staggered text-xs"></i>
+          </button>
+        )}
+
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
@@ -96,6 +112,23 @@ export const MobileMenu: React.FC = () => {
                   </li>
                 );
               })}
+
+              {/* Quick Drawer trigger inside mobile nav */}
+              {onOpenDrawer && (
+                <li className="slicknav_item mt-2 pt-2 border-t border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      onOpenDrawer();
+                    }}
+                    className="w-full text-left py-2 px-3 text-[#E8AF30] font-semibold flex items-center justify-between text-sm"
+                  >
+                    <span>Explore All Pages</span>
+                    <i className="fa-solid fa-arrow-right text-xs"></i>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         )}
