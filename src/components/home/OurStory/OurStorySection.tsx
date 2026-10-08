@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ourStoryData } from "@/data/home";
 import { VideoPopup } from "@/components/common";

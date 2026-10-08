@@ -1,13 +1,13 @@
 "use client";
+import type { ReactNode } from "react";
 
-import React from "react";
 import Link from "next/link";
 
 export type AdminHeaderProps = {
   onToggleSidebar: () => void;
   title?: string;
   subtitle?: string;
-  actionButton?: React.ReactNode;
+  actionButton?: ReactNode;
 };
 
 export const AdminHeader = ({

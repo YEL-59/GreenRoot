@@ -1,4 +1,3 @@
-import React from "react";
 import { servicesData } from "@/data/home";
 import { ServiceCard } from "./ServiceCard";
 import { ServicesFooter } from "./ServicesFooter";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { initialOrders } from "@/data/orders";
 import { OrderCard } from "@/components/dashboard";
 

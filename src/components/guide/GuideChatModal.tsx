@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { quickQuestions, findMatchingIntent, GuideIntent } from "./guideKnowledge";
@@ -61,7 +62,7 @@ export const GuideChatModal = ({
     setInputValue("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleSendQuery(inputValue);
   };

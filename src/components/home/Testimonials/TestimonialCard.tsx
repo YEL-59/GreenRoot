@@ -1,4 +1,3 @@
-import React from "react";
 import type { Testimonial } from "@/types";
 
 export type TestimonialCardProps = {

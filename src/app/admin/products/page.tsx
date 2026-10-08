@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { ProductManagementTable } from "@/components/admin";
 
 export default function AdminProductsPage() {

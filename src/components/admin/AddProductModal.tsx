@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Product } from "@/types";
 import { productCategories } from "@/data/products";
 
@@ -29,7 +30,7 @@ export const AddProductModal = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!title || !titleBn || !price) return;
 

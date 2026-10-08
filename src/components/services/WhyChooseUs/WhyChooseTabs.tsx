@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const WhyChooseTabs = () => {
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2" | "tab3">("tab2");

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import type { OrderTrackingInfo } from "@/types";
 
 export type TrackingTimelineProps = {

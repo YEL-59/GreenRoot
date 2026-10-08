@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function AdminSettingsPage() {
   const [farmName, setFarmName] = useState("GreenRoot Agriculture & Organic Farm");
@@ -14,7 +15,7 @@ export default function AdminSettingsPage() {
   const [enableBkash, setEnableBkash] = useState(true);
   const [saved, setSaved] = useState(false);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = (e: FormEvent) => {
     e.preventDefault();
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);

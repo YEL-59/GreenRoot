@@ -1,4 +1,3 @@
-import React from "react";
 import { WhyChooseImages } from "./WhyChooseImages";
 import { WhyChooseFeatures } from "./WhyChooseFeatures";
 

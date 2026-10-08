@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { UserAddress } from "@/types";
 import { initialUserProfile } from "@/data/userProfile";
 
@@ -22,7 +23,7 @@ export const AddressManager = () => {
     );
   };
 
-  const handleAddAddress = (e: React.FormEvent) => {
+  const handleAddAddress = (e: FormEvent) => {
     e.preventDefault();
     if (!newName || !newPhone || !newAddress) return;
 

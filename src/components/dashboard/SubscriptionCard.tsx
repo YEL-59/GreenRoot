@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FarmSubscription } from "@/types";
 import { initialUserProfile } from "@/data/userProfile";
 

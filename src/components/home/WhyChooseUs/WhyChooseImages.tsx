@@ -1,4 +1,3 @@
-import React from "react";
 import { whyChooseData } from "@/data/home";
 
 export const WhyChooseImages = () => {

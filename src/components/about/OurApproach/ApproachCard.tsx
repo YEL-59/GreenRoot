@@ -1,4 +1,3 @@
-import React from "react";
 import type { ApproachItem } from "@/data/about";
 
 type ApproachCardProps = {

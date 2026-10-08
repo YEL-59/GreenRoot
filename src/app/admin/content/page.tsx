@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { initialFarmNotices, type FarmNotice } from "@/data/adminData";
 import { articles as initialArticles } from "@/data/blog";
 
@@ -9,7 +10,7 @@ export default function AdminContentManagementPage() {
   const [newNoticeTitle, setNewNoticeTitle] = useState("");
   const [newNoticeBadge, setNewNoticeBadge] = useState("Harvest Notice");
 
-  const handleAddNotice = (e: React.FormEvent) => {
+  const handleAddNotice = (e: FormEvent) => {
     e.preventDefault();
     if (!newNoticeTitle) return;
 

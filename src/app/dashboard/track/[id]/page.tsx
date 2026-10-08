@@ -1,6 +1,6 @@
 "use client";
+import { use } from "react";
 
-import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { initialOrders } from "@/data/orders";
@@ -11,7 +11,7 @@ export default function OrderLiveTrackPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const resolvedParams = React.use(params);
+  const resolvedParams = use(params);
   const id = resolvedParams?.id;
 
   const order = initialOrders.find((o) => o.id === id) || initialOrders[0];

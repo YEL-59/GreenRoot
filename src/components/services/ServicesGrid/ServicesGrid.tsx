@@ -1,4 +1,3 @@
-import React from "react";
 import { servicesList } from "@/data/services";
 import { ServiceGridCard } from "./ServiceGridCard";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { teamMembers } from "@/data/home";
 import { TeamMemberCard } from "./TeamMemberCard";
 import { TeamFooter } from "./TeamFooter";

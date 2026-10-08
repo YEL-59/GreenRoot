@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { ApproachCard } from "./ApproachCard";
