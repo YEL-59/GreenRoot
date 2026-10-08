@@ -1,22 +1,72 @@
-"use client";
-import { use } from "react";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import { articles } from "@/data/blog";
+import { siteConfig } from "@/config/site";
 
-export default function BlogPostPage({
-  params,
-}: {
+type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
-}) {
-  const resolvedParams = use(params);
-  const slug = resolvedParams?.slug;
+};
 
+export async function generateStaticParams() {
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
   const article = articles.find((a) => a.slug === slug);
 
   if (!article) {
-    return notFound();
+    return {
+      title: `Article Not Found | ${siteConfig.title}`,
+      description: "The requested blog article could not be found.",
+    };
+  }
+
+  const title = `${article.titleBn} (${article.title}) | ${siteConfig.title}`;
+  const description = article.excerptBn || article.excerpt;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/blog/${article.slug}`,
+      siteName: siteConfig.title,
+      images: [
+        {
+          url: article.image,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      type: "article",
+      locale: "bn_BD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [article.image],
+    },
+    alternates: {
+      canonical: `/blog/${article.slug}`,
+    },
+  };
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const article = articles.find((a) => a.slug === slug);
+
+  if (!article) {
+    notFound();
   }
 
   const otherArticles = articles.filter((a) => a.slug !== slug).slice(0, 2);

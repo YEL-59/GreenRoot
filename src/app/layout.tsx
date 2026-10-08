@@ -10,10 +10,56 @@ import { FarmGuideAssistant } from "@/components/guide";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: `${siteConfig.title}`,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://greenroot.farm"),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
   description: siteConfig.description,
+  keywords: [
+    "GreenRoot",
+    "Organic Farm Bangladesh",
+    "Pure Raw Cow Milk",
+    "Bilona Cow Ghee",
+    "Sundarban Wild Honey",
+    "Cold Pressed Mustard Oil",
+    "খাঁটি গরুর দুধ",
+    "গাওয়া ঘি",
+    "সুন্দরবনের মধু",
+    "অর্গানিক খামার পণ্য",
+  ],
+  authors: [{ name: "GreenRoot Agro & Dairy" }],
+  creator: "GreenRoot Team",
+  publisher: "GreenRoot",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: "https://greenroot.farm",
+    siteName: siteConfig.name,
+    locale: "bn_BD",
+    type: "website",
+    images: [
+      {
+        url: "/images/hero-image-1.jpg",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.title,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: ["/images/hero-image-1.jpg"],
+  },
   icons: {
     icon: "/images/favicon.png",
+    apple: "/images/favicon.png",
   },
 };
 
@@ -23,7 +69,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="zxx">
+    <html lang="bn" suppressHydrationWarning>
       <head>
         {/* Preconnect for Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
