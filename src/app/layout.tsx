@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Header, Footer } from "@/components/layout";
+import { AppShell } from "@/components/layout";
 import { Preloader, MagicCursor, TemplateEffects } from "@/components/providers";
 import { siteConfig } from "@/config/site";
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/cart";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,27 +29,24 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
-
       </head>
       <body>
-        {/* Preloader animation */}
-        <Preloader />
+        <CartProvider>
+          {/* Preloader animation */}
+          <Preloader />
 
-        {/* Interactive Custom Magic Cursor */}
-        <MagicCursor />
+          {/* Interactive Custom Magic Cursor */}
+          <MagicCursor />
 
-        {/* Dynamic client effects: WOW, CounterUp, SkillBars, Parallax, SplitText */}
-        <TemplateEffects />
+          {/* Dynamic client effects: WOW, CounterUp, SkillBars, Parallax, SplitText */}
+          <TemplateEffects />
 
-        {/* Header Navigation */}
-        <Header />
+          {/* Conditionally renders marketing Header & Footer for storefront, isolates Dashboard & Admin */}
+          <AppShell>{children}</AppShell>
 
-        {/* Main Page Content */}
-        <main>{children}</main>
-
-        {/* Footer */}
-        <Footer />
+          {/* Global Slide-out Shopping Cart Drawer */}
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

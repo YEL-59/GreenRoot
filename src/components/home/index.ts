@@ -10,3 +10,4 @@ export * from "./Team";
 export * from "./Faq";
 export * from "./Testimonials";
 export * from "./Blog";
+export * from "./Products/FeaturedProductsSection";

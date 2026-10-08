@@ -49,7 +49,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
         {/* Top Header */}
         <div className="p-6 border-b border-emerald-900/60 flex items-center justify-between">
           <Link href="/" onClick={onClose} className="inline-block">
-            <img src={siteConfig.logo} alt={siteConfig.name} className="h-10 w-auto" />
+            <img src={siteConfig.logoLight} alt={siteConfig.name} className="h-10 w-auto" />
           </Link>
           <button
             onClick={onClose}

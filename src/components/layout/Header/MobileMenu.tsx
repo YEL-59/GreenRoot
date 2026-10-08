@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { mainNav } from "@/data/navigation";
+import { useCart } from "@/context/CartContext";
 import type { NavLink } from "@/types";
 
 interface MobileMenuProps {
@@ -12,6 +14,8 @@ interface MobileMenuProps {
 export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const pathname = usePathname();
+  const { openCart, totalItems } = useCart();
 
   const toggleSubmenu = (label: string) => {
     setOpenSubmenu((prev) => (prev === label ? null : label));
@@ -19,92 +23,129 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
 
   return (
     <>
-      <div className="navbar-toggle flex items-center gap-2">
+      {/* Mobile Controls (Visible on mobile & tablet, hidden on desktop lg+) */}
+      <div className="flex lg:hidden items-center gap-2 shrink-0">
+        {/* Mobile Cart Trigger */}
+        <button
+          type="button"
+          onClick={openCart}
+          className="relative w-10 h-10 rounded-full bg-stone-900/5 hover:bg-[#E8AF30]/20 border border-stone-900/15 text-[#2C2C2C] flex items-center justify-center transition-all duration-200 focus:outline-none shadow-sm"
+          aria-label="Open Shopping Cart"
+          title="Cart"
+        >
+          <i className="fa-solid fa-basket-shopping text-sm"></i>
+          {totalItems > 0 && (
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-black text-[10px] flex items-center justify-center shadow-md animate-bounce">
+              {totalItems}
+            </span>
+          )}
+        </button>
+
         {onOpenDrawer && (
           <button
             type="button"
             onClick={onOpenDrawer}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E8AF30] border border-white/20 text-white hover:text-black flex items-center justify-center transition-all duration-200 mr-1"
+            className="w-10 h-10 rounded-full bg-[#E8AF30]/15 hover:bg-[#E8AF30] border border-[#E8AF30]/40 text-[#2C2C2C] hover:text-[#181818] flex items-center justify-center transition-all duration-200 focus:outline-none shadow-sm"
             aria-label="Open Explore Side Menu"
             title="Explore All Pages"
           >
-            <i className="fa-solid fa-bars-staggered text-xs"></i>
+            <i className="fa-solid fa-bars-staggered text-sm"></i>
           </button>
         )}
 
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`slicknav_btn ${isOpen ? "slicknav_open" : ""}`}
+          className="w-10 h-10 rounded-xl bg-stone-900/5 hover:bg-stone-900/10 border border-stone-900/15 flex flex-col items-center justify-center gap-1.5 transition-all duration-200 focus:outline-none"
           aria-label="Toggle navigation"
-          style={{ border: "none", background: "none", cursor: "pointer" }}
         >
-          <span className="slicknav_menutxt"></span>
-          <span className="slicknav_icon">
-            <span className="slicknav_icon-bar"></span>
-            <span className="slicknav_icon-bar"></span>
-            <span className="slicknav_icon-bar"></span>
-          </span>
+          <span
+            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+              isOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+              isOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+              isOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </button>
       </div>
 
-      <div className="responsive-menu">
-        {isOpen && (
-          <div className="slicknav_menu" style={{ display: "block" }}>
-            <ul className="slicknav_nav" aria-hidden="false" role="menu">
+      {/* Floating Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="lg:hidden absolute top-full left-0 right-0 w-full px-4 pt-2 pb-4 z-[990]">
+          <div className="bg-[#002719] border-2 border-[#E8AF30]/40 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white">
+            <ul className="space-y-1.5 p-0 m-0 list-none">
               {mainNav.map((item: NavLink) => {
                 const hasChildren = !!item.children;
                 const isSubOpen = openSubmenu === item.label;
+                const isCurrent =
+                  (item.href === "/" && pathname === "/") ||
+                  (item.href !== "/" && (pathname === item.href || pathname?.startsWith(item.href + "/"))) ||
+                  (item.children &&
+                    item.children.some(
+                      (sub: NavLink) => pathname === sub.href || pathname?.startsWith(sub.href + "/")
+                    ));
 
                 return (
-                  <li
-                    key={item.label}
-                    className={`slicknav_item ${hasChildren ? "slicknav_collapsed" : ""}`}
-                  >
+                  <li key={item.label} className="border-b border-white/10 last:border-b-0 pb-1.5">
                     {hasChildren ? (
-                      <>
-                        <a
-                          role="menuitem"
-                          aria-haspopup="true"
-                          tabIndex={0}
-                          className="slicknav_item"
+                      <div>
+                        <button
+                          type="button"
                           onClick={() => toggleSubmenu(item.label)}
-                          style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}
+                          className={`w-full flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-semibold transition-colors ${
+                            isCurrent
+                              ? "text-[#E8AF30] bg-white/10"
+                              : "text-white hover:text-[#E8AF30]"
+                          }`}
                         >
                           <span>{item.label}</span>
-                          <span
-                            className="slicknav_arrow"
-                            style={{
-                              transform: isSubOpen ? "rotate(-180deg)" : "none",
-                              transition: "transform 0.3s ease",
-                            }}
-                          >
-                            &#9662;
-                          </span>
-                        </a>
+                          <i
+                            className={`fa-solid fa-chevron-down text-xs transition-transform duration-200 ${
+                              isSubOpen ? "rotate-180 text-[#E8AF30]" : "text-white/60"
+                            }`}
+                          />
+                        </button>
+
                         {isSubOpen && (
-                          <ul className="slicknav_hidden" role="menu">
-                            {item.children?.map((sub: NavLink) => (
-                              <li key={sub.label}>
-                                <Link
-                                  href={sub.href}
-                                  role="menuitem"
-                                  tabIndex={0}
-                                  onClick={() => setIsOpen(false)}
-                                >
-                                  {sub.label}
-                                </Link>
-                              </li>
-                            ))}
+                          <ul className="pl-4 pr-2 py-2 space-y-1 bg-black/40 rounded-xl mt-1.5 mb-2 border border-white/10 list-none">
+                            {item.children?.map((sub: NavLink) => {
+                              const isSubActive = pathname === sub.href;
+                              return (
+                                <li key={sub.label}>
+                                  <Link
+                                    href={sub.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className={`block py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
+                                      isSubActive
+                                        ? "text-[#E8AF30] font-bold bg-white/15"
+                                        : "text-emerald-100/90 hover:text-white hover:bg-white/10"
+                                    }`}
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                           </ul>
                         )}
-                      </>
+                      </div>
                     ) : (
                       <Link
                         href={item.href}
-                        role="menuitem"
-                        tabIndex={0}
                         onClick={() => setIsOpen(false)}
+                        className={`block py-2.5 px-3 rounded-xl text-base font-semibold transition-colors ${
+                          isCurrent
+                            ? "text-[#E8AF30] bg-white/10 font-bold"
+                            : "text-white hover:text-[#E8AF30]"
+                        }`}
                       >
                         {item.label}
                       </Link>
@@ -112,27 +153,53 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
                   </li>
                 );
               })}
-
-              {/* Quick Drawer trigger inside mobile nav */}
-              {onOpenDrawer && (
-                <li className="slicknav_item mt-2 pt-2 border-t border-white/10">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsOpen(false);
-                      onOpenDrawer();
-                    }}
-                    className="w-full text-left py-2 px-3 text-[#E8AF30] font-semibold flex items-center justify-between text-sm"
-                  >
-                    <span>Explore All Pages</span>
-                    <i className="fa-solid fa-arrow-right text-xs"></i>
-                  </button>
-                </li>
-              )}
             </ul>
+
+            {/* Mobile Actions */}
+            <div className="mt-5 pt-4 border-t border-white/15 flex flex-col gap-2.5">
+              <Link
+                href="/services"
+                onClick={() => setIsOpen(false)}
+                className="w-full text-center py-3 px-4 rounded-full bg-[#E8AF30] hover:bg-[#dfbe2c] text-[#181818] font-bold text-sm tracking-wide transition-colors shadow-md"
+              >
+                Get Started
+              </Link>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsOpen(false)}
+                  className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10 text-center"
+                >
+                  <i className="fa-regular fa-user text-xs text-[#E8AF30]"></i>
+                  <span>ইউজার ড্যাশবোর্ড</span>
+                </Link>
+                <Link
+                  href="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10 text-center"
+                >
+                  <i className="fa-solid fa-shield-halved text-xs text-[#E8AF30]"></i>
+                  <span>অ্যাডমিন প্যানেল</span>
+                </Link>
+              </div>
+
+              {onOpenDrawer && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false);
+                    onOpenDrawer();
+                  }}
+                  className="w-full text-center py-2.5 px-4 rounded-full bg-white/10 hover:bg-white/20 text-emerald-100 font-semibold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10"
+                >
+                  <i className="fa-solid fa-compass text-xs text-[#E8AF30]"></i>
+                  <span>Explore All Pages</span>
+                </button>
+              )}
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

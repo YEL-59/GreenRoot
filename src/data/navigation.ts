@@ -15,6 +15,19 @@ export const mainNav: NavLink[] = [
     href: "/about",
   },
   {
+    label: "Farm Shop",
+    href: "/products",
+    children: [
+      { label: "All Farm Products (সব পণ্য)", href: "/products" },
+      { label: "Milk & Dairy (দুধ ও গাওয়া ঘি)", href: "/products?category=milk-dairy" },
+      { label: "Premium Khejur (মেডজুল ও আজওয়া)", href: "/products?category=khejur" },
+      { label: "Pure Spices & Oils (ঘানি ভাঙা তেল)", href: "/products?category=mosla-oil" },
+      { label: "Raw Honey & Gur (সুন্দরবন মধু ও গুড়)", href: "/products?category=honey-gur" },
+      { label: "Fresh Shak & Veggies (তাজা শাকসবজি)", href: "/products?category=shak-vegetables" },
+      { label: "Deshi Fish & Protein (দেশি মাছ ও ডিম)", href: "/products?category=deshi-fish-meat" },
+    ],
+  },
+  {
     label: "Services",
     href: "/services",
     children: [
@@ -27,10 +40,6 @@ export const mainNav: NavLink[] = [
   {
     label: "Blog",
     href: "/blog",
-    children: [
-      { label: "Blog Grid", href: "/blog" },
-      { label: "Blog Details", href: "/blog/true-benefits-of-organic" },
-    ],
   },
   {
     label: "Contact Us",
@@ -49,28 +58,33 @@ export const drawerCategories: DrawerCategory[] = [
     ],
   },
   {
+    title: "Portals & Dashboards",
+    items: [
+      { label: "User Dashboard (গ্রাহক পোর্টাল)", href: "/dashboard" },
+      { label: "Live Order Tracking Map", href: "/dashboard/track/GR-2026-8841" },
+      { label: "My Orders & History", href: "/dashboard/orders" },
+      { label: "Farm Subscriptions", href: "/dashboard/subscriptions" },
+      { label: "Admin HQ Console (খামার অ্যাডমিন)", href: "/admin" },
+      { label: "Products & Stock Manager", href: "/admin/products" },
+      { label: "Orders Fulfillment", href: "/admin/orders" },
+    ],
+  },
+  {
     title: "Products & Shop",
     items: [
-      { label: "Our Products", href: "/products" },
-      { label: "Product Details", href: "/products/organic-basket" },
+      { label: "Farm Fresh Shop", href: "/products" },
+      { label: "Pure Raw Cow Milk", href: "/products/pure-raw-cow-milk" },
+      { label: "Sundarban Wild Honey", href: "/products/sundarban-raw-wild-honey" },
+      { label: "Wood-Mill Mustard Oil", href: "/products/wood-mill-mustard-oil" },
+      { label: "Checkout", href: "/checkout" },
     ],
   },
   {
-    title: "Company & People",
+    title: "Company & Help",
     items: [
-      { label: "Our Team", href: "/team" },
-      { label: "Team Details", href: "/team/ramesh-patel" },
-      { label: "Pricing Plan", href: "/pricing" },
-      { label: "Testimonials", href: "/testimonials" },
-    ],
-  },
-  {
-    title: "Media & Help",
-    items: [
-      { label: "Image Gallery", href: "/image-gallery" },
-      { label: "Video Gallery", href: "/video-gallery" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "404 Error", href: "/404" },
+      { label: "About Us", href: "/about" },
+      { label: "Blog & Insights", href: "/blog" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
 ];
