@@ -1,4 +1,4 @@
-/** Shared types for the Soilux (GreenRoot) Next.js conversion */
+/** Shared types for the GreenRoot Next.js application */
 
 export interface NavLink {
   label: string;

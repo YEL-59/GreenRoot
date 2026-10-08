@@ -7,7 +7,7 @@ export const FooterBottom: React.FC = () => {
     <div className="col-lg-12">
       <div className="footer-copyright-gold">
         <div className="footer-copyright-text-gold">
-          <p>Copyright © {new Date().getFullYear()} All Rights Reserved.</p>
+          <p>Copyright © {new Date().getFullYear()} GreenRoot. All Rights Reserved.</p>
         </div>
 
         <div className="footer-privacy-policy-gold">

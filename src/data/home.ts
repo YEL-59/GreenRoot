@@ -23,14 +23,14 @@ export const clientAvatars = [
 
 /* ---------------- Hero ---------------- */
 export const heroData = {
-  subtitle: "Healthy Farms, Healthy Lives",
-  title: "Growing pure organic goodness for a healthier tomorrow",
+  subtitle: "GreenRoot 100% Organic Farm",
+  title: "GreenRoot: Growing pure organic goodness for a healthier tomorrow",
   description:
-    "Discover the true taste of nature with our farm-fresh, chemical-free, and sustainably grown produce. From nutrient-rich vegetables to naturally ripened fruits,",
-  bigTitle: "Soilux",
+    "Discover the true taste of nature with GreenRoot's farm-fresh, chemical-free, and sustainably grown produce. From pure raw cow milk, traditional bilona ghee, and cold-pressed oils to seasonal veggies—delivered fresh directly from our farm to your home.",
+  bigTitle: "GreenRoot",
   image: "/images/hero-image-gold.png",
-  primaryBtn: { label: "Visit Our Farm", href: "/contact" },
-  secondaryBtn: { label: "View Our Services", href: "/services" },
+  primaryBtn: { label: "Shop Farm Products", href: "/products" },
+  secondaryBtn: { label: "Our Organic Story", href: "/about" },
 };
 
 /* ---------------- About ---------------- */
