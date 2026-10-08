@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import type { Order, OrderStatus } from "@/types";
 import { initialOrders } from "@/data/orders";
 
-export const OrderManagementTable: React.FC = () => {
+export function OrderManagementTable() {
   const [orders, setOrders] = useState<Order[]>(initialOrders);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");

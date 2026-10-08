@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 import { ModernProductCard } from "@/components/common";
 import type { Product } from "@/types";
 
-const ProductsContent: React.FC = () => {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category") || "all";
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-export const FooterNewsletter: React.FC = () => {
+export function FooterNewsletter() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 

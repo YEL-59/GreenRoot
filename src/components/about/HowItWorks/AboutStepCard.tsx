@@ -12,7 +12,7 @@ interface AboutStepCardProps {
   step: StepItemData;
 }
 
-export const AboutStepCard: React.FC<AboutStepCardProps> = ({ step }) => {
+export function AboutStepCard({ step }: AboutStepCardProps) {
   return (
     <div className="how-work-item">
       <div className="how-work-step-no">

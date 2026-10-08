@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TeamFooter: React.FC = () => {
+export function TeamFooter() {
   return (
     <div className="col-lg-12">
       <div className="section-footer-text section-satisfy-img wow fadeInUp" data-wow-delay="0.8s">

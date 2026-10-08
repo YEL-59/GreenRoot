@@ -13,10 +13,10 @@ const adminNavItems = [
   { href: "/admin/settings", label: "বিজনেস সেটিংস", labelEn: "Store Settings", icon: "fa-solid fa-sliders" },
 ];
 
-export const AdminSidebar: React.FC<{ isOpen?: boolean; onClose?: () => void }> = ({
+export function AdminSidebar({
   isOpen = false,
   onClose,
-}) => {
+}: { isOpen?: boolean; onClose?: () => void }) {
   const pathname = usePathname();
 
   return (

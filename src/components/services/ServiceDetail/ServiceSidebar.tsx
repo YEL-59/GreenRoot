@@ -7,7 +7,7 @@ interface ServiceSidebarProps {
   currentSlug: string;
 }
 
-export const ServiceSidebar: React.FC<ServiceSidebarProps> = ({ currentSlug }) => {
+export function ServiceSidebar({ currentSlug }: ServiceSidebarProps) {
   return (
     <div className="page-single-sidebar">
       {/* Category List */}

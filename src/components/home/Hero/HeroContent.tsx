@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { heroData } from "@/data/home";
 
-export const HeroContent: React.FC = () => {
+export function HeroContent() {
   return (
     <div className="hero-content-gold">
       <div className="section-title">
@@ -25,4 +25,4 @@ export const HeroContent: React.FC = () => {
       </div>
     </div>
   );
-};
+}

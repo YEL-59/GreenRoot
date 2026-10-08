@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import type { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 
-export const ModernProductCard: React.FC<{
+export function ModernProductCard({ product, showQuickBuy = true }: {
   product: Product;
   showQuickBuy?: boolean;
-}> = ({ product, showQuickBuy = true }) => {
+}) {
   const router = useRouter();
   const { items, addToCart, updateQuantity, openCart } = useCart();
   const [isWishlisted, setIsWishlisted] = useState(false);

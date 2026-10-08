@@ -9,9 +9,9 @@ interface ServiceDetailViewProps {
   service: ServiceDetailData;
 }
 
-export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({
+export function ServiceDetailView({
   service,
-}) => {
+}: ServiceDetailViewProps) {
   return (
     <div className="page-service-single">
       <div className="container">

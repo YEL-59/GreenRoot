@@ -1,7 +1,7 @@
 import React from "react";
 import { heroData } from "@/data/home";
 
-export const HeroImage: React.FC = () => {
+export function HeroImage() {
   return (
     <div className="hero-image-box-gold relative mt-4 sm:mt-8">
       <div className="container-fluid">
@@ -20,4 +20,4 @@ export const HeroImage: React.FC = () => {
       </div>
     </div>
   );
-};
+}

@@ -11,7 +11,7 @@ interface MobileMenuProps {
   onOpenDrawer?: () => void;
 }
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
+export function MobileMenu({ onOpenDrawer }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const pathname = usePathname();

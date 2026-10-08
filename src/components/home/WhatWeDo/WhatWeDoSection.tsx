@@ -3,7 +3,7 @@ import { WhatWeDoImages } from "./WhatWeDoImages";
 import { WhatWeDoSteps } from "./WhatWeDoSteps";
 import { WhatWeDoCounters } from "./WhatWeDoCounters";
 
-export const WhatWeDoSection: React.FC = () => {
+export function WhatWeDoSection() {
   return (
     <div className="what-we-do-gold">
       <div className="container">

@@ -5,7 +5,7 @@ interface AboutFooterProps {
   tags: string[];
 }
 
-export const AboutFooter: React.FC<AboutFooterProps> = ({ tags }) => {
+export function AboutFooter({ tags }: AboutFooterProps) {
   return (
     <div className="about-us-footer">
       {/* Footer Tags List */}

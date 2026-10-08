@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { siteConfig, socialLinks } from "@/config/site";
 
-export const FooterBrand: React.FC = () => {
+export function FooterBrand() {
   return (
     <div className="footer-about-gold order-1">
       <div className="footer-logo-gold">

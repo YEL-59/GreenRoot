@@ -5,7 +5,7 @@ import { TeamFooter } from "./TeamFooter";
 
 const delays = ["0s", "0.2s", "0.4s", "0.6s"];
 
-export const TeamSection: React.FC = () => {
+export function TeamSection() {
   return (
     <div className="our-team-gold bg-section dark-section">
       <div className="container">

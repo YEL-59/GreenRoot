@@ -7,11 +7,11 @@ interface ServiceBenefitsSectionProps {
   image: string;
 }
 
-export const ServiceBenefitsSection: React.FC<ServiceBenefitsSectionProps> = ({
+export function ServiceBenefitsSection({
   intro,
   benefits,
   image,
-}) => {
+}: ServiceBenefitsSectionProps) {
   return (
     <div className="service-benefit-box">
       <h2 className="text-anime-style-3">Benefits by choosing us</h2>

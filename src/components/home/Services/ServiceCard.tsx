@@ -7,7 +7,7 @@ export interface ServiceCardProps {
   delay?: string;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service, delay }) => {
+export function ServiceCard({ service, delay }: ServiceCardProps) {
   return (
     <div className="col-xl-3 col-md-6">
       <div className="service-item-gold wow fadeInUp" data-wow-delay={delay}>

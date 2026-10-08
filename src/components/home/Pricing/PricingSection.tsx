@@ -5,7 +5,7 @@ import { PricingBenefits } from "./PricingBenefits";
 
 const delays = ["0s", "0.2s", "0.4s"];
 
-export const PricingSection: React.FC = () => {
+export function PricingSection() {
   return (
     <div className="our-pricing-gold bg-section dark-section">
       <div className="container">

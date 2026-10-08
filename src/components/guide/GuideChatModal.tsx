@@ -19,11 +19,11 @@ interface GuideChatModalProps {
   onStartTour: () => void;
 }
 
-export const GuideChatModal: React.FC<GuideChatModalProps> = ({
+export function GuideChatModal({
   isOpen,
   onClose,
   onStartTour,
-}) => {
+}: GuideChatModalProps) {
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([
     {

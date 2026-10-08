@@ -4,7 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Header, Footer } from "@/components/layout";
 
-export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isDashboardOrAdmin =
     pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin");

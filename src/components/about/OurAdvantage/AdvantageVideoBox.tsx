@@ -8,10 +8,10 @@ interface AdvantageVideoBoxProps {
   videoUrl: string;
 }
 
-export const AdvantageVideoBox: React.FC<AdvantageVideoBoxProps> = ({
+export function AdvantageVideoBox({
   image,
   videoUrl,
-}) => {
+}: AdvantageVideoBoxProps) {
   return (
     <div
       className="our-advantage-image box-2 wow fadeInUp"

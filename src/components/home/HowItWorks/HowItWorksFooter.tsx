@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export const HowItWorksFooter: React.FC = () => {
+export function HowItWorksFooter() {
   return (
     <div className="col-lg-12">
       <div className="section-footer-text wow fadeInUp" data-wow-delay="0.8s">

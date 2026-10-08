@@ -7,7 +7,7 @@ interface ServiceDetailFaqProps {
   faqs: ServiceDetailData["faqs"];
 }
 
-export const ServiceDetailFaq: React.FC<ServiceDetailFaqProps> = ({ faqs }) => {
+export function ServiceDetailFaq({ faqs }: ServiceDetailFaqProps) {
   const [openId, setOpenId] = useState<string | null>(faqs[0]?.id || null);
 
   const toggle = (id: string) => {

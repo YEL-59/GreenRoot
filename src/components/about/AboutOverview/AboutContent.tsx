@@ -9,12 +9,12 @@ interface AboutContentProps {
   features: AboutFeature[];
 }
 
-export const AboutContent: React.FC<AboutContentProps> = ({
+export function AboutContent({
   subtitle,
   title,
   paragraphs,
   features,
-}) => {
+}: AboutContentProps) {
   return (
     <div className="about-us-content">
       {/* Section Title */}

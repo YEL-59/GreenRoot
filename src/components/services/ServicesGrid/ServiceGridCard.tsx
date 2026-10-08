@@ -7,10 +7,10 @@ interface ServiceGridCardProps {
   delay?: string;
 }
 
-export const ServiceGridCard: React.FC<ServiceGridCardProps> = ({
+export function ServiceGridCard({
   service,
   delay = "0s",
-}) => {
+}: ServiceGridCardProps) {
   return (
     <div className="col-xl-3 col-md-6">
       <div

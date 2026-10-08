@@ -4,7 +4,7 @@ import { AboutImages } from "./AboutImages";
 import { AboutContent } from "./AboutContent";
 import { AboutFooter } from "./AboutFooter";
 
-export const AboutOverview: React.FC = () => {
+export function AboutOverview() {
   const { overview } = aboutData;
 
   return (

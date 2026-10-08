@@ -1,7 +1,7 @@
 import React from "react";
 import { whatWeDoData } from "@/data/home";
 
-export const WhatWeDoCounters: React.FC = () => {
+export function WhatWeDoCounters() {
   return (
     <div className="col-12">
       <div className="what-we-counter-list-gold wow fadeInUp" data-wow-delay="0.8s">

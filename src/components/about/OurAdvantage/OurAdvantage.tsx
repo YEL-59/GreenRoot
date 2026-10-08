@@ -5,7 +5,7 @@ import { AdvantageQualityBox } from "./AdvantageQualityBox";
 import { AdvantageVideoBox } from "./AdvantageVideoBox";
 import { AdvantageCounterBox } from "./AdvantageCounterBox";
 
-export const OurAdvantage: React.FC = () => {
+export function OurAdvantage() {
   const { advantage } = aboutData;
 
   return (

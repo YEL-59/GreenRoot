@@ -5,7 +5,7 @@ interface TestimonialSlideProps {
   item: TestimonialItem;
 }
 
-export const TestimonialSlide: React.FC<TestimonialSlideProps> = ({ item }) => {
+export function TestimonialSlide({ item }: TestimonialSlideProps) {
   return (
     <div className="testimonial-item">
       <div className="testimonial-item-image">

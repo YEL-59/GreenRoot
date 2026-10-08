@@ -8,7 +8,7 @@ export interface FaqItemProps {
   delay?: string;
 }
 
-export const FaqItem: React.FC<FaqItemProps> = ({ item, isOpen, onToggle, delay }) => {
+export function FaqItem({ item, isOpen, onToggle, delay }: FaqItemProps) {
   return (
     <div className="accordion-item-gold wow fadeInUp" data-wow-delay={delay}>
       <h2 className="accordion-header" id={`heading${item.id}`}>

@@ -7,12 +7,12 @@ interface AdvantageQualityBoxProps {
   customers: string;
 }
 
-export const AdvantageQualityBox: React.FC<AdvantageQualityBoxProps> = ({
+export function AdvantageQualityBox({
   icon,
   title,
   description,
   customers,
-}) => {
+}: AdvantageQualityBoxProps) {
   return (
     <div className="our-advantage-box wow fadeInUp">
       <div className="our-advantage-box-body">

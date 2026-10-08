@@ -3,7 +3,7 @@ import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { TestimonialSlide } from "./TestimonialSlide";
 
-export const AboutTestimonials: React.FC = () => {
+export function AboutTestimonials() {
   const { testimonials } = aboutData;
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { whatWeDoData } from "@/data/home";
 
-export const WhatWeDoSteps: React.FC = () => {
+export function WhatWeDoSteps() {
   return (
     <div className="col-xl-6">
       <div className="what-we-do-content-gold">

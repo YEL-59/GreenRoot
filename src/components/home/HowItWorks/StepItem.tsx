@@ -7,7 +7,7 @@ export interface StepItemProps {
   delay?: string;
 }
 
-export const StepItem: React.FC<StepItemProps> = ({ step, boxIndex, delay }) => {
+export function StepItem({ step, boxIndex, delay }: StepItemProps) {
   return (
     <div className="col-xl-3 col-md-6">
       <div

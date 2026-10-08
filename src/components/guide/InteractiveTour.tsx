@@ -9,10 +9,10 @@ interface InteractiveTourProps {
   onClose: () => void;
 }
 
-export const InteractiveTour: React.FC<InteractiveTourProps> = ({
+export function InteractiveTour({
   isActive,
   onClose,
-}) => {
+}: InteractiveTourProps) {
   const router = useRouter();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 

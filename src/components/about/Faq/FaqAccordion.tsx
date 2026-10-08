@@ -7,7 +7,7 @@ interface FaqAccordionProps {
   items: FaqItemData[];
 }
 
-export const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
+export function FaqAccordion({ items }: FaqAccordionProps) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id || null);
 
   const toggle = (id: string) => {

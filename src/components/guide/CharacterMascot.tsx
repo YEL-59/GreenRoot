@@ -8,11 +8,11 @@ interface CharacterMascotProps {
   unreadCount?: number;
 }
 
-export const CharacterMascot: React.FC<CharacterMascotProps> = ({
+export function CharacterMascot({
   isOpen,
   onToggle,
   unreadCount = 1,
-}) => {
+}: CharacterMascotProps) {
   const [speechBubbleText, setSpeechBubbleText] = useState("ড্যাশবোর্ড বা পণ্য খুঁজছেন? ক্লিক করুন!");
   const [showSpeechBubble, setShowSpeechBubble] = useState(true);
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { TeamCard } from "./TeamCard";
 
-export const AboutTeam: React.FC = () => {
+export function AboutTeam() {
   const { team } = aboutData;
 
   return (

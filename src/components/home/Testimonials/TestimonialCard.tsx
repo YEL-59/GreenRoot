@@ -6,7 +6,7 @@ export interface TestimonialCardProps {
   delay?: string;
 }
 
-export const TestimonialCard: React.FC<TestimonialCardProps> = ({ item, delay }) => {
+export function TestimonialCard({ item, delay }: TestimonialCardProps) {
   return (
     <div className="testimonials-item-gold wow fadeInUp" data-wow-delay={delay}>
       <div className="testimonials-item-header-gold">

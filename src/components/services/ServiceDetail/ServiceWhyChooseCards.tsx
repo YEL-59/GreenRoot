@@ -7,11 +7,11 @@ interface ServiceWhyChooseCardsProps {
   audienceDesc: string;
 }
 
-export const ServiceWhyChooseCards: React.FC<ServiceWhyChooseCardsProps> = ({
+export function ServiceWhyChooseCards({
   intro,
   points,
   audienceDesc,
-}) => {
+}: ServiceWhyChooseCardsProps) {
   return (
     <div className="service-why-choose-box">
       <h2 className="text-anime-style-3">Why choose this service</h2>

@@ -11,7 +11,7 @@ interface NavMenuProps {
   onOpenDrawer?: () => void;
 }
 
-export const NavMenu: React.FC<NavMenuProps> = ({ onOpenDrawer }) => {
+export function NavMenu({ onOpenDrawer }: NavMenuProps) {
   const pathname = usePathname();
   const { openCart, totalItems, subtotal } = useCart();
 

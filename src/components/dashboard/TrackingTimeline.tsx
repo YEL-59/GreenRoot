@@ -3,7 +3,7 @@
 import React from "react";
 import type { OrderTrackingInfo } from "@/types";
 
-export const TrackingTimeline: React.FC<{ tracking: OrderTrackingInfo }> = ({ tracking }) => {
+export function TrackingTimeline({ tracking }: { tracking: OrderTrackingInfo }) {
   return (
     <div className="bg-white rounded-3xl p-6 md:p-8 border border-stone-200/90 shadow-sm">
       <div className="flex items-center justify-between mb-8">

@@ -10,7 +10,7 @@ interface SideDrawerProps {
   onClose: () => void;
 }
 
-export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
+export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

@@ -5,7 +5,7 @@ import type { Product } from "@/types";
 import { products as initialProductList, productCategories } from "@/data/products";
 import { AddProductModal } from "./AddProductModal";
 
-export const ProductManagementTable: React.FC = () => {
+export function ProductManagementTable() {
   const [productList, setProductList] = useState<Product[]>(initialProductList);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");

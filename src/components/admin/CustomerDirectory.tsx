@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { initialCustomers, type AdminCustomer } from "@/data/adminData";
 
-export const CustomerDirectory: React.FC = () => {
+export function CustomerDirectory() {
   const [customers] = useState<AdminCustomer[]>(initialCustomers);
   const [search, setSearch] = useState("");
 

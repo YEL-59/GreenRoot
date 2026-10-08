@@ -7,7 +7,7 @@ export interface PricingCardProps {
   delay?: string;
 }
 
-export const PricingCard: React.FC<PricingCardProps> = ({ plan, delay }) => {
+export function PricingCard({ plan, delay }: PricingCardProps) {
   return (
     <div className="col-xl-4 col-md-6">
       <div className="pricing-item-gold wow fadeInUp" data-wow-delay={delay}>

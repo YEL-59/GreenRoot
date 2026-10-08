@@ -7,7 +7,7 @@ export interface BlogCardProps {
   delay?: string;
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ post, delay }) => {
+export function BlogCard({ post, delay }: BlogCardProps) {
   return (
     <div className="col-xl-4 col-md-6">
       <div className="post-item wow fadeInUp" data-wow-delay={delay}>

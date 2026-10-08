@@ -2,7 +2,7 @@ import React from "react";
 import { aboutData } from "@/data/about";
 import { FaqAccordion } from "./FaqAccordion";
 
-export const AboutFaq: React.FC = () => {
+export function AboutFaq() {
   const { faqs } = aboutData;
 
   return (

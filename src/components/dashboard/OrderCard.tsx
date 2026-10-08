@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Order } from "@/types";
 import { useCart } from "@/context/CartContext";
 
-export const OrderCard: React.FC<{ order: Order }> = ({ order }) => {
+export function OrderCard({ order }: { order: Order }) {
   const [reordered, setReordered] = useState(false);
   const { addToCart, openCart } = useCart();
 

@@ -14,10 +14,10 @@ const menuItems = [
   { href: "/dashboard/rewards", label: "গ্রীনকয়েন ও ওয়ালেট", labelEn: "Rewards & Wallet", icon: "fa-solid fa-coins" },
 ];
 
-export const UserSidebar: React.FC<{ isOpen?: boolean; onClose?: () => void }> = ({
+export function UserSidebar({
   isOpen = false,
   onClose,
-}) => {
+}: { isOpen?: boolean; onClose?: () => void }) {
   const pathname = usePathname();
   const user = initialUserProfile;
 

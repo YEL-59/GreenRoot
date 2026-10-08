@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-export const WhyChooseTabs: React.FC = () => {
+export function WhyChooseTabs() {
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2" | "tab3">("tab2");
 
   const tabContents = {

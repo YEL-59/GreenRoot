@@ -7,7 +7,7 @@ export interface TeamMemberCardProps {
   delay?: string;
 }
 
-export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, delay }) => {
+export function TeamMemberCard({ member, delay }: TeamMemberCardProps) {
   return (
     <div className="col-xl-3 col-md-6">
       <div className="team-item-gold wow fadeInUp" data-wow-delay={delay}>

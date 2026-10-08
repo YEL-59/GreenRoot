@@ -8,13 +8,13 @@ interface AdvantageCounterBoxProps {
   bullets: string[];
 }
 
-export const AdvantageCounterBox: React.FC<AdvantageCounterBoxProps> = ({
+export function AdvantageCounterBox({
   icon,
   years,
   title,
   description,
   bullets,
-}) => {
+}: AdvantageCounterBoxProps) {
   return (
     <div
       className="our-advantage-box wow fadeInUp"

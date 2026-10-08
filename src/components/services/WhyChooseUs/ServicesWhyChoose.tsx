@@ -2,7 +2,7 @@ import React from "react";
 import { WhyChooseTabs } from "./WhyChooseTabs";
 import { WhyChooseVisuals } from "./WhyChooseVisuals";
 
-export const ServicesWhyChoose: React.FC = () => {
+export function ServicesWhyChoose() {
   return (
     <div className="why-choose-us">
       <div className="container">

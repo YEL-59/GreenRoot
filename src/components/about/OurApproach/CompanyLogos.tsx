@@ -4,7 +4,7 @@ interface CompanyLogosProps {
   logos: string[];
 }
 
-export const CompanyLogos: React.FC<CompanyLogosProps> = ({ logos }) => {
+export function CompanyLogos({ logos }: CompanyLogosProps) {
   return (
     <div className="approach-company-slider-box wow fadeInUp" data-wow-delay="1s">
       <div className="company-supports-content">

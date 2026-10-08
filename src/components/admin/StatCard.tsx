@@ -12,7 +12,7 @@ export interface StatCardProps {
   accentColor?: "emerald" | "amber" | "blue" | "purple";
 }
 
-export const StatCard: React.FC<StatCardProps> = ({
+export function StatCard({
   title,
   titleBn,
   value,
@@ -20,7 +20,7 @@ export const StatCard: React.FC<StatCardProps> = ({
   isPositive = true,
   icon,
   accentColor = "emerald",
-}) => {
+}: StatCardProps) {
   const colorMap = {
     emerald: "from-emerald-500/20 to-teal-500/10 text-emerald-400 border-emerald-500/30",
     amber: "from-amber-500/20 to-yellow-500/10 text-amber-400 border-amber-500/30",

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { aboutData, clientAvatars } from "@/data/home";
 
-export const AboutVision: React.FC = () => {
+export function AboutVision() {
   return (
     <div className="col-xl-3 col-md-6 order-xl-3 order-md-2">
       <div className="about-us-item-box-gold vision-box-gold wow fadeInUp" data-wow-delay="0.4s">

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { footerLegalLinks } from "@/data/navigation";
 
-export const FooterBottom: React.FC = () => {
+export function FooterBottom() {
   return (
     <div className="col-lg-12">
       <div className="footer-copyright-gold">
