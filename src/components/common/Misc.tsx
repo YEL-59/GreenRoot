@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { SocialLink } from "@/types";
 
-export function GetInTouchCircle({ href = "/contact", className = "get-in-touch-circle-gold" }) {
+export const GetInTouchCircle = ({ href = "/contact", className = "get-in-touch-circle-gold" }) => {
   return (
     <div className={className}>
       <Link href={href}>
@@ -11,7 +11,7 @@ export function GetInTouchCircle({ href = "/contact", className = "get-in-touch-
   );
 }
 
-export function SocialIcons({ links, className }: { links: SocialLink[]; className: string }) {
+export const SocialIcons = ({ links, className }: { links: SocialLink[]; className: string }) => {
   return (
     <div className={className}>
       <ul>
@@ -25,4 +25,4 @@ export function SocialIcons({ links, className }: { links: SocialLink[]; classNa
       </ul>
     </div>
   );
-}
+};

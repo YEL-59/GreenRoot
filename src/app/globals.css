@@ -44,3 +44,50 @@ body {
     color: #E8AF30;
   }
 }
+
+/* ========================================================
+   Header & Navbar Enhancements
+   ======================================================== */
+
+/* Prevent Tailwind .collapse from hiding navbar desktop menu */
+.main-menu,
+.navbar-collapse {
+  visibility: visible !important;
+}
+
+/* Remove CSS ::after caret on desktop menu items to use animated React icon */
+.main-menu ul li.submenu > a::after {
+  display: none !important;
+}
+
+/* Submenu dropdown bridge and smooth display */
+.main-menu ul li.submenu > ul::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.main-menu ul li:hover > ul,
+.main-menu ul li:focus-within > ul {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Polished Sticky Header Styles */
+.main-header.header-gold .header-sticky.active {
+  background: rgba(248, 246, 239, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid rgba(44, 44, 44, 0.08) !important;
+}
+
+.main-header.header-gold .header-sticky.active .navbar {
+  padding: 14px 0px !important;
+  transition: padding 0.3s ease;
+}

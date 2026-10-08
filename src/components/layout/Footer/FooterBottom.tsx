@@ -1,13 +1,12 @@
-import React from "react";
 import Link from "next/link";
 import { footerLegalLinks } from "@/data/navigation";
 
-export const FooterBottom: React.FC = () => {
+export const FooterBottom = () => {
   return (
     <div className="col-lg-12">
       <div className="footer-copyright-gold">
         <div className="footer-copyright-text-gold">
-          <p>Copyright © {new Date().getFullYear()} All Rights Reserved.</p>
+          <p>Copyright © {new Date().getFullYear()} GreenRoot. All Rights Reserved.</p>
         </div>
 
         <div className="footer-privacy-policy-gold">

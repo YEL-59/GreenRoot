@@ -1,8 +1,7 @@
-import React from "react";
 import Link from "next/link";
 import { heroData } from "@/data/home";
 
-export const HeroContent: React.FC = () => {
+export const HeroContent = () => {
   return (
     <div className="hero-content-gold">
       <div className="section-title">

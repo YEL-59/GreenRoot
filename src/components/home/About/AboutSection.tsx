@@ -1,10 +1,9 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/home";
 import { AboutMission } from "./AboutMission";
 import { AboutVision } from "./AboutVision";
 
-export const AboutSection: React.FC = () => {
+export const AboutSection = () => {
   return (
     <div className="about-us-gold">
       <div className="container">

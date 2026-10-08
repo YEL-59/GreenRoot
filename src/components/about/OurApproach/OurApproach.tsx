@@ -1,10 +1,9 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { ApproachCard } from "./ApproachCard";
 import { CompanyLogos } from "./CompanyLogos";
 
-export const OurApproach: React.FC = () => {
+export const OurApproach = () => {
   const { approach } = aboutData;
 
   return (

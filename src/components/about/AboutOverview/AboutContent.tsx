@@ -1,20 +1,19 @@
-import React from "react";
 import Link from "next/link";
 import type { AboutFeature } from "@/data/about";
 
-interface AboutContentProps {
+type AboutContentProps = {
   subtitle: string;
   title: string;
   paragraphs: string[];
   features: AboutFeature[];
-}
+};
 
-export const AboutContent: React.FC<AboutContentProps> = ({
+export const AboutContent = ({
   subtitle,
   title,
   paragraphs,
   features,
-}) => {
+}: AboutContentProps) => {
   return (
     <div className="about-us-content">
       {/* Section Title */}

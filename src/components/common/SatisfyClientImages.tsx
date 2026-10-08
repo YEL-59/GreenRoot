@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-export interface SatisfyClientImagesProps {
+export type SatisfyClientImagesProps = {
   images: string[];
   /** renders the trailing `.add-more` bubble with this icon */
   addMoreIcon?: string;
-}
+};
 
-export function SatisfyClientImages({ images, addMoreIcon }: SatisfyClientImagesProps) {
+export const SatisfyClientImages = ({ images, addMoreIcon }: SatisfyClientImagesProps) => {
   return (
     <div className="satisfy-client-images">
       {images.map((src) => (
@@ -25,4 +25,4 @@ export function SatisfyClientImages({ images, addMoreIcon }: SatisfyClientImages
       )}
     </div>
   );
-}
+};

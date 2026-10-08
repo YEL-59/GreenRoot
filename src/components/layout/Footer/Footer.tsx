@@ -1,10 +1,9 @@
-import React from "react";
 import { FooterBrand } from "./FooterBrand";
 import { FooterNewsletter } from "./FooterNewsletter";
 import { FooterLinks } from "./FooterLinks";
 import { FooterBottom } from "./FooterBottom";
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
     <footer className="main-footer-gold bg-section dark-section">
       <div className="container">

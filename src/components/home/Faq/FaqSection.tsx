@@ -1,10 +1,9 @@
-import React from "react";
 import Link from "next/link";
 import { faqData } from "@/data/home";
 import { siteConfig } from "@/config/site";
 import { FaqAccordion } from "./FaqAccordion";
 
-export const FaqSection: React.FC = () => {
+export const FaqSection = () => {
   return (
     <div className="our-faqs-gold">
       <div className="container">

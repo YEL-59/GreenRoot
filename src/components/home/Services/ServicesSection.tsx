@@ -1,11 +1,10 @@
-import React from "react";
 import { servicesData } from "@/data/home";
 import { ServiceCard } from "./ServiceCard";
 import { ServicesFooter } from "./ServicesFooter";
 
 const delays = ["0s", "0.2s", "0.4s", "0.6s"];
 
-export const ServicesSection: React.FC = () => {
+export const ServicesSection = () => {
   return (
     <div className="our-services-gold bg-section">
       <div className="container">

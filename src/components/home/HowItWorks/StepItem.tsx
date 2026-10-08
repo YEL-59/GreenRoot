@@ -1,13 +1,12 @@
-import React from "react";
 import type { HowWorksStep } from "@/types";
 
-export interface StepItemProps {
+export type StepItemProps = {
   step: HowWorksStep;
   boxIndex: number;
   delay?: string;
-}
+};
 
-export const StepItem: React.FC<StepItemProps> = ({ step, boxIndex, delay }) => {
+export const StepItem = ({ step, boxIndex, delay }: StepItemProps) => {
   return (
     <div className="col-xl-3 col-md-6">
       <div

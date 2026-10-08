@@ -1,8 +1,7 @@
-import React from "react";
 import Link from "next/link";
 import { whatWeDoData } from "@/data/home";
 
-export const WhatWeDoImages: React.FC = () => {
+export const WhatWeDoImages = () => {
   return (
     <div className="col-xl-6">
       <div className="what-we-images-gold">

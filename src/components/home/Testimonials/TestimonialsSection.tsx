@@ -1,11 +1,10 @@
-import React from "react";
 import Link from "next/link";
 import { testimonialsData } from "@/data/home";
 import { TestimonialCard } from "./TestimonialCard";
 
 const delays = ["0s", "0.2s", "0.4s"];
 
-export const TestimonialsSection: React.FC = () => {
+export const TestimonialsSection = () => {
   return (
     <div className="our-testimonials-gold bg-section dark-section parallaxie">
       <div className="container">

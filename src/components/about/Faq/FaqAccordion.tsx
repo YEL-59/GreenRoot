@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FaqItemData } from "@/data/about";
 
-interface FaqAccordionProps {
+type FaqAccordionProps = {
   items: FaqItemData[];
-}
+};
 
-export const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
+export const FaqAccordion = ({ items }: FaqAccordionProps) => {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id || null);
 
   const toggle = (id: string) => {

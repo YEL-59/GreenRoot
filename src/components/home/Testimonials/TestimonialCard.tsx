@@ -1,12 +1,11 @@
-import React from "react";
 import type { Testimonial } from "@/types";
 
-export interface TestimonialCardProps {
+export type TestimonialCardProps = {
   item: Testimonial;
   delay?: string;
-}
+};
 
-export const TestimonialCard: React.FC<TestimonialCardProps> = ({ item, delay }) => {
+export const TestimonialCard = ({ item, delay }: TestimonialCardProps) => {
   return (
     <div className="testimonials-item-gold wow fadeInUp" data-wow-delay={delay}>
       <div className="testimonials-item-header-gold">

@@ -1,17 +1,16 @@
-import React from "react";
 import type { ServiceDetailData } from "@/data/services";
 import { ServiceSidebar } from "./ServiceSidebar";
 import { ServiceWhyChooseCards } from "./ServiceWhyChooseCards";
 import { ServiceBenefitsSection } from "./ServiceBenefitsSection";
 import { ServiceDetailFaq } from "./ServiceDetailFaq";
 
-interface ServiceDetailViewProps {
+type ServiceDetailViewProps = {
   service: ServiceDetailData;
-}
+};
 
-export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({
+export const ServiceDetailView = ({
   service,
-}) => {
+}: ServiceDetailViewProps) => {
   return (
     <div className="page-service-single">
       <div className="container">

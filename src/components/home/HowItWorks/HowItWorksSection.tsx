@@ -1,11 +1,10 @@
-import React from "react";
 import { howItWorksSteps } from "@/data/home";
 import { StepItem } from "./StepItem";
 import { HowItWorksFooter } from "./HowItWorksFooter";
 
 const delays = ["0s", "0.2s", "0.4s", "0.6s"];
 
-export const HowItWorksSection: React.FC = () => {
+export const HowItWorksSection = () => {
   return (
     <div className="how-it-works-gold">
       <div className="container">

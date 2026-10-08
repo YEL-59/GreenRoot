@@ -1,11 +1,10 @@
-import React from "react";
 
-interface AboutImagesProps {
+type AboutImagesProps = {
   image1: string;
   image2: string;
-}
+};
 
-export const AboutImages: React.FC<AboutImagesProps> = ({ image1, image2 }) => {
+export const AboutImages = ({ image1, image2 }: AboutImagesProps) => {
   return (
     <div className="about-us-images">
       <div className="about-us-image-1">

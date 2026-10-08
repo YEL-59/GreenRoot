@@ -1,17 +1,16 @@
 "use client";
 
-import React from "react";
 import { VideoPopup } from "@/components/common";
 
-interface AdvantageVideoBoxProps {
+type AdvantageVideoBoxProps = {
   image: string;
   videoUrl: string;
-}
+};
 
-export const AdvantageVideoBox: React.FC<AdvantageVideoBoxProps> = ({
+export const AdvantageVideoBox = ({
   image,
   videoUrl,
-}) => {
+}: AdvantageVideoBoxProps) => {
   return (
     <div
       className="our-advantage-image box-2 wow fadeInUp"

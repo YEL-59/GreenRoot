@@ -1,9 +1,8 @@
-import React from "react";
 import Link from "next/link";
 import { ourStoryData } from "@/data/home";
 import { VideoPopup } from "@/components/common";
 
-export const OurStorySection: React.FC = () => {
+export const OurStorySection = () => {
   return (
     <div className="our-story-gold bg-section dark-section parallaxie">
       <div className="container">

@@ -1,13 +1,12 @@
-import React from "react";
 import Link from "next/link";
 import { servicesList } from "@/data/services";
 import { siteConfig } from "@/config/site";
 
-interface ServiceSidebarProps {
+type ServiceSidebarProps = {
   currentSlug: string;
-}
+};
 
-export const ServiceSidebar: React.FC<ServiceSidebarProps> = ({ currentSlug }) => {
+export const ServiceSidebar = ({ currentSlug }: ServiceSidebarProps) => {
   return (
     <div className="page-single-sidebar">
       {/* Category List */}

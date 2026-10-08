@@ -1,13 +1,12 @@
-import React from "react";
 import Link from "next/link";
 import type { ServiceItem } from "@/types";
 
-export interface ServiceCardProps {
+export type ServiceCardProps = {
   service: ServiceItem;
   delay?: string;
-}
+};
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service, delay }) => {
+export const ServiceCard = ({ service, delay }: ServiceCardProps) => {
   return (
     <div className="col-xl-3 col-md-6">
       <div className="service-item-gold wow fadeInUp" data-wow-delay={delay}>

@@ -1,7 +1,6 @@
-import React from "react";
 import { aboutData } from "@/data/home";
 
-export const AboutMission: React.FC = () => {
+export const AboutMission = () => {
   return (
     <div className="col-xl-3 col-md-6 order-xl-1 order-md-1">
       <div className="about-us-item-box-gold mission-box-gold wow fadeInUp" data-wow-delay="0.2s">

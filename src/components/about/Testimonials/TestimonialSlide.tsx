@@ -1,11 +1,10 @@
-import React from "react";
 import type { TestimonialItem } from "@/data/about";
 
-interface TestimonialSlideProps {
+type TestimonialSlideProps = {
   item: TestimonialItem;
-}
+};
 
-export const TestimonialSlide: React.FC<TestimonialSlideProps> = ({ item }) => {
+export const TestimonialSlide = ({ item }: TestimonialSlideProps) => {
   return (
     <div className="testimonial-item">
       <div className="testimonial-item-image">

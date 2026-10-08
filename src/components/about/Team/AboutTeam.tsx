@@ -1,9 +1,8 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { TeamCard } from "./TeamCard";
 
-export const AboutTeam: React.FC = () => {
+export const AboutTeam = () => {
   const { team } = aboutData;
 
   return (

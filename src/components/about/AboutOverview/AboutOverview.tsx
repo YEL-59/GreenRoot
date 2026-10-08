@@ -1,10 +1,9 @@
-import React from "react";
 import { aboutData } from "@/data/about";
 import { AboutImages } from "./AboutImages";
 import { AboutContent } from "./AboutContent";
 import { AboutFooter } from "./AboutFooter";
 
-export const AboutOverview: React.FC = () => {
+export const AboutOverview = () => {
   const { overview } = aboutData;
 
   return (

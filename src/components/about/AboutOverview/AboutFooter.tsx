@@ -1,11 +1,10 @@
-import React from "react";
 import Link from "next/link";
 
-interface AboutFooterProps {
+type AboutFooterProps = {
   tags: string[];
-}
+};
 
-export const AboutFooter: React.FC<AboutFooterProps> = ({ tags }) => {
+export const AboutFooter = ({ tags }: AboutFooterProps) => {
   return (
     <div className="about-us-footer">
       {/* Footer Tags List */}

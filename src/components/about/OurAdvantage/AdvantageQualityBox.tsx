@@ -1,18 +1,17 @@
-import React from "react";
 
-interface AdvantageQualityBoxProps {
+type AdvantageQualityBoxProps = {
   icon: string;
   title: string;
   description: string;
   customers: string;
-}
+};
 
-export const AdvantageQualityBox: React.FC<AdvantageQualityBoxProps> = ({
+export const AdvantageQualityBox = ({
   icon,
   title,
   description,
   customers,
-}) => {
+}: AdvantageQualityBoxProps) => {
   return (
     <div className="our-advantage-box wow fadeInUp">
       <div className="our-advantage-box-body">

@@ -1,8 +1,7 @@
-import React from "react";
 import { HeroContent } from "./HeroContent";
 import { HeroImage } from "./HeroImage";
 
-export const HeroSection: React.FC = () => {
+export const HeroSection = () => {
   return (
     <div className="hero-gold bg-section">
       <div className="hero-box-gold">

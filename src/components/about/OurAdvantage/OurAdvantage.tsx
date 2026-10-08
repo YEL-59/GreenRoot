@@ -1,11 +1,10 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { AdvantageQualityBox } from "./AdvantageQualityBox";
 import { AdvantageVideoBox } from "./AdvantageVideoBox";
 import { AdvantageCounterBox } from "./AdvantageCounterBox";
 
-export const OurAdvantage: React.FC = () => {
+export const OurAdvantage = () => {
   const { advantage } = aboutData;
 
   return (

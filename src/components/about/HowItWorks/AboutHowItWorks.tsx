@@ -1,9 +1,8 @@
-import React from "react";
 import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { AboutStepCard } from "./AboutStepCard";
 
-export const AboutHowItWorks: React.FC = () => {
+export const AboutHowItWorks = () => {
   const { howItWorks } = aboutData;
 
   return (

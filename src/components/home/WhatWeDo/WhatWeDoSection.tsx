@@ -1,9 +1,8 @@
-import React from "react";
 import { WhatWeDoImages } from "./WhatWeDoImages";
 import { WhatWeDoSteps } from "./WhatWeDoSteps";
 import { WhatWeDoCounters } from "./WhatWeDoCounters";
 
-export const WhatWeDoSection: React.FC = () => {
+export const WhatWeDoSection = () => {
   return (
     <div className="what-we-do-gold">
       <div className="container">

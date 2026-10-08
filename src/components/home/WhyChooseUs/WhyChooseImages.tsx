@@ -1,7 +1,6 @@
-import React from "react";
 import { whyChooseData } from "@/data/home";
 
-export const WhyChooseImages: React.FC = () => {
+export const WhyChooseImages = () => {
   return (
     <div className="col-xl-6">
       <div className="why-choose-images-gold">

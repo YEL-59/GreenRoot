@@ -1,7 +1,11 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Header, Footer } from "@/components/layout";
+import { AppShell } from "@/components/layout";
 import { Preloader, MagicCursor, TemplateEffects } from "@/components/providers";
 import { siteConfig } from "@/config/site";
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/cart";
+import { FarmGuideAssistant } from "@/components/guide";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="zxx">
@@ -27,27 +31,27 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-
-
       </head>
       <body>
-        {/* Preloader animation */}
-        <Preloader />
+        <CartProvider>
+          {/* Preloader animation */}
+          <Preloader />
 
-        {/* Interactive Custom Magic Cursor */}
-        <MagicCursor />
+          {/* Interactive Custom Magic Cursor */}
+          <MagicCursor />
 
-        {/* Dynamic client effects: WOW, CounterUp, SkillBars, Parallax, SplitText */}
-        <TemplateEffects />
+          {/* Dynamic client effects: WOW, CounterUp, SkillBars, Parallax, SplitText */}
+          <TemplateEffects />
 
-        {/* Header Navigation */}
-        <Header />
+          {/* Conditionally renders marketing Header & Footer for storefront, isolates Dashboard & Admin */}
+          <AppShell>{children}</AppShell>
 
-        {/* Main Page Content */}
-        <main>{children}</main>
+          {/* Global Slide-out Shopping Cart Drawer */}
+          <CartDrawer />
 
-        {/* Footer */}
-        <Footer />
+          {/* Interactive Animated Mascot Guide & Help Assistant */}
+          <FarmGuideAssistant />
+        </CartProvider>
       </body>
     </html>
   );

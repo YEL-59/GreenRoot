@@ -1,8 +1,7 @@
-import React from "react";
 import Link from "next/link";
 import { whyChooseData } from "@/data/home";
 
-export const WhyChooseFeatures: React.FC = () => {
+export const WhyChooseFeatures = () => {
   return (
     <div className="col-xl-6">
       <div className="why-choose-us-content-gold">

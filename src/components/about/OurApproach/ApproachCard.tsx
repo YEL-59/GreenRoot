@@ -1,12 +1,11 @@
-import React from "react";
 import type { ApproachItem } from "@/data/about";
 
-interface ApproachCardProps {
+type ApproachCardProps = {
   item: ApproachItem;
   delay?: string;
-}
+};
 
-export const ApproachCard: React.FC<ApproachCardProps> = ({ item, delay = "0.6s" }) => {
+export const ApproachCard = ({ item, delay = "0.6s" }: ApproachCardProps) => {
   return (
     <div className="approach-item wow fadeInUp" data-wow-delay={delay}>
       {/* Approach Image */}

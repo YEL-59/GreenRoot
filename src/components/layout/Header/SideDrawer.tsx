@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { drawerCategories } from "@/data/navigation";
 
-interface SideDrawerProps {
+type SideDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
-export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
+export const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -49,7 +49,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
         {/* Top Header */}
         <div className="p-6 border-b border-emerald-900/60 flex items-center justify-between">
           <Link href="/" onClick={onClose} className="inline-block">
-            <img src={siteConfig.logo} alt={siteConfig.name} className="h-10 w-auto" />
+            <img src={siteConfig.logoLight} alt={siteConfig.name} className="h-10 w-auto" />
           </Link>
           <button
             onClick={onClose}
