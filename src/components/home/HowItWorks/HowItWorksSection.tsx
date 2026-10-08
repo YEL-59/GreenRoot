@@ -1,4 +1,3 @@
-import React from "react";
 import { howItWorksSteps } from "@/data/home";
 import { StepItem } from "./StepItem";
 import { HowItWorksFooter } from "./HowItWorksFooter";

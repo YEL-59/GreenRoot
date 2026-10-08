@@ -1,6 +1,7 @@
 "use client";
+import type { FormEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
@@ -54,7 +55,7 @@ export default function CheckoutPage() {
 
   const finalPayable = Math.max(0, total - discountAmount);
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
+  const handlePlaceOrder = (e: FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !phoneNumber.trim() || !address.trim()) {
       alert("অনুগ্রহ করে আপনার নাম, মোবাইল নম্বর এবং ঠিকানা পূরণ করুন।");

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Order } from "@/types";
 
 export type LiveTrackingMapProps = {

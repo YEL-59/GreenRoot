@@ -1,4 +1,3 @@
-import React from "react";
 
 type CompanyLogosProps = {
   logos: string[];

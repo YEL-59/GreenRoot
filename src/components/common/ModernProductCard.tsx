@@ -1,6 +1,7 @@
 "use client";
+import type { MouseEvent } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/types";
@@ -32,7 +33,7 @@ export const ModernProductCard = ({
 
   const savings = product.originalPrice ? product.originalPrice - product.price : 0;
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product, 1, false);
@@ -40,26 +41,26 @@ export const ModernProductCard = ({
     setTimeout(() => setIsAdded(false), 2200);
   };
 
-  const handleBuyNow = (e: React.MouseEvent) => {
+  const handleBuyNow = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product, 1, false);
     router.push("/checkout");
   };
 
-  const toggleWishlist = (e: React.MouseEvent) => {
+  const toggleWishlist = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsWishlisted(!isWishlisted);
   };
 
-  const handleIncrease = (e: React.MouseEvent) => {
+  const handleIncrease = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     updateQuantity(product.id, cartQty + 1);
   };
 
-  const handleDecrease = (e: React.MouseEvent) => {
+  const handleDecrease = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     updateQuantity(product.id, cartQty - 1);

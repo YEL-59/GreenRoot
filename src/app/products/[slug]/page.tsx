@@ -1,6 +1,7 @@
 "use client";
+import { use } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
 import { products } from "@/data/products";
@@ -13,7 +14,7 @@ export default function ProductDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const resolvedParams = React.use(params);
+  const resolvedParams = use(params);
   const router = useRouter();
   const slug = resolvedParams?.slug;
 

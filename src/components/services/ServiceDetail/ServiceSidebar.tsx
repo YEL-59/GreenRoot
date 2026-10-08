@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { servicesList } from "@/data/services";
 import { siteConfig } from "@/config/site";

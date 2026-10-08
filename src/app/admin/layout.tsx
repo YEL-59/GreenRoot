@@ -1,12 +1,13 @@
 "use client";
+import type { ReactNode } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { AdminSidebar, AdminHeader } from "@/components/admin";
 
 export default function AdminLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

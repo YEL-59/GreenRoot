@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { testimonialsData } from "@/data/home";
 import { TestimonialCard } from "./TestimonialCard";

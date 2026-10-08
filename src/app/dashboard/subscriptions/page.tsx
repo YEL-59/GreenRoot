@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { SubscriptionCard } from "@/components/dashboard";
 
 export default function UserSubscriptionsPage() {

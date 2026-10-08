@@ -1,11 +1,11 @@
 "use client";
+import type { ReactNode } from "react";
 
-import React from "react";
 import { usePathname } from "next/navigation";
 import { Header, Footer } from "@/components/layout";
 
 export type AppShellProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const AppShell = ({ children }: AppShellProps) => {
