@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import type { Order } from "@/types";
 import { useCart } from "@/context/CartContext";

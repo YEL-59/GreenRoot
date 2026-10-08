@@ -1,4 +1,3 @@
-import React from "react";
 import { WhyChooseTabs } from "./WhyChooseTabs";
 import { WhyChooseVisuals } from "./WhyChooseVisuals";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { FooterBrand } from "./FooterBrand";
 import { FooterNewsletter } from "./FooterNewsletter";
 import { FooterLinks } from "./FooterLinks";

@@ -1,4 +1,3 @@
-import React from "react";
 import { pricingBenefits } from "@/data/home";
 
 export const PricingBenefits = () => {

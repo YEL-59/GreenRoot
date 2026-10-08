@@ -1,12 +1,13 @@
 "use client";
+import type { ReactNode } from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { UserSidebar, UserHeader } from "@/components/dashboard";
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

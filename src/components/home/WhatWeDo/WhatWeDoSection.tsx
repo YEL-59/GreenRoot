@@ -1,4 +1,3 @@
-import React from "react";
 import { WhatWeDoImages } from "./WhatWeDoImages";
 import { WhatWeDoSteps } from "./WhatWeDoSteps";
 import { WhatWeDoCounters } from "./WhatWeDoCounters";

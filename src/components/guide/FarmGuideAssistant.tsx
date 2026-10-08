@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { CharacterMascot } from "./CharacterMascot";
 import { GuideChatModal } from "./GuideChatModal";
 import { InteractiveTour } from "./InteractiveTour";
