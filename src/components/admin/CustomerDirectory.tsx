@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { initialCustomers, type AdminCustomer } from "@/data/adminData";
 
 export const CustomerDirectory = () => {

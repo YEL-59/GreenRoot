@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FaqItemData } from "@/data/about";
 
 type FaqAccordionProps = {

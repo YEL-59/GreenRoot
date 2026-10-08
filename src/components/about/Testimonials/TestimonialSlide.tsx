@@ -1,4 +1,3 @@
-import React from "react";
 import type { TestimonialItem } from "@/data/about";
 
 type TestimonialSlideProps = {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { initialNotifications, initialUserProfile } from "@/data/userProfile";
 import { useCart } from "@/context/CartContext";

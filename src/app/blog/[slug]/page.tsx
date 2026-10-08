@@ -1,6 +1,6 @@
 "use client";
+import { use } from "react";
 
-import React from "react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { articles } from "@/data/blog";
@@ -10,7 +10,7 @@ export default function BlogPostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const resolvedParams = React.use(params);
+  const resolvedParams = use(params);
   const slug = resolvedParams?.slug;
 
   const article = articles.find((a) => a.slug === slug);

@@ -1,4 +1,3 @@
-import React from "react";
 import { heroData } from "@/data/home";
 
 export const HeroImage = () => {

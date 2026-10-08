@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { AddressManager } from "@/components/dashboard";
 
 export default function UserAddressesPage() {
