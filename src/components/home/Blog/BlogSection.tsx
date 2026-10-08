@@ -1,4 +1,3 @@
-import React from "react";
 import { blogPosts } from "@/data/home";
 import { BlogCard } from "./BlogCard";
 

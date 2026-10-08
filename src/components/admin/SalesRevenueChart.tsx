@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { initialAdminStats } from "@/data/adminData";
 
 export const SalesRevenueChart = () => {

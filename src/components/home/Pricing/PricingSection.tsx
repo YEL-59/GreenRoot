@@ -1,4 +1,3 @@
-import React from "react";
 import { pricingPlans } from "@/data/home";
 import { PricingCard } from "./PricingCard";
 import { PricingBenefits } from "./PricingBenefits";

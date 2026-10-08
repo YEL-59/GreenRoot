@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { VideoPopup } from "@/components/common";
 
 type AdvantageVideoBoxProps = {

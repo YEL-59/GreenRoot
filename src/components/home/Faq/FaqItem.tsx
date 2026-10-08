@@ -1,4 +1,3 @@
-import React from "react";
 import type { FaqItem as FaqItemType } from "@/types";
 
 export type FaqItemProps = {

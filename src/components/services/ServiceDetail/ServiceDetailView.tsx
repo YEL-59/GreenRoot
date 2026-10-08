@@ -1,4 +1,3 @@
-import React from "react";
 import type { ServiceDetailData } from "@/data/services";
 import { ServiceSidebar } from "./ServiceSidebar";
 import { ServiceWhyChooseCards } from "./ServiceWhyChooseCards";

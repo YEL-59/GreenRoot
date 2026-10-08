@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Product } from "@/types";
 import { products as initialProductList, productCategories } from "@/data/products";
 import { AddProductModal } from "./AddProductModal";

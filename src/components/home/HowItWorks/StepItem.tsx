@@ -1,4 +1,3 @@
-import React from "react";
 import type { HowWorksStep } from "@/types";
 
 export type StepItemProps = {

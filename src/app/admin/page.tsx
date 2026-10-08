@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { initialAdminStats, initialFarmNotices } from "@/data/adminData";
 import { initialOrders } from "@/data/orders";
