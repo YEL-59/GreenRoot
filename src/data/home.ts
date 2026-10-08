@@ -27,7 +27,7 @@ export const heroData = {
   title: "GreenRoot: Growing pure organic goodness for a healthier tomorrow",
   description:
     "Discover the true taste of nature with GreenRoot's farm-fresh, chemical-free, and sustainably grown produce. From pure raw cow milk, traditional bilona ghee, and cold-pressed oils to seasonal veggies—delivered fresh directly from our farm to your home.",
-  bigTitle: "GreenRoot",
+  bigTitle: "Green",
   image: "/images/hero-image-gold.png",
   primaryBtn: { label: "Shop Farm Products", href: "/products" },
   secondaryBtn: { label: "Our Organic Story", href: "/about" },
