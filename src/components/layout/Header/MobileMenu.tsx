@@ -29,11 +29,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
         <button
           type="button"
           onClick={openCart}
-          className="relative w-10 h-10 rounded-full bg-stone-900/5 hover:bg-[#E8AF30]/20 border border-stone-900/15 text-[#2C2C2C] flex items-center justify-center transition-all duration-200 focus:outline-none shadow-sm"
+          className="relative w-10 h-10 rounded-full bg-stone-100 hover:bg-[#E8AF30]/20 border border-stone-200/90 text-stone-800 flex items-center justify-center transition-all duration-200 focus:outline-none shadow-xs"
           aria-label="Open Shopping Cart"
           title="Cart"
         >
-          <i className="fa-solid fa-basket-shopping text-sm"></i>
+          <i className="fa-solid fa-basket-shopping text-sm text-[#002719]"></i>
           {totalItems > 0 && (
             <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-black text-[10px] flex items-center justify-center shadow-md animate-bounce">
               {totalItems}
@@ -45,7 +45,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
           <button
             type="button"
             onClick={onOpenDrawer}
-            className="w-10 h-10 rounded-full bg-[#E8AF30]/15 hover:bg-[#E8AF30] border border-[#E8AF30]/40 text-[#2C2C2C] hover:text-[#181818] flex items-center justify-center transition-all duration-200 focus:outline-none shadow-sm"
+            className="w-10 h-10 rounded-full bg-[#E8AF30]/15 hover:bg-[#E8AF30] border border-[#E8AF30]/40 text-stone-800 hover:text-[#181818] flex items-center justify-center transition-all duration-200 focus:outline-none shadow-xs"
             aria-label="Open Explore Side Menu"
             title="Explore All Pages"
           >
@@ -56,21 +56,21 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onOpenDrawer }) => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="w-10 h-10 rounded-xl bg-stone-900/5 hover:bg-stone-900/10 border border-stone-900/15 flex flex-col items-center justify-center gap-1.5 transition-all duration-200 focus:outline-none"
+          className="w-10 h-10 rounded-xl bg-stone-100 hover:bg-stone-200 border border-stone-200/90 flex flex-col items-center justify-center gap-1.5 transition-all duration-200 focus:outline-none"
           aria-label="Toggle navigation"
         >
           <span
-            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+            className={`w-5 h-0.5 bg-stone-800 rounded-full transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+            className={`w-5 h-0.5 bg-stone-800 rounded-full transition-all duration-300 ${
               isOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`w-5 h-0.5 bg-[#2C2C2C] rounded-full transition-all duration-300 ${
+            className={`w-5 h-0.5 bg-stone-800 rounded-full transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />

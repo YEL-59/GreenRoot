@@ -4,6 +4,7 @@ import { Preloader, MagicCursor, TemplateEffects } from "@/components/providers"
 import { siteConfig } from "@/config/site";
 import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/cart";
+import { FarmGuideAssistant } from "@/components/guide";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -46,6 +47,9 @@ export default function RootLayout({
 
           {/* Global Slide-out Shopping Cart Drawer */}
           <CartDrawer />
+
+          {/* Interactive Animated Mascot Guide & Help Assistant */}
+          <FarmGuideAssistant />
         </CartProvider>
       </body>
     </html>
