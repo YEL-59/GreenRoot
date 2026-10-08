@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { products, productCategories } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { ModernProductCard } from "@/components/common";
 import type { Product } from "@/types";
 
 const ProductsContent: React.FC = () => {
@@ -167,116 +168,9 @@ const ProductsContent: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => {
-                const discount = product.originalPrice
-                  ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-                  : 0;
-
-                return (
-                  <div
-                    key={product.id}
-                    className="group bg-white rounded-3xl overflow-hidden border border-stone-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
-                  >
-                    <div>
-                      {/* Image Thumbnail Container */}
-                      <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
-                        <img
-                          src={product.image}
-                          alt={product.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-
-                        {/* Top Badges */}
-                        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                          {product.badge && (
-                            <span className="px-3 py-1 rounded-full bg-[#002f1f] text-white text-[11px] font-bold shadow-sm">
-                              {product.badge}
-                            </span>
-                          )}
-                          {discount > 0 && (
-                            <span className="px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold shadow-sm self-start">
-                              {discount}% ছাড়
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Origin Pill */}
-                        <div className="absolute bottom-3 left-3 z-10">
-                          <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[10px] font-medium flex items-center gap-1">
-                            <i className="fa-solid fa-location-dot text-[#E8AF30]"></i>
-                            {product.originBn}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Content Area */}
-                      <div className="p-5">
-                        {/* Rating & Stock */}
-                        <div className="flex items-center justify-between text-xs mb-2">
-                          <div className="flex items-center gap-1 text-amber-500">
-                            <i className="fa-solid fa-star text-[11px]"></i>
-                            <span className="font-bold text-stone-800">{product.rating}</span>
-                            <span className="text-stone-400">({product.reviewCount})</span>
-                          </div>
-                          <span className="text-emerald-700 font-semibold text-[11px] bg-emerald-50 px-2 py-0.5 rounded-md">
-                            {product.categoryBn}
-                          </span>
-                        </div>
-
-                        {/* Titles */}
-                        <Link href={`/products/${product.slug}`} className="block group-hover:text-emerald-800 transition-colors">
-                          <h3 className="font-bold text-stone-900 text-base leading-snug mb-1">
-                            {product.titleBn}
-                          </h3>
-                          <p className="text-stone-500 text-xs font-medium truncate mb-3">
-                            {product.title}
-                          </p>
-                        </Link>
-
-                        {/* Price & Unit */}
-                        <div className="flex items-baseline justify-between pt-2 border-t border-stone-100">
-                          <div>
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-xl font-extrabold text-[#002f1f]">
-                                ৳{product.price}
-                              </span>
-                              {product.originalPrice && (
-                                <span className="text-xs text-stone-400 line-through">
-                                  ৳{product.originalPrice}
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-[11px] text-stone-500">
-                              প্রতি {product.unitBn}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Add-to-Cart Button */}
-                    <div className="p-5 pt-0">
-                      <div className="grid grid-cols-4 gap-2">
-                        <Link
-                          href={`/products/${product.slug}`}
-                          className="col-span-1 py-2.5 rounded-xl border border-stone-200 text-stone-700 hover:bg-stone-50 flex items-center justify-center text-xs font-semibold transition-colors"
-                          title="বিস্তারিত দেখুন"
-                        >
-                          <i className="fa-regular fa-eye"></i>
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() => addToCart(product, 1)}
-                          className="col-span-3 py-2.5 px-4 rounded-xl bg-[#002f1f] hover:bg-[#E8AF30] text-white hover:text-black font-bold text-xs tracking-wide flex items-center justify-center gap-2 transition-all duration-200 shadow-sm active:scale-95"
-                        >
-                          <i className="fa-solid fa-basket-shopping text-xs"></i>
-                          <span>ব্যাগে নিন</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              {filteredProducts.map((product) => (
+                <ModernProductCard key={product.id} product={product} />
+              ))}
             </div>
           )}
 

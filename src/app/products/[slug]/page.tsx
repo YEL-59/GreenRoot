@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound, useParams, useRouter } from "next/navigation";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { ModernProductCard } from "@/components/common";
 
 export default function ProductDetailPage({
   params,
@@ -334,32 +335,7 @@ export default function ProductDetailPage({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((p) => (
-                <div
-                  key={p.id}
-                  className="bg-white rounded-3xl overflow-hidden border border-stone-200/90 p-4 hover:shadow-lg transition-all flex flex-col justify-between"
-                >
-                  <Link href={`/products/${p.slug}`}>
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full aspect-[4/3] object-cover rounded-2xl mb-3"
-                    />
-                    <h4 className="font-bold text-stone-900 text-sm leading-snug line-clamp-1">
-                      {p.titleBn}
-                    </h4>
-                    <p className="text-xs text-stone-500 mb-2 truncate">{p.title}</p>
-                  </Link>
-                  <div className="flex items-center justify-between pt-2 border-t border-stone-100 mt-2">
-                    <span className="text-base font-extrabold text-[#002f1f]">৳{p.price}</span>
-                    <button
-                      type="button"
-                      onClick={() => addToCart(p, 1)}
-                      className="px-3 py-1.5 rounded-xl bg-[#002f1f] hover:bg-[#E8AF30] text-white hover:text-black font-bold text-xs transition-colors"
-                    >
-                      + ব্যাগে নিন
-                    </button>
-                  </div>
-                </div>
+                <ModernProductCard key={p.id} product={p} />
               ))}
             </div>
           </div>
