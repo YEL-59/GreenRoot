@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 import { tourSteps } from "./guideKnowledge";
 
 type InteractiveTourProps = {
@@ -14,6 +15,7 @@ export const InteractiveTour = ({
   onClose,
 }: InteractiveTourProps) => {
   const router = useRouter();
+  const { isBn } = useLanguage();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   if (!isActive) return null;
@@ -54,10 +56,10 @@ export const InteractiveTour = ({
             </div>
             <div>
               <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/80 px-2.5 py-0.5 rounded-full inline-block mb-0.5">
-                {currentStep.badgeBn}
+                {isBn ? currentStep.badgeBn : (currentStep.badgeEn || currentStep.badgeBn)}
               </span>
               <h3 className="font-black text-lg text-stone-900">
-                {currentStep.titleBn}
+                {isBn ? currentStep.titleBn : (currentStep.titleEn || currentStep.titleBn)}
               </h3>
             </div>
           </div>
@@ -75,7 +77,7 @@ export const InteractiveTour = ({
         {/* Step Content */}
         <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200/80 mb-6">
           <p className="text-stone-700 text-xs sm:text-sm leading-relaxed">
-            {currentStep.descriptionBn}
+            {isBn ? currentStep.descriptionBn : (currentStep.descriptionEn || currentStep.descriptionBn)}
           </p>
         </div>
 
@@ -94,7 +96,7 @@ export const InteractiveTour = ({
             ))}
           </div>
           <span className="text-xs font-bold text-stone-500 font-mono">
-            ধাপ {currentStepIndex + 1} / {tourSteps.length}
+            {isBn ? `ধাপ ${currentStepIndex + 1} / ${tourSteps.length}` : `Step ${currentStepIndex + 1} of ${tourSteps.length}`}
           </span>
         </div>
 
@@ -110,7 +112,7 @@ export const InteractiveTour = ({
                 : "text-stone-700 hover:bg-stone-100"
             }`}
           >
-            ← পূর্ববর্তী
+            {isBn ? "← পূর্ববর্তী" : "← Previous"}
           </button>
 
           <button
@@ -120,8 +122,8 @@ export const InteractiveTour = ({
           >
             <span>
               {currentStepIndex === tourSteps.length - 1
-                ? "ট্যুর সমাপ্ত করুন ✓"
-                : "পরবর্তী ধাপ →"}
+                ? (isBn ? "ট্যুর সমাপ্ত করুন ✓" : "Finish Tour ✓")
+                : (isBn ? "পরবর্তী ধাপ →" : "Next Step →")}
             </span>
           </button>
         </div>

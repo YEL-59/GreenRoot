@@ -2,6 +2,7 @@
 
 export interface NavLink {
   label: string;
+  labelBn?: string;
   href: string;
   children?: NavLink[];
 }

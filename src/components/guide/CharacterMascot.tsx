@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 type CharacterMascotProps = {
   isOpen: boolean;
@@ -13,26 +14,36 @@ export const CharacterMascot = ({
   onToggle,
   unreadCount = 1,
 }: CharacterMascotProps) => {
-  const [speechBubbleText, setSpeechBubbleText] = useState("ড্যাশবোর্ড বা পণ্য খুঁজছেন? ক্লিক করুন!");
+  const { isBn } = useLanguage();
+  const [speechBubbleText, setSpeechBubbleText] = useState("");
   const [showSpeechBubble, setShowSpeechBubble] = useState(true);
 
   // Rotate speech bubble hints periodically
   useEffect(() => {
-    const hints = [
-      "ড্যাশবোর্ড বা পণ্য খুঁজছেন? ক্লিক করুন!",
-      "লাইভ জিপিএস অর্ডারিং দেখতে চান?",
-      "আমি আপনার গ্রীনরুট ফার্ম গাইড!",
-      "খাঁটি দুধ ও ঘি সম্পর্কে জানুন!",
-    ];
+    const hints = isBn
+      ? [
+          "ড্যাশবোর্ড বা পণ্য খুঁজছেন? ক্লিক করুন!",
+          "লাইভ জিপিএস অর্ডারিং দেখতে চান?",
+          "আমি আপনার গ্রীনরুট ফার্ম গাইড!",
+          "খাঁটি দুধ ও ঘি সম্পর্কে জানুন!",
+        ]
+      : [
+          "Need help finding products or dashboard?",
+          "Want to try live GPS order tracking?",
+          "I'm your GreenRoot farm assistant!",
+          "Explore fresh grass-fed dairy & honey!",
+        ];
+
+    setSpeechBubbleText(hints[0]);
     let index = 0;
     const interval = setInterval(() => {
       index = (index + 1) % hints.length;
       setSpeechBubbleText(hints[index]);
       setShowSpeechBubble(true);
-    }, 9000);
+    }, 8000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isBn]);
 
   return (
     <div className="fixed bottom-6 right-6 z-[990] flex flex-col items-end select-none">

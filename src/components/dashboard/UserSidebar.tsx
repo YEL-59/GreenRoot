@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { initialUserProfile } from "@/data/userProfile";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/common";
 
 const menuItems = [
   { href: "/dashboard", label: "ড্যাশবোর্ড ওভারভিউ", labelEn: "Overview", icon: "fa-solid fa-house" },
+  { href: "/dashboard/cart", label: "কার্ট ও অর্ডার ম্যানেজমেন্ট", labelEn: "Cart Management", icon: "fa-solid fa-cart-shopping", badge: "Active" },
   { href: "/dashboard/orders", label: "আমার সকল অর্ডার", labelEn: "My Orders", icon: "fa-solid fa-box-open" },
   { href: "/dashboard/track/GR-2026-8841", label: "লাইভ ডেলিভারি ট্র্যাকিং", labelEn: "Live Track Map", icon: "fa-solid fa-map-location-dot", badge: "Live" },
   { href: "/dashboard/subscriptions", label: "ফার্ম সাবস্ক্রিপশন", labelEn: "Subscriptions", icon: "fa-solid fa-repeat" },
@@ -23,6 +26,7 @@ export const UserSidebar = ({
   onClose,
 }: UserSidebarProps) => {
   const pathname = usePathname();
+  const { isBn } = useLanguage();
   const user = initialUserProfile;
 
   return (
@@ -71,7 +75,9 @@ export const UserSidebar = ({
               className="w-12 h-12 rounded-full object-cover border-2 border-[#E8AF30]"
             />
             <div className="overflow-hidden">
-              <h4 className="font-bold text-sm text-white truncate">{user.nameBn}</h4>
+              <h4 className="font-bold text-sm text-white truncate">
+                {isBn ? user.nameBn : user.name}
+              </h4>
               <p className="text-xs text-stone-400 truncate">{user.email}</p>
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 mt-1 rounded text-[10px] font-bold bg-[#E8AF30]/20 text-[#E8AF30] border border-[#E8AF30]/30">
                 <i className="fa-solid fa-award text-[9px]"></i>
@@ -90,7 +96,7 @@ export const UserSidebar = ({
               </div>
             </div>
             <div className="border-l border-white/10">
-              <div className="text-[10px] text-stone-400">ব্যালেন্স</div>
+              <div className="text-[10px] text-stone-400">{isBn ? "ব্যালেন্স" : "Balance"}</div>
               <div className="text-sm font-extrabold text-white">৳{user.walletBalance}</div>
             </div>
           </div>
@@ -103,6 +109,9 @@ export const UserSidebar = ({
               item.href === "/dashboard"
                 ? pathname === "/dashboard"
                 : pathname.startsWith(item.href);
+
+            const primaryLabel = isBn ? item.label : item.labelEn;
+            const secondaryLabel = isBn ? item.labelEn : item.label;
 
             return (
               <Link
@@ -122,9 +131,9 @@ export const UserSidebar = ({
                     }`}
                   ></i>
                   <div>
-                    <span className="block">{item.label}</span>
+                    <span className="block">{primaryLabel}</span>
                     <span className={`text-[10px] block opacity-75 font-normal ${isActive ? "text-[#002719]" : "text-stone-400"}`}>
-                      {item.labelEn}
+                      {secondaryLabel}
                     </span>
                   </div>
                 </div>
@@ -145,21 +154,29 @@ export const UserSidebar = ({
           })}
         </nav>
 
-        {/* Footer shortcuts */}
-        <div className="p-4 border-t border-white/10 space-y-2">
+        {/* Footer shortcuts & Language Switcher */}
+        <div className="p-4 border-t border-white/10 space-y-2.5">
+          {/* In-sidebar language switcher */}
+          <div className="pb-1">
+            <span className="text-[10px] uppercase font-bold text-stone-400 block mb-1 tracking-wider">
+              {isBn ? "ভাষা নির্বাচন:" : "Select Language:"}
+            </span>
+            <LanguageSwitcher variant="drawer" />
+          </div>
+
           <Link
             href="/products"
             className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all text-center"
           >
             <i className="fa-solid fa-basket-shopping text-[#E8AF30]"></i>
-            ফার্ম শপে যান (Shop Fresh)
+            {isBn ? "ফার্ম শপে যান (Shop Fresh)" : "Browse Farm Catalog"}
           </Link>
           <Link
             href="/admin"
             className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-emerald-950/60 hover:bg-emerald-900 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold transition-all text-center"
           >
             <i className="fa-solid fa-shield-halved text-xs"></i>
-            অ্যাডমিন পোর্টালে যান (Admin)
+            {isBn ? "অ্যাডমিন পোর্টালে যান (Admin)" : "Admin HQ Console"}
           </Link>
         </div>
       </aside>

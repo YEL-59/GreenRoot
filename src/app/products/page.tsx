@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { products, productCategories } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { ModernProductCard } from "@/components/common";
 import type { Product } from "@/types";
 
@@ -17,6 +18,7 @@ const ProductsContent = () => {
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "rating">("featured");
 
   const { addToCart } = useCart();
+  const { t, isBn } = useLanguage();
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
@@ -50,13 +52,13 @@ const ProductsContent = () => {
           <div className="max-w-3xl mx-auto text-center">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8AF30]/15 text-[#E8AF30] border border-[#E8AF30]/30 text-xs font-bold uppercase tracking-wider mb-4">
               <i className="fa-solid fa-seedling text-xs"></i>
-              ১০০% খাঁটি ও প্রাকৃতিক খামার পণ্য
+              {t.shopPage.badge}
             </span>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
-              GreenRoot Farm Shop
+              {t.shopPage.title}
             </h1>
             <p className="text-emerald-100/80 text-sm md:text-base leading-relaxed">
-              সরাসরি খামার থেকে সংগৃহীত কাঁচা গরুর দুধ, কাঠের ঘানি ভাঙা তেল, মদিনার খেজুর, সুন্দরবনের মধু এবং তাজা শাকসবজি ও দেশি মাছ—আপনার পরিবারের সুস্বাস্থ্যের নিশ্চয়তায়।
+              {t.shopPage.subtitle}
             </p>
           </div>
         </div>
@@ -74,7 +76,7 @@ const ProductsContent = () => {
                 <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
                 <input
                   type="text"
-                  placeholder="পণ্য খুঁজুন (দুধ, খেজুর, মধু, তেল, শাক...)"
+                  placeholder={t.shopPage.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-11 pr-10 py-3 rounded-full bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:outline-none focus:border-[#E8AF30] focus:ring-2 focus:ring-[#E8AF30]/20 transition-all placeholder:text-stone-400"
@@ -92,16 +94,16 @@ const ProductsContent = () => {
 
               {/* Sort Selector */}
               <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-                <span className="text-xs text-stone-500 font-medium">সাজান:</span>
+                <span className="text-xs text-stone-500 font-medium">{t.shopPage.sortBy}</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
                   className="px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-700 text-sm focus:outline-none focus:border-[#E8AF30] font-medium cursor-pointer"
                 >
-                  <option value="featured">ফিচার্ড পণ্য (Featured)</option>
-                  <option value="price-asc">দাম: কম থেকে বেশি</option>
-                  <option value="price-desc">দাম: বেশি থেকে কম</option>
-                  <option value="rating">সেরা রেটিং (Top Rated)</option>
+                  <option value="featured">{t.shopPage.featured}</option>
+                  <option value="price-asc">{t.shopPage.priceAsc}</option>
+                  <option value="price-desc">{t.shopPage.priceDesc}</option>
+                  <option value="rating">{t.shopPage.rating}</option>
                 </select>
               </div>
             </div>
@@ -123,7 +125,7 @@ const ProductsContent = () => {
                       }`}
                     >
                       <i className={`${cat.icon} ${isSelected ? "text-[#E8AF30]" : "text-stone-500"}`}></i>
-                      <span>{cat.nameBn}</span>
+                      <span>{isBn ? cat.nameBn : cat.name}</span>
                     </button>
                   );
                 })}
@@ -134,14 +136,17 @@ const ProductsContent = () => {
           {/* Results Count */}
           <div className="flex items-center justify-between mb-6 px-1">
             <p className="text-xs md:text-sm text-stone-600 font-medium">
-              মোট পাওয়া গেছে: <span className="font-bold text-[#002f1f]">{filteredProducts.length}টি</span> খাঁটি পণ্য
+              {t.shopPage.resultsCount}{" "}
+              <span className="font-bold text-[#002f1f]">
+                {filteredProducts.length} {t.shopPage.items}
+              </span>
             </p>
             {selectedCategory !== "all" && (
               <button
                 onClick={() => setSelectedCategory("all")}
                 className="text-xs text-[#002f1f] hover:text-[#E8AF30] font-semibold underline"
               >
-                সব ক্যাটাগরি দেখুন
+                {t.shopPage.allCategories}
               </button>
             )}
           </div>
@@ -152,9 +157,9 @@ const ProductsContent = () => {
               <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 mx-auto mb-4 text-2xl">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </div>
-              <h3 className="text-stone-800 font-bold text-lg mb-2">কোনো পণ্য পাওয়া যায়নি</h3>
+              <h3 className="text-stone-800 font-bold text-lg mb-2">{t.shopPage.noProducts}</h3>
               <p className="text-stone-500 text-xs mb-6">
-                আপনার অনুসন্ধানের সাথে কোনো পণ্য মেলেনি। ভিন্ন শব্দ দিয়ে অনুসন্ধান করুন অথবা সব পণ্য দেখুন।
+                {t.shopPage.noProductsDesc}
               </p>
               <button
                 onClick={() => {
@@ -163,7 +168,7 @@ const ProductsContent = () => {
                 }}
                 className="btn-default py-2.5 px-6 text-sm"
               >
-                সব পণ্য রিসেট করুন
+                {t.shopPage.reset}
               </button>
             </div>
           ) : (
@@ -178,10 +183,10 @@ const ProductsContent = () => {
           <div className="mt-20 bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm">
             <div className="text-center max-w-xl mx-auto mb-10">
               <span className="text-[#E8AF30] text-xs font-bold uppercase tracking-wider block mb-1">
-                গ্রীনরুট গুণগত অঙ্গীকার
+                {isBn ? "গ্রীনরুট গুণগত অঙ্গীকার" : "GreenRoot Quality Promise"}
               </span>
               <h2 className="text-2xl font-bold text-stone-900">
-                কেন আমাদের অর্গানিক পণ্য আলাদা?
+                {isBn ? "কেন আমাদের অর্গানিক পণ্য আলাদা?" : "Why Our Organic Farm Products Stand Apart?"}
               </h2>
             </div>
 
@@ -190,9 +195,13 @@ const ProductsContent = () => {
                 <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl mx-auto mb-4">
                   <i className="fa-solid fa-shield-halved"></i>
                 </div>
-                <h4 className="font-bold text-stone-900 text-sm mb-1">১০০% কেমিক্যালমুক্ত</h4>
+                <h4 className="font-bold text-stone-900 text-sm mb-1">
+                  {isBn ? "১০০% কেমিক্যালমুক্ত" : "100% Chemical-Free"}
+                </h4>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  কোনো প্রকার ফরমালিন, কীটনাশক বা কৃত্রিম রং ব্যবহার ছাড়া উৎপাদিত।
+                  {isBn
+                    ? "কোনো প্রকার ফরমালিন, কীটনাশক বা কৃত্রিম রং ব্যবহার ছাড়া উৎপাদিত।"
+                    : "Grown naturally with zero formalin, synthetic pesticides, or artificial agents."}
                 </p>
               </div>
 
@@ -200,9 +209,13 @@ const ProductsContent = () => {
                 <div className="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mx-auto mb-4">
                   <i className="fa-solid fa-tractor"></i>
                 </div>
-                <h4 className="font-bold text-stone-900 text-sm mb-1">সরাসরি নিজস্ব খামার</h4>
+                <h4 className="font-bold text-stone-900 text-sm mb-1">
+                  {isBn ? "সরাসরি নিজস্ব খামার" : "Direct From Our Farms"}
+                </h4>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  মানিকগঞ্জ, বগুড়া ও সুন্দরবন থেকে মধ্যস্বত্বভোগী ছাড়া সতেজ পণ্য সংগ্রহ।
+                  {isBn
+                    ? "সাভার, মানিকগঞ্জ ও নাটোরের নিজস্ব খামার থেকে মধ্যস্বত্বভোগী ছাড়া সতেজ পণ্য সংগ্রহ।"
+                    : "Harvested directly from our verified farm fields without middleman commissions."}
                 </p>
               </div>
 
@@ -210,9 +223,13 @@ const ProductsContent = () => {
                 <div className="w-14 h-14 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center text-2xl mx-auto mb-4">
                   <i className="fa-solid fa-truck-fast"></i>
                 </div>
-                <h4 className="font-bold text-stone-900 text-sm mb-1">দ্রুত হোম ডেলিভারি</h4>
+                <h4 className="font-bold text-stone-900 text-sm mb-1">
+                  {isBn ? "দ্রুত হোম ডেলিভারি" : "Express Cold Delivery"}
+                </h4>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  সকালের তাজা শাকসবজি ও দুধ সরাসরি আপনার রান্নাঘরের দরজায়।
+                  {isBn
+                    ? "সকালের তাজা শাকসবজি ও দুধ সরাসরি আপনার রান্নাঘরের দরজায়।"
+                    : "Morning fresh milk, produce and fish delivered in cold-chain boxes to your kitchen."}
                 </p>
               </div>
 
@@ -220,9 +237,13 @@ const ProductsContent = () => {
                 <div className="w-14 h-14 rounded-2xl bg-green-100 text-green-800 flex items-center justify-center text-2xl mx-auto mb-4">
                   <i className="fa-solid fa-hand-holding-dollar"></i>
                 </div>
-                <h4 className="font-bold text-stone-900 text-sm mb-1">ক্যাশ অন ডেলিভারি</h4>
+                <h4 className="font-bold text-stone-900 text-sm mb-1">
+                  {isBn ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery"}
+                </h4>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  পণ্য হাতে পেয়ে দেখে শুনে মূল্য পরিশোধের সম্পূর্ণ নিশ্চিন্ত সুবিধা।
+                  {isBn
+                    ? "পণ্য হাতে পেয়ে দেখে শুনে মূল্য পরিশোধের সম্পূর্ণ নিশ্চিন্ত সুবিধা।"
+                    : "Inspect freshness and sealed quality at doorstep before paying."}
                 </p>
               </div>
             </div>
@@ -235,7 +256,7 @@ const ProductsContent = () => {
 
 const ProductsPage = () => {
   return (
-    <Suspense fallback={<div className="min-h-screen pt-36 text-center text-stone-500">লোড হচ্ছে...</div>}>
+    <Suspense fallback={<div className="min-h-screen pt-36 text-center text-stone-500">Loading Farm Shop...</div>}>
       <ProductsContent />
     </Suspense>
   );

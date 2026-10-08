@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { ModernProductCard } from "@/components/common";
 import type { Product } from "@/types";
 
@@ -25,6 +26,7 @@ export default function ProductDetailPage({
   }
 
   const { addToCart, openCart } = useCart();
+  const { isBn, t } = useLanguage();
   const [quantity, setQuantity] = useState(1);
   const [selectedPackIndex, setSelectedPackIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -36,20 +38,26 @@ export default function ProductDetailPage({
   // Pack sizes configuration
   const packOptions = [
     {
-      label: `১ ${product.unitBn} (স্ট্যান্ডার্ড)`,
-      unitText: product.unitBn,
+      label: isBn
+        ? `১ ${product.unitBn} (স্ট্যান্ডার্ড)`
+        : `1 ${product.unit} (Standard)`,
+      unitText: isBn ? product.unitBn : product.unit,
       multiplier: 1,
       discountExtra: 0,
     },
     {
-      label: `২ ${product.unitBn} (ফ্যামিলি প্যাক)`,
-      unitText: `২ ${product.unitBn}`,
+      label: isBn
+        ? `২ ${product.unitBn} (ফ্যামিলি প্যাক)`
+        : `2 ${product.unit} (Family Pack)`,
+      unitText: isBn ? `২ ${product.unitBn}` : `2 ${product.unit}`,
       multiplier: 2,
       discountExtra: product.price > 500 ? 50 : 5,
     },
     {
-      label: `৫ ${product.unitBn} (সাপ্তাহিক স্টক)`,
-      unitText: `৫ ${product.unitBn}`,
+      label: isBn
+        ? `৫ ${product.unitBn} (সাপ্তাহিক স্টক)`
+        : `5 ${product.unit} (Weekly Stock)`,
+      unitText: isBn ? `৫ ${product.unitBn}` : `5 ${product.unit}`,
       multiplier: 5,
       discountExtra: product.price > 500 ? 150 : 30,
     },
@@ -126,22 +134,22 @@ export default function ProductDetailPage({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 py-4 mb-4 border-b border-stone-200/80">
           <nav className="flex items-center gap-2 text-xs text-stone-500 overflow-x-auto whitespace-nowrap">
             <Link href="/" className="hover:text-[#002719] font-medium transition-colors">
-              হোম
+              {t.nav.home}
             </Link>
             <span className="text-stone-300">/</span>
             <Link href="/products" className="hover:text-[#002719] font-medium transition-colors">
-              ফার্ম শপ
+              {t.nav.shop}
             </Link>
             <span className="text-stone-300">/</span>
             <Link
               href={`/products?category=${product.category}`}
               className="hover:text-[#002719] font-medium transition-colors"
             >
-              {product.categoryBn}
+              {isBn ? product.categoryBn : product.category}
             </Link>
             <span className="text-stone-300">/</span>
             <span className="text-stone-900 font-bold truncate max-w-[200px] sm:max-w-none">
-              {product.titleBn}
+              {isBn ? product.titleBn : product.title}
             </span>
           </nav>
 
@@ -151,10 +159,10 @@ export default function ProductDetailPage({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
               </span>
-              ভোরের তাজা সংগ্রহ (Dawn Harvested)
+              {isBn ? "ভোরের তাজা সংগ্রহ (Dawn Harvested)" : "Daily Dawn Harvest"}
             </span>
             <span className="text-stone-400 font-mono hidden sm:inline">
-              ব্যাচ #GR-2026-FARM
+              Batch #GR-2026-FARM
             </span>
           </div>
         </div>
@@ -187,7 +195,7 @@ export default function ProductDetailPage({
                   )}
                   {discountPercent > 0 && (
                     <span className="px-3 py-1 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[10px] font-black shadow-md">
-                      -{discountPercent}% ছাড় (৳{totalSavings} সাশ্রয়)
+                      -{discountPercent}% {isBn ? `ছাড় (৳${totalSavings} সাশ্রয়)` : `Off (Save ৳${totalSavings})`}
                     </span>
                   )}
                 </div>
@@ -202,7 +210,11 @@ export default function ProductDetailPage({
                         ? "bg-rose-500 text-white scale-105 shadow-rose-500/40"
                         : "bg-white/85 hover:bg-white text-stone-700 hover:text-rose-500"
                     }`}
-                    title={isWishlisted ? "পছন্দ থেকে সরান" : "পছন্দের তালিকায় রাখুন"}
+                    title={
+                      isWishlisted
+                        ? (isBn ? "পছন্দ থেকে সরান" : "Remove from Wishlist")
+                        : (isBn ? "পছন্দের তালিকায় রাখুন" : "Add to Wishlist")
+                    }
                     aria-label="Wishlist"
                   >
                     <i
@@ -217,12 +229,12 @@ export default function ProductDetailPage({
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
                   <span className="px-3 py-1 rounded-xl bg-black/65 backdrop-blur-md border border-white/15 text-white text-xs font-medium flex items-center gap-1.5 shadow-sm">
                     <i className="fa-solid fa-location-dot text-[#E8AF30] text-xs"></i>
-                    <span>{product.originBn}</span>
+                    <span>{isBn ? product.originBn : product.origin}</span>
                   </span>
 
                   <span className="px-3 py-1 rounded-xl bg-emerald-950/85 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 shadow-sm">
                     <i className="fa-solid fa-shield-halved text-emerald-400 text-xs"></i>
-                    <span>ল্যাব টেস্ট স্কোর ৯৯.৮%</span>
+                    <span>{isBn ? "ল্যাব টেস্ট স্কোর ৯৯.৮%" : "Lab Tested Score 99.8%"}</span>
                   </span>
                 </div>
               </div>
@@ -253,21 +265,21 @@ export default function ProductDetailPage({
                   </div>
                   <div>
                     <h4 className="font-extrabold text-xs text-emerald-950">
-                      BSTI ও ISO স্ট্যান্ডার্ড সার্টিফাইড পিউরিটি
+                      {isBn ? "BSTI ও ISO স্ট্যান্ডার্ড সার্টিফাইড পিউরিটি" : "BSTI & ISO Certified Organic Purity"}
                     </h4>
                     <p className="text-[11px] text-emerald-800">
-                      কোনো রাসায়নিক, মেলামাইন বা হরমোন মেশানো নেই।
+                      {isBn ? "কোনো রাসায়নিক, মেলামাইন বা হরমোন মেশানো নেই।" : "Zero chemical additives, preservatives or artificial thickeners."}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 pt-2 border-t border-emerald-200/50 text-[11px] font-bold text-emerald-900">
                   <span className="flex items-center gap-1">
-                    <i className="fa-solid fa-snowflake text-emerald-600"></i> ৪°C কোল্ড-চেইন
+                    <i className="fa-solid fa-snowflake text-emerald-600"></i> {isBn ? "৪°C কোল্ড-চেইন" : "4°C Cold-Chain"}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <i className="fa-solid fa-bottle-droplet text-emerald-600"></i> খাদ্য-উপযোগী সিলগালা জার
+                    <i className="fa-solid fa-bottle-droplet text-emerald-600"></i> {isBn ? "খাদ্য-উপযোগী সিলগালা জার" : "Food-Grade Sealed Pack"}
                   </span>
                 </div>
               </div>
@@ -281,11 +293,11 @@ export default function ProductDetailPage({
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-emerald-900 bg-emerald-100/80 px-3 py-1 rounded-full border border-emerald-200">
                       <i className="fa-solid fa-seedling mr-1.5 text-emerald-700"></i>
-                      {product.categoryBn}
+                      {isBn ? product.categoryBn : product.category}
                     </span>
 
                     <span className="text-xs font-medium text-stone-500 bg-stone-100 px-2.5 py-1 rounded-full">
-                      স্টক: {product.stock} টি উপলব্ধ
+                      {isBn ? `স্টক: ${product.stock} টি উপলব্ধ` : `Stock: ${product.stock} in stock`}
                     </span>
                   </div>
 
@@ -298,24 +310,24 @@ export default function ProductDetailPage({
                     <i className="fa-solid fa-star text-amber-500"></i>
                     <span className="text-stone-900">{product.rating}</span>
                     <span className="text-stone-500 font-medium underline">
-                      ({product.reviewCount} কাস্টমার রিভিউ)
+                      ({product.reviewCount} {isBn ? "কাস্টমার রিভিউ" : "reviews"})
                     </span>
                   </button>
                 </div>
 
                 {/* Product Title */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-stone-950 leading-tight mb-1">
-                  {product.titleBn}
+                  {isBn ? product.titleBn : product.title}
                 </h1>
                 <p className="text-stone-500 text-sm font-medium mb-5">
-                  {product.title} • 100% Raw Grass-Fed Organic Farm Produce
+                  {isBn ? product.title : product.titleBn} • 100% Raw Grass-Fed Organic Farm Produce
                 </p>
 
                 {/* Price Display Card */}
                 <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-stone-50 via-stone-50/80 to-emerald-50/40 border border-stone-200/80 mb-5 flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <span className="text-[11px] font-bold text-stone-500 uppercase tracking-wider block mb-0.5">
-                      বিশেষ অফার মূল্য
+                      {t.productDetail.specialOffer}
                     </span>
                     <div className="flex items-baseline gap-3">
                       <span className="text-3xl sm:text-4xl font-black text-[#002719] font-mono tracking-tight">
@@ -327,14 +339,14 @@ export default function ProductDetailPage({
                         </span>
                       )}
                       <span className="text-xs font-black text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300/60">
-                        ৳{totalSavings} সাশ্রয় (-{discountPercent}%)
+                        {isBn ? `৳${totalSavings} সাশ্রয় (-${discountPercent}%)` : `Save ৳${totalSavings} (-${discountPercent}%)`}
                       </span>
                     </div>
                   </div>
 
                   <div className="text-right">
                     <span className="text-[11px] font-bold text-stone-500 uppercase tracking-wider block mb-0.5">
-                      প্যাকেজিং
+                      {t.productDetail.packaging}
                     </span>
                     <span className="text-xs sm:text-sm font-extrabold text-stone-800 bg-white px-3.5 py-1.5 rounded-xl border border-stone-200 shadow-xs inline-block">
                       {currentPack.unitText}
@@ -346,10 +358,10 @@ export default function ProductDetailPage({
                 <div className="mb-5 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-stone-800">
-                      প্যাক সাইজ বেছে নিন (Select Pack Size):
+                      {t.productDetail.selectPack}
                     </span>
                     <span className="text-[11px] text-emerald-700 font-bold">
-                      বড় প্যাকে বাড়তি সাশ্রয়!
+                      {t.productDetail.packSavings}
                     </span>
                   </div>
 
@@ -387,12 +399,14 @@ export default function ProductDetailPage({
                   <div className="flex items-center justify-between text-xs font-bold text-amber-950 mb-1.5">
                     <span className="flex items-center gap-1.5">
                       <i className="fa-solid fa-truck-fast text-[#E8AF30]"></i>
-                      ৳১,০০০ টাকার অর্ডারে ফ্রি এক্সপ্রেস ডেলিভারি
+                      {t.productDetail.freeDeliveryBanner}
                     </span>
                     <span className="text-emerald-800">
                       {unitPrice * quantity >= 1000
-                        ? "ফ্রি ডেলিভারি প্রযোজ্য! 🎉"
-                        : `আর মাত্র ৳${Math.max(0, 1000 - unitPrice * quantity)} বাকি`}
+                        ? t.productDetail.freeDeliveryReached
+                        : isBn
+                        ? `আর মাত্র ৳${Math.max(0, 1000 - unitPrice * quantity)} বাকি`
+                        : `Only ৳${Math.max(0, 1000 - unitPrice * quantity)} away`}
                     </span>
                   </div>
                   <div className="w-full bg-amber-200/60 rounded-full h-2 overflow-hidden">
@@ -413,16 +427,16 @@ export default function ProductDetailPage({
                     </div>
                     <div>
                       <span className="font-bold text-stone-900 block">
-                        পরবর্তী এক্সপ্রেস ডেলিভারি স্লট
+                        {t.productDetail.deliverySlot}
                       </span>
                       <span className="text-stone-500 text-[11px]">
-                        আজ বিকাল ৪:০০ - রাত ৮:০০ (ঢাকা সিটিতে ৩ ঘণ্টার মধ্যে ডেলিভারি)
+                        {t.productDetail.deliverySlotTiming}
                       </span>
                     </div>
                   </div>
 
                   <span className="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 font-extrabold text-[11px] whitespace-nowrap">
-                    স্লট উন্মুক্ত
+                    {t.productDetail.slotOpen}
                   </span>
                 </div>
               </div>
@@ -431,7 +445,7 @@ export default function ProductDetailPage({
               <div className="space-y-4 pt-4 border-t border-stone-200">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold text-stone-700">পরিমাণ:</span>
+                    <span className="text-xs font-bold text-stone-700">{t.productDetail.quantity}</span>
                     <div className="flex items-center bg-stone-100 rounded-2xl p-1 border border-stone-200">
                       <button
                         type="button"
@@ -456,7 +470,7 @@ export default function ProductDetailPage({
                   </div>
 
                   <div className="text-right">
-                    <span className="text-[11px] text-stone-500 block">সর্বমোট প্রদেয়:</span>
+                    <span className="text-[11px] text-stone-500 block">{t.productDetail.totalPayable}</span>
                     <span className="text-2xl font-black text-[#002719] font-mono">
                       ৳{unitPrice * quantity}
                     </span>
@@ -479,7 +493,7 @@ export default function ProductDetailPage({
                         isAddedFeedback ? "fa-solid fa-check" : "fa-solid fa-basket-shopping"
                       } text-base`}
                     ></i>
-                    <span>{isAddedFeedback ? "ব্যাগে যুক্ত হয়েছে ✓" : "ব্যাগে নিন (Add to Cart)"}</span>
+                    <span>{isAddedFeedback ? t.productDetail.addedToBag : t.productDetail.addToBag}</span>
                   </button>
 
                   <button
@@ -488,7 +502,7 @@ export default function ProductDetailPage({
                     className="py-4 px-6 rounded-2xl bg-gradient-to-r from-[#E8AF30] to-amber-400 hover:from-amber-400 hover:to-yellow-500 text-[#002719] font-black text-sm tracking-wide flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#E8AF30]/25 active:scale-95"
                   >
                     <i className="fa-solid fa-bolt text-base"></i>
-                    <span>সরাসরি কিনুন (1-Click Buy)</span>
+                    <span>{t.productDetail.oneClickBuy}</span>
                   </button>
                 </div>
 
@@ -499,7 +513,7 @@ export default function ProductDetailPage({
                     className="flex items-center gap-1.5 hover:text-[#002719] transition-colors"
                   >
                     <i className="fa-solid fa-phone text-[#E8AF30]"></i>
-                    <span>ফোনে অর্ডার: ০১৭১২-৩৪৫৬৭৮</span>
+                    <span>{t.productDetail.orderPhone}</span>
                   </a>
                   <span>•</span>
                   <a
@@ -509,7 +523,7 @@ export default function ProductDetailPage({
                     className="flex items-center gap-1.5 hover:text-emerald-700 transition-colors"
                   >
                     <i className="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>
-                    <span>হোয়াটসঅ্যাপে অর্ডার</span>
+                    <span>{t.productDetail.orderWhatsApp}</span>
                   </a>
                 </div>
 
@@ -517,25 +531,25 @@ export default function ProductDetailPage({
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 border-t border-stone-100">
                   <div className="p-2.5 rounded-xl bg-stone-50 text-center">
                     <i className="fa-solid fa-shield-heart text-emerald-700 text-base mb-1 block"></i>
-                    <span className="text-[10px] font-bold text-stone-800 block">১০০% প্রাকৃতিক</span>
-                    <span className="text-[9px] text-stone-500">রাসায়নিক মুক্ত</span>
+                    <span className="text-[10px] font-bold text-stone-800 block">{t.productDetail.trust1Title}</span>
+                    <span className="text-[9px] text-stone-500">{t.productDetail.trust1Sub}</span>
                   </div>
 
                   <div className="p-2.5 rounded-xl bg-stone-50 text-center">
                     <i className="fa-solid fa-rotate-left text-emerald-700 text-base mb-1 block"></i>
-                    <span className="text-[10px] font-bold text-stone-800 block">মানিব্যাক গ্যারান্টি</span>
-                    <span className="text-[9px] text-stone-500">ইনস্ট্যান্ট রিফান্ড</span>
+                    <span className="text-[10px] font-bold text-stone-800 block">{t.productDetail.trust2Title}</span>
+                    <span className="text-[9px] text-stone-500">{t.productDetail.trust2Sub}</span>
                   </div>
 
                   <div className="p-2.5 rounded-xl bg-stone-50 text-center">
                     <i className="fa-solid fa-hand-holding-dollar text-emerald-700 text-base mb-1 block"></i>
-                    <span className="text-[10px] font-bold text-stone-800 block">ক্যাশ অন ডেলিভারি</span>
-                    <span className="text-[9px] text-stone-500">পণ্য দেখে দাম দিন</span>
+                    <span className="text-[10px] font-bold text-stone-800 block">{t.productDetail.trust3Title}</span>
+                    <span className="text-[9px] text-stone-500">{t.productDetail.trust3Sub}</span>
                   </div>
 
                   <div className="p-2.5 rounded-xl bg-stone-50 text-center">
                     <i className="fa-solid fa-truck-ramp-box text-emerald-700 text-base mb-1 block"></i>
-                    <span className="text-[10px] font-bold text-stone-800 block">কোল্ড-চেইন</span>
+                    <span className="text-[10px] font-bold text-stone-800 block">{t.productDetail.trust4Title}</span>
                     <span className="text-[9px] text-stone-500">৪ ঘণ্টায় ডেলিভারি</span>
                   </div>
                 </div>
@@ -548,13 +562,13 @@ export default function ProductDetailPage({
         <div className="bg-gradient-to-br from-[#002719] to-[#003824] rounded-[32px] p-6 sm:p-8 text-white mb-12 shadow-xl border border-emerald-800/60 relative overflow-hidden">
           <div className="max-w-2xl relative z-10 mb-6">
             <span className="text-[#E8AF30] text-xs font-bold uppercase tracking-wider block mb-1">
-              খামারের স্বাস্থ্যকর কম্বো অফার
+              {t.productDetail.comboBadge}
             </span>
             <h3 className="text-xl sm:text-2xl font-black text-white mb-1">
-              একসাথে কিনুন এবং বাড়তি ১১১ টাকা সাশ্রয় করুন!
+              {t.productDetail.comboTitle}
             </h3>
             <p className="text-emerald-200/80 text-xs sm:text-sm">
-              খাঁটি দুধের সাথে বিলোনা গাওয়া ঘি ও সুন্দরবনের মধু—পরিপূর্ণ সকালের পুষ্টির জন্য আদর্শ প্যাকেজ।
+              {t.productDetail.comboDesc}
             </p>
           </div>
 
@@ -569,7 +583,7 @@ export default function ProductDetailPage({
                   className="w-14 h-14 rounded-xl object-cover shrink-0"
                 />
                 <div>
-                  <h4 className="font-bold text-xs line-clamp-1">{product.titleBn}</h4>
+                  <h4 className="font-bold text-xs line-clamp-1">{isBn ? product.titleBn : product.title}</h4>
                   <span className="text-xs font-black text-[#E8AF30] font-mono">৳{unitPrice}</span>
                 </div>
               </div>
@@ -584,7 +598,7 @@ export default function ProductDetailPage({
                   className="w-14 h-14 rounded-xl object-cover shrink-0"
                 />
                 <div>
-                  <h4 className="font-bold text-xs line-clamp-1">{bundleProduct1.titleBn}</h4>
+                  <h4 className="font-bold text-xs line-clamp-1">{isBn ? bundleProduct1.titleBn : bundleProduct1.title}</h4>
                   <span className="text-xs font-black text-[#E8AF30] font-mono">৳{bundleProduct1.price}</span>
                 </div>
               </div>
@@ -599,7 +613,7 @@ export default function ProductDetailPage({
                   className="w-14 h-14 rounded-xl object-cover shrink-0"
                 />
                 <div>
-                  <h4 className="font-bold text-xs line-clamp-1">{bundleProduct2.titleBn}</h4>
+                  <h4 className="font-bold text-xs line-clamp-1">{isBn ? bundleProduct2.titleBn : bundleProduct2.title}</h4>
                   <span className="text-xs font-black text-[#E8AF30] font-mono">৳{bundleProduct2.price}</span>
                 </div>
               </div>
@@ -607,7 +621,7 @@ export default function ProductDetailPage({
 
             {/* Bundle Checkout Action */}
             <div className="lg:col-span-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 text-center">
-              <span className="text-xs text-emerald-200 block mb-1">৩টি পণ্যের কম্বো মূল্য:</span>
+              <span className="text-xs text-emerald-200 block mb-1">{t.productDetail.comboPrice}</span>
               <div className="flex items-baseline justify-center gap-2 mb-3">
                 <span className="text-2xl font-black text-[#E8AF30] font-mono">
                   ৳{bundleDiscountedPrice}
@@ -621,7 +635,7 @@ export default function ProductDetailPage({
                 onClick={handleAddBundle}
                 className="w-full py-3 px-4 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-black text-xs tracking-wide transition-all shadow-md active:scale-95"
               >
-                এক ক্লিকে কম্বো ব্যাগে নিন
+                {t.productDetail.addCombo}
               </button>
             </div>
           </div>
@@ -639,7 +653,7 @@ export default function ProductDetailPage({
                   : "text-stone-500 hover:text-stone-900 bg-stone-50"
               }`}
             >
-              পুষ্টি ও স্বাস্থ্য উপকারিতা
+              {t.productDetail.tabBenefits}
             </button>
             <button
               onClick={() => setActiveTab("nutrition")}
@@ -649,7 +663,7 @@ export default function ProductDetailPage({
                   : "text-stone-500 hover:text-stone-900 bg-stone-50"
               }`}
             >
-              ল্যাব টেস্ট রিপোর্ট ও মান নিয়ন্ত্রণ
+              {t.productDetail.tabNutrition}
             </button>
             <button
               onClick={() => setActiveTab("origin")}
@@ -659,7 +673,7 @@ export default function ProductDetailPage({
                   : "text-stone-500 hover:text-stone-900 bg-stone-50"
               }`}
             >
-              খামারের উৎস ও সংগ্রহের গল্প
+              {t.productDetail.tabOrigin}
             </button>
             <button
               onClick={() => setActiveTab("storage")}
@@ -669,7 +683,7 @@ export default function ProductDetailPage({
                   : "text-stone-500 hover:text-stone-900 bg-stone-50"
               }`}
             >
-              ব্যবহারবিধি ও সংরক্ষণ পরামর্শ
+              {t.productDetail.tabStorage}
             </button>
             <button
               onClick={() => setActiveTab("reviews")}
@@ -679,7 +693,7 @@ export default function ProductDetailPage({
                   : "text-stone-500 hover:text-stone-900 bg-stone-50"
               }`}
             >
-              কাস্টমার রিভিউ ({product.reviewCount})
+              {t.productDetail.tabReviews} ({product.reviewCount})
             </button>
           </div>
 
@@ -688,10 +702,10 @@ export default function ProductDetailPage({
             <div className="space-y-6 animate-in fade-in duration-300">
               <div className="max-w-3xl">
                 <h3 className="text-lg sm:text-xl font-black text-stone-900 mb-2">
-                  কেন {product.titleBn} আপনার পরিবারের প্রতিদিনের পুষ্টির সেরা সমাধান?
+                  {t.productDetail.benefitsHeading.replace("{title}", isBn ? product.titleBn : product.title)}
                 </h3>
                 <p className="text-sm text-stone-600 leading-relaxed">
-                  {product.descriptionBn || product.description}
+                  {isBn ? (product.descriptionBn || product.description) : product.description}
                 </p>
               </div>
 
@@ -709,7 +723,7 @@ export default function ProductDetailPage({
                         {b}
                       </h4>
                       <p className="text-xs text-stone-500 leading-relaxed">
-                        প্রাকৃতিক উৎস থেকে সংগৃহীত হওয়ায় শরীরের রোগ প্রতিরোধ ক্ষমতা বহুগুণ বাড়াতে সহায়তা করে।
+                        {t.productDetail.benefitDefaultNote}
                       </p>
                     </div>
                   </div>
@@ -725,13 +739,13 @@ export default function ProductDetailPage({
                 {/* Purity Score Card */}
                 <div className="p-6 rounded-3xl bg-emerald-50 border border-emerald-200 text-center">
                   <div className="w-16 h-16 rounded-full bg-emerald-700 text-white text-2xl font-black flex items-center justify-center mx-auto mb-3 shadow-md">
-                    ৯৯.৮%
+                    {isBn ? "৯৯.৮%" : "99.8%"}
                   </div>
                   <h4 className="font-black text-emerald-950 text-base mb-1">
-                    সার্টিফাইড পিউরিটি স্কোর
+                    {t.productDetail.certifiedPurityScore}
                   </h4>
                   <p className="text-xs text-emerald-800">
-                    দৈনিক মাইক্রোবায়োলজিক্যাল টেস্টে শূন্য কেমিক্যাল ও ভেজাল নিশ্চিত করা হয়েছে।
+                    {t.productDetail.certifiedPurityDesc}
                   </p>
                 </div>
 
@@ -739,24 +753,24 @@ export default function ProductDetailPage({
                 <div className="md:col-span-2 p-6 rounded-3xl bg-stone-50 border border-stone-200">
                   <h4 className="font-extrabold text-stone-900 text-sm mb-4 flex items-center gap-2">
                     <i className="fa-solid fa-list-check text-emerald-700"></i>
-                    পুষ্টি উপাদান প্রোফাইল (প্রতি ১০০ মিলি/গ্রাম অনুযায়ী)
+                    {t.productDetail.nutritionFactsTitle}
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div className="p-3 rounded-xl bg-white border border-stone-200 text-center">
-                      <span className="text-[11px] text-stone-500 block">ক্যালোরি</span>
-                      <span className="text-base font-black text-stone-900 font-mono">৬৭ kcal</span>
+                      <span className="text-[11px] text-stone-500 block">{t.productDetail.calories}</span>
+                      <span className="text-base font-black text-stone-900 font-mono">{isBn ? "৬৭ kcal" : "67 kcal"}</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white border border-stone-200 text-center">
-                      <span className="text-[11px] text-stone-500 block">প্রোটিন</span>
-                      <span className="text-base font-black text-stone-900 font-mono">৩.৪ গ্রাম</span>
+                      <span className="text-[11px] text-stone-500 block">{t.productDetail.protein}</span>
+                      <span className="text-base font-black text-stone-900 font-mono">{isBn ? "৩.৪ গ্রাম" : "3.4 g"}</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white border border-stone-200 text-center">
-                      <span className="text-[11px] text-stone-500 block">প্রাকৃতিক ফ্যাট</span>
-                      <span className="text-base font-black text-stone-900 font-mono">৪.২%</span>
+                      <span className="text-[11px] text-stone-500 block">{t.productDetail.naturalFat}</span>
+                      <span className="text-base font-black text-stone-900 font-mono">{isBn ? "৪.২%" : "4.2%"}</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white border border-stone-200 text-center">
-                      <span className="text-[11px] text-stone-500 block">ক্যালসিয়াম</span>
-                      <span className="text-base font-black text-stone-900 font-mono">১২৫ মি.গ্রা.</span>
+                      <span className="text-[11px] text-stone-500 block">{t.productDetail.calcium}</span>
+                      <span className="text-base font-black text-stone-900 font-mono">{isBn ? "১২৫ মি.গ্রা." : "125 mg"}</span>
                     </div>
                   </div>
                 </div>
@@ -764,19 +778,19 @@ export default function ProductDetailPage({
 
               {/* Lab Certification Points */}
               <div className="p-5 rounded-2xl bg-white border border-stone-200/90 space-y-2">
-                <h5 className="font-bold text-xs text-stone-900">ল্যাব টেস্টে যা নিশ্চিত করা হয়:</h5>
+                <h5 className="font-bold text-xs text-stone-900">{t.productDetail.labTestingTitle}</h5>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-stone-600">
                   <div className="flex items-center gap-2">
                     <i className="fa-solid fa-check text-emerald-600"></i>
-                    <span>০% কৃত্রিম ইউরিয়া ও স্টার্চ</span>
+                    <span>{t.productDetail.labTest1}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <i className="fa-solid fa-check text-emerald-600"></i>
-                    <span>হরমোন ও অ্যান্টিবায়োটিক মুক্ত</span>
+                    <span>{t.productDetail.labTest2}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <i className="fa-solid fa-check text-emerald-600"></i>
-                    <span>প্রাকৃতিক ঘন সর ও পুষ্টি সংরক্ষিত</span>
+                    <span>{t.productDetail.labTest3}</span>
                   </div>
                 </div>
               </div>
@@ -788,26 +802,26 @@ export default function ProductDetailPage({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center animate-in fade-in duration-300">
               <div className="space-y-4">
                 <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold inline-block">
-                  খামারের গল্প ও ট্র্যাসেবিলিটি
+                  {t.productDetail.originBadge}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-stone-950 leading-snug">
-                  সবুজ ঘাসে চরে বেড়ানো গাভী ও খাঁটি সংগ্রহের শপথ
+                  {t.productDetail.originHeading}
                 </h3>
                 <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-                  আমাদের খামারে গাভীদের কোনো প্রকার কৃত্রিম কমার্শিয়াল ফিড বা হরমোন প্রয়োগ করা হয় না। প্রতিদিন ভোরে সবুজ নেপিয়ার ঘাস ও ভুট্টার তাজা সাইলেজ খেয়ে প্রাকৃতিক পরিবেশে গাভীরা বেড়ে ওঠে।
+                  {t.productDetail.originDesc}
                 </p>
                 <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2 text-xs text-stone-700">
                   <div className="flex items-center gap-2 font-bold">
                     <i className="fa-solid fa-location-pin text-[#E8AF30]"></i>
-                    <span>খামারের অবস্থান: {product.originBn} (ঢাকা থেকে মাত্র ৪০ কিমি)</span>
+                    <span>{t.productDetail.farmLocationLabel} {isBn ? product.originBn : product.origin}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <i className="fa-solid fa-tractor text-emerald-700"></i>
-                    <span>তত্ত্বাবধায়ক: গ্রীনরুট কো-অপারেটিভ ডেইরি ফার্মার্স</span>
+                    <span>{t.productDetail.supervisorLabel} {t.productDetail.supervisorVal}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <i className="fa-solid fa-clock text-emerald-700"></i>
-                    <span>মিল্কিং সময়: ভোর ৫:০০ টা | চিলিং সম্পন্ন: ভোর ৫:৩০ টা</span>
+                    <span>{t.productDetail.milkingTimeLabel} {t.productDetail.milkingTimeVal}</span>
                   </div>
                 </div>
               </div>
@@ -826,36 +840,36 @@ export default function ProductDetailPage({
           {activeTab === "storage" && (
             <div className="space-y-6 animate-in fade-in duration-300">
               <h3 className="text-lg font-black text-stone-900">
-                জ্বাল দেওয়ার সঠিক নিয়ম ও সংরক্ষণ গাইডলাইন
+                {t.productDetail.storageHeading}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-5 rounded-2xl bg-stone-50 border border-stone-200">
                   <span className="w-8 h-8 rounded-xl bg-[#002719] text-[#E8AF30] font-black flex items-center justify-center text-xs mb-3">
-                    ১
+                    1
                   </span>
-                  <h4 className="font-bold text-sm text-stone-900 mb-1">হালকা আঁচে জ্বাল</h4>
+                  <h4 className="font-bold text-sm text-stone-900 mb-1">{t.productDetail.step1Title}</h4>
                   <p className="text-xs text-stone-500 leading-relaxed">
-                    দুধ পাওয়ার সাথে সাথে পরিষ্কার পাত্রে হালকা আঁচে একবার ফুটিয়ে নামিয়ে ফেলুন। বেশি সময় ধরে অতিরিক্ত ফোটালে পুষ্টিকর এনজাইম নষ্ট হতে পারে।
+                    {t.productDetail.step1Desc}
                   </p>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-stone-50 border border-stone-200">
                   <span className="w-8 h-8 rounded-xl bg-[#002719] text-[#E8AF30] font-black flex items-center justify-center text-xs mb-3">
-                    ২
+                    2
                   </span>
-                  <h4 className="font-bold text-sm text-stone-900 mb-1">ঘন সর তোলার টিপস</h4>
+                  <h4 className="font-bold text-sm text-stone-900 mb-1">{t.productDetail.step2Title}</h4>
                   <p className="text-xs text-stone-500 leading-relaxed">
-                    জ্বাল দেওয়ার পর না ঢেকে স্বাভাবিক তাপমাত্রায় ঠান্ডা হতে দিন। এরপর ফ্রিজে রাখলে ওপরে পুরু ও সুস্বাদু সরের আস্তরণ পড়বে।
+                    {t.productDetail.step2Desc}
                   </p>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-stone-50 border border-stone-200">
                   <span className="w-8 h-8 rounded-xl bg-[#002719] text-[#E8AF30] font-black flex items-center justify-center text-xs mb-3">
-                    ৩
+                    3
                   </span>
-                  <h4 className="font-bold text-sm text-stone-900 mb-1">ফ্রিজে সংরক্ষণ</h4>
+                  <h4 className="font-bold text-sm text-stone-900 mb-1">{t.productDetail.step3Title}</h4>
                   <p className="text-xs text-stone-500 leading-relaxed">
-                    ফ্রিজের সাধারণ চেম্বারে (৪°C তাপমাত্রায়) কাঁচের বোতলে মুখ বন্ধ অবস্থায় ৩-৪ দিন সম্পূর্ণ টাটকা থাকে।
+                    {t.productDetail.step3Desc}
                   </p>
                 </div>
               </div>
@@ -872,31 +886,31 @@ export default function ProductDetailPage({
                   </span>
                   <div className="text-amber-500 text-sm my-1">★★★★★</div>
                   <span className="text-xs text-stone-500 font-medium">
-                    {product.reviewCount} জন ভেরিফাইড ক্রেতার মতামত
+                    {product.reviewCount} {t.productDetail.verifiedReviewsCount}
                   </span>
                 </div>
 
                 <div className="md:col-span-5 space-y-1.5 text-xs text-stone-600">
                   <div className="flex items-center gap-2">
-                    <span className="w-10 text-right">৫ স্টার</span>
+                    <span className="w-12 text-right">{t.productDetail.star5}</span>
                     <div className="flex-1 bg-stone-200 rounded-full h-2">
                       <div className="bg-amber-500 h-2 rounded-full w-[92%]" />
                     </div>
-                    <span className="w-8">৯২%</span>
+                    <span className="w-8">92%</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-10 text-right">৪ স্টার</span>
+                    <span className="w-12 text-right">{t.productDetail.star4}</span>
                     <div className="flex-1 bg-stone-200 rounded-full h-2">
                       <div className="bg-amber-500 h-2 rounded-full w-[6%]" />
                     </div>
-                    <span className="w-8">৬%</span>
+                    <span className="w-8">6%</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-10 text-right">৩ স্টার</span>
+                    <span className="w-12 text-right">{t.productDetail.star3}</span>
                     <div className="flex-1 bg-stone-200 rounded-full h-2">
                       <div className="bg-amber-500 h-2 rounded-full w-[2%]" />
                     </div>
-                    <span className="w-8">২%</span>
+                    <span className="w-8">2%</span>
                   </div>
                 </div>
 
@@ -906,7 +920,7 @@ export default function ProductDetailPage({
                     onClick={() => setShowReviewModal(true)}
                     className="w-full py-3 px-4 rounded-xl bg-[#002719] hover:bg-emerald-900 text-white font-bold text-xs tracking-wide transition-all shadow-md active:scale-95"
                   >
-                    রিভিউ লিখুন
+                    {t.productDetail.writeReview}
                   </button>
                 </div>
               </div>
@@ -917,17 +931,19 @@ export default function ProductDetailPage({
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-900 font-bold text-xs flex items-center justify-center">
-                        তা
+                        T
                       </div>
                       <div>
-                        <h5 className="font-extrabold text-xs text-stone-900">তানভীর আহমেদ</h5>
-                        <span className="text-[10px] text-stone-400">ধানমন্ডি, ঢাকা • ২ দিন আগে</span>
+                        <h5 className="font-extrabold text-xs text-stone-900">{isBn ? "তানভীর আহমেদ" : "Tanveer Ahmed"}</h5>
+                        <span className="text-[10px] text-stone-400">{isBn ? "ধানমন্ডি, ঢাকা • ২ দিন আগে" : "Dhanmondi, Dhaka • 2 days ago"}</span>
                       </div>
                     </div>
                     <span className="text-xs text-amber-500 font-bold">★★★★★</span>
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    বাচ্চাদের জন্য নিয়মিত নিচ্ছি। কোনো প্রকার ভেজাল নেই, সাধারণ বাজার থেকে পাওয়া দুধের সাথে কোনো তুলনাই চলে না। ওপরের ঘন সর দেখলেই বোঝা যায় আসল খাঁটি দুধ। অনেক ধন্যবাদ গ্রীনরুট টিমকে!
+                    {isBn
+                      ? "বাচ্চাদের জন্য নিয়মিত নিচ্ছি। কোনো প্রকার ভেজাল নেই, সাধারণ বাজার থেকে পাওয়া দুধের সাথে কোনো তুলনাই চলে না। ওপরের ঘন সর দেখলেই বোঝা যায় আসল খাঁটি দুধ। অনেক ধন্যবাদ গ্রীনরুট টিমকে!"
+                      : "Ordering regularly for my kids. Extremely pure and the thick natural cream layer proves it is authentic grass-fed raw milk. Great cold-chain packaging!"}
                   </p>
                 </div>
 
@@ -935,17 +951,19 @@ export default function ProductDetailPage({
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-full bg-amber-100 text-amber-900 font-bold text-xs flex items-center justify-center">
-                        ফ
+                        F
                       </div>
                       <div>
-                        <h5 className="font-extrabold text-xs text-stone-900">ফারহানা চৌধুরী</h5>
-                        <span className="text-[10px] text-stone-400">উত্তরা সেক্টর ৭ • ৫ দিন আগে</span>
+                        <h5 className="font-extrabold text-xs text-stone-900">{isBn ? "ফারহানা চৌধুরী" : "Farhana Chowdhury"}</h5>
+                        <span className="text-[10px] text-stone-400">{isBn ? "উত্তরা সেক্টর ৭ • ৫ দিন আগে" : "Uttara Sector 7 • 5 days ago"}</span>
                       </div>
                     </div>
                     <span className="text-xs text-amber-500 font-bold">★★★★★</span>
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    সকালে অর্ডার দিয়েছিলাম, দুপুরের আগেই একদম চিলড অবস্থায় কাঁচের বোতলে ডেলিভারি পেয়েছি। প্যাকেজিং ও দুধের মিষ্টি প্রাকৃতিক গন্ধ অসাধারণ।
+                    {isBn
+                      ? "সকালে অর্ডার দিয়েছিলাম, দুপুরের আগেই একদম চিলড অবস্থায় কাঁচের বোতলে ডেলিভারি পেয়েছি। প্যাকেজিং ও দুধের মিষ্টি প্রাকৃতিক গন্ধ অসাধারণ।"
+                      : "Placed the order in the morning and received chilled glass bottles before noon. Incredible aroma and sweetness!"}
                   </p>
                 </div>
               </div>
@@ -959,17 +977,17 @@ export default function ProductDetailPage({
             <div className="flex items-center justify-between mb-6">
               <div>
                 <span className="text-xs font-bold text-[#E8AF30] uppercase tracking-wider block mb-0.5">
-                  আরো খাঁটি সংগ্রহ
+                  {t.productDetail.relatedBadge}
                 </span>
                 <h2 className="text-xl sm:text-2xl font-black text-stone-900">
-                  সম্পর্কিত অন্যান্য অর্গানিক পণ্য
+                  {t.productDetail.relatedHeading}
                 </h2>
               </div>
               <Link
                 href="/products"
                 className="text-xs font-bold text-[#002719] hover:text-[#E8AF30] transition-colors"
               >
-                সব পণ্য দেখুন →
+                {t.productDetail.viewAllProducts}
               </Link>
             </div>
 
@@ -991,7 +1009,7 @@ export default function ProductDetailPage({
             className="w-11 h-11 rounded-xl object-cover shrink-0 border border-stone-200"
           />
           <div className="min-w-0">
-            <h4 className="font-bold text-xs text-stone-900 truncate">{product.titleBn}</h4>
+            <h4 className="font-bold text-xs text-stone-900 truncate">{isBn ? product.titleBn : product.title}</h4>
             <span className="text-sm font-black text-[#002719] font-mono">
               ৳{unitPrice * quantity}
             </span>
@@ -1005,14 +1023,14 @@ export default function ProductDetailPage({
             className="py-2.5 px-4 rounded-xl bg-[#002719] text-white font-bold text-xs flex items-center gap-1.5 active:scale-95 shadow-sm"
           >
             <i className="fa-solid fa-basket-shopping text-xs"></i>
-            <span>ব্যাগে নিন</span>
+            <span>{t.productDetail.mobileAddBag}</span>
           </button>
           <button
             type="button"
             onClick={handleBuyNow}
             className="py-2.5 px-4 rounded-xl bg-[#E8AF30] text-[#002719] font-black text-xs active:scale-95 shadow-sm"
           >
-            কিনুন
+            {t.productDetail.mobileBuy}
           </button>
         </div>
       </div>
@@ -1037,22 +1055,22 @@ export default function ProductDetailPage({
             </button>
 
             <h3 className="text-xl font-black text-stone-900 mb-1">
-              আপনার অভিজ্ঞতা শেয়ার করুন
+              {t.productDetail.shareExperience}
             </h3>
             <p className="text-xs text-stone-500 mb-5">
-              {product.titleBn} সম্পর্কে আপনার সৎ মূল্যায়ন আমাদের খামারের কৃষকদের উৎসাহিত করে।
+              {isBn ? product.titleBn : product.title} {t.productDetail.shareExperienceDesc}
             </p>
 
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("আপনার মূল্যবান পর্যালোচনার জন্য ধন্যবাদ! এটি পর্যালোচনার পর প্রকাশিত হবে।");
+                alert(t.productDetail.reviewSuccessMsg);
                 setShowReviewModal(false);
               }}
               className="space-y-4"
             >
               <div>
-                <label className="text-xs font-bold text-stone-700 block mb-1">রেটিং দিন:</label>
+                <label className="text-xs font-bold text-stone-700 block mb-1">{t.productDetail.rateLabel}</label>
                 <div className="flex gap-2 text-2xl text-amber-400 cursor-pointer">
                   <span>★</span>
                   <span>★</span>
@@ -1063,31 +1081,31 @@ export default function ProductDetailPage({
               </div>
 
               <div>
-                <label className="text-xs font-bold text-stone-700 block mb-1">আপনার নাম:</label>
+                <label className="text-xs font-bold text-stone-700 block mb-1">{t.productDetail.yourName}</label>
                 <input
                   type="text"
                   required
-                  placeholder="যেমন: তানভীর আহমেদ"
+                  placeholder={isBn ? "যেমন: তানভীর আহমেদ" : "e.g., Tanveer Ahmed"}
                   className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs focus:outline-none focus:border-[#E8AF30]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-stone-700 block mb-1">আপনার এলাকা/শহর:</label>
+                <label className="text-xs font-bold text-stone-700 block mb-1">{t.productDetail.yourLocation}</label>
                 <input
                   type="text"
                   required
-                  placeholder="যেমন: উত্তরা, ঢাকা"
+                  placeholder={isBn ? "যেমন: উত্তরা, ঢাকা" : "e.g., Uttara, Dhaka"}
                   className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs focus:outline-none focus:border-[#E8AF30]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-stone-700 block mb-1">বিস্তারিত মতামত:</label>
+                <label className="text-xs font-bold text-stone-700 block mb-1">{t.productDetail.feedbackLabel}</label>
                 <textarea
                   rows={3}
                   required
-                  placeholder="স্বাদ, গন্ধ ও প্যাকেজিং কেমন লেগেছে তা লিখুন..."
+                  placeholder={t.productDetail.feedbackPlaceholder}
                   className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-xs focus:outline-none focus:border-[#E8AF30]"
                 ></textarea>
               </div>
@@ -1096,7 +1114,7 @@ export default function ProductDetailPage({
                 type="submit"
                 className="w-full py-3 rounded-xl bg-[#002719] hover:bg-emerald-800 text-white font-bold text-xs tracking-wide transition-all shadow-md"
               >
-                রিভিউ সাবমিট করুন
+                {t.productDetail.submitReview}
               </button>
             </form>
           </div>

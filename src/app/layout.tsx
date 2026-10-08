@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/layout";
 import { Preloader, MagicCursor, TemplateEffects } from "@/components/providers";
 import { siteConfig } from "@/config/site";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/cart";
 import { FarmGuideAssistant } from "@/components/guide";
@@ -33,7 +34,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <CartProvider>
+        <LanguageProvider>
+          <CartProvider>
           {/* Preloader animation */}
           <Preloader />
 
@@ -51,7 +53,8 @@ export default function RootLayout({
 
           {/* Interactive Animated Mascot Guide & Help Assistant */}
           <FarmGuideAssistant />
-        </CartProvider>
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

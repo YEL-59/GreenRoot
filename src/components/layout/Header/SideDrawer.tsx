@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { drawerCategories } from "@/data/navigation";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 
 type SideDrawerProps = {
   isOpen: boolean;
@@ -62,6 +63,9 @@ export const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
 
         {/* Content Body */}
         <div className="p-6 space-y-6 flex-1">
+          {/* Language Switcher */}
+          <LanguageSwitcher variant="drawer" />
+
           {/* About GreenRoot Bio */}
           <div className="bg-emerald-950/40 border border-emerald-800/40 rounded-xl p-4">
             <h4 className="text-white font-semibold text-sm mb-1.5 flex items-center gap-2">
