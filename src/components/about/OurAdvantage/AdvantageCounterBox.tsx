@@ -1,20 +1,20 @@
 import React from "react";
 
-interface AdvantageCounterBoxProps {
+type AdvantageCounterBoxProps = {
   icon: string;
   years: number;
   title: string;
   description: string;
   bullets: string[];
-}
+};
 
-export function AdvantageCounterBox({
+export const AdvantageCounterBox = ({
   icon,
   years,
   title,
   description,
   bullets,
-}: AdvantageCounterBoxProps) {
+}: AdvantageCounterBoxProps) => {
   return (
     <div
       className="our-advantage-box wow fadeInUp"

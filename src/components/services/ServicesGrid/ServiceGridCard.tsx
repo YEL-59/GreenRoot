@@ -2,15 +2,15 @@ import React from "react";
 import Link from "next/link";
 import type { ServiceItem } from "@/data/services";
 
-interface ServiceGridCardProps {
+type ServiceGridCardProps = {
   service: ServiceItem;
   delay?: string;
-}
+};
 
-export function ServiceGridCard({
+export const ServiceGridCard = ({
   service,
   delay = "0s",
-}: ServiceGridCardProps) {
+}: ServiceGridCardProps) => {
   return (
     <div className="col-xl-3 col-md-6">
       <div

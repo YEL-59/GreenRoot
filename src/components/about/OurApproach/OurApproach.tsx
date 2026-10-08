@@ -4,7 +4,7 @@ import { aboutData } from "@/data/about";
 import { ApproachCard } from "./ApproachCard";
 import { CompanyLogos } from "./CompanyLogos";
 
-export function OurApproach() {
+export const OurApproach = () => {
   const { approach } = aboutData;
 
   return (

@@ -5,15 +5,17 @@ import Link from "next/link";
 import { initialNotifications, initialUserProfile } from "@/data/userProfile";
 import { useCart } from "@/context/CartContext";
 
-export function UserHeader({
-  onToggleSidebar,
-  title = "গ্রাহক ড্যাশবোর্ড (Customer Portal)",
-  subtitle = "আপনার সকল খামার অর্ডার, ডেলিভারি ট্র্যাকিং ও সাবস্ক্রিপশন পরিচালনা করুন",
-}: {
+export type UserHeaderProps = {
   onToggleSidebar: () => void;
   title?: string;
   subtitle?: string;
-}) {
+};
+
+export const UserHeader = ({
+  onToggleSidebar,
+  title = "গ্রাহক ড্যাশবোর্ড (Customer Portal)",
+  subtitle = "আপনার সকল খামার অর্ডার, ডেলিভারি ট্র্যাকিং ও সাবস্ক্রিপশন পরিচালনা করুন",
+}: UserHeaderProps) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const { totalItems, openCart } = useCart();
   const unreadCount = initialNotifications.filter((n) => !n.read).length;

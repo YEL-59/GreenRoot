@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export function WhyChooseVisuals() {
+export const WhyChooseVisuals = () => {
   return (
     <div className="why-choose-image-box">
       <div className="why-choose-image-box-1">

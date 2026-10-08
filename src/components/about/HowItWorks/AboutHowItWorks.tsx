@@ -3,7 +3,7 @@ import Link from "next/link";
 import { aboutData } from "@/data/about";
 import { AboutStepCard } from "./AboutStepCard";
 
-export function AboutHowItWorks() {
+export const AboutHowItWorks = () => {
   const { howItWorks } = aboutData;
 
   return (

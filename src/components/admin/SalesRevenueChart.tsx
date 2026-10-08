@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { initialAdminStats } from "@/data/adminData";
 
-export function SalesRevenueChart() {
+export const SalesRevenueChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const data = initialAdminStats.recentSales;
   const maxRevenue = Math.max(...data.map((d) => d.revenue));

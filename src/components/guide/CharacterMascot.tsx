@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 
-interface CharacterMascotProps {
+type CharacterMascotProps = {
   isOpen: boolean;
   onToggle: () => void;
   unreadCount?: number;
-}
+};
 
-export function CharacterMascot({
+export const CharacterMascot = ({
   isOpen,
   onToggle,
   unreadCount = 1,
-}: CharacterMascotProps) {
+}: CharacterMascotProps) => {
   const [speechBubbleText, setSpeechBubbleText] = useState("ড্যাশবোর্ড বা পণ্য খুঁজছেন? ক্লিক করুন!");
   const [showSpeechBubble, setShowSpeechBubble] = useState(true);
 

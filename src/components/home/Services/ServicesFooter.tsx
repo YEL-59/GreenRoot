@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { serviceTags } from "@/data/home";
 
-export function ServicesFooter() {
+export const ServicesFooter = () => {
   return (
     <div className="col-lg-12">
       <div className="our-service-footer-gold">

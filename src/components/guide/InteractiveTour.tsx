@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { tourSteps } from "./guideKnowledge";
 
-interface InteractiveTourProps {
+type InteractiveTourProps = {
   isActive: boolean;
   onClose: () => void;
-}
+};
 
-export function InteractiveTour({
+export const InteractiveTour = ({
   isActive,
   onClose,
-}: InteractiveTourProps) {
+}: InteractiveTourProps) => {
   const router = useRouter();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 

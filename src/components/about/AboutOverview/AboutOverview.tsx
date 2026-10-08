@@ -4,7 +4,7 @@ import { AboutImages } from "./AboutImages";
 import { AboutContent } from "./AboutContent";
 import { AboutFooter } from "./AboutFooter";
 
-export function AboutOverview() {
+export const AboutOverview = () => {
   const { overview } = aboutData;
 
   return (

@@ -8,11 +8,11 @@ export interface StepItemData {
   bullet: string;
 }
 
-interface AboutStepCardProps {
+type AboutStepCardProps = {
   step: StepItemData;
-}
+};
 
-export function AboutStepCard({ step }: AboutStepCardProps) {
+export const AboutStepCard = ({ step }: AboutStepCardProps) => {
   return (
     <div className="how-work-item">
       <div className="how-work-step-no">

@@ -5,13 +5,13 @@ import { ServiceWhyChooseCards } from "./ServiceWhyChooseCards";
 import { ServiceBenefitsSection } from "./ServiceBenefitsSection";
 import { ServiceDetailFaq } from "./ServiceDetailFaq";
 
-interface ServiceDetailViewProps {
+type ServiceDetailViewProps = {
   service: ServiceDetailData;
-}
+};
 
-export function ServiceDetailView({
+export const ServiceDetailView = ({
   service,
-}: ServiceDetailViewProps) {
+}: ServiceDetailViewProps) => {
   return (
     <div className="page-service-single">
       <div className="container">

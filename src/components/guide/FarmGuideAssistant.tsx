@@ -5,7 +5,7 @@ import { CharacterMascot } from "./CharacterMascot";
 import { GuideChatModal } from "./GuideChatModal";
 import { InteractiveTour } from "./InteractiveTour";
 
-export function FarmGuideAssistant() {
+export const FarmGuideAssistant = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isTourActive, setIsTourActive] = useState(false);
 

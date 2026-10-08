@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import type { TeamMember } from "@/types";
 
-export interface TeamMemberCardProps {
+export type TeamMemberCardProps = {
   member: TeamMember;
   delay?: string;
-}
+};
 
-export function TeamMemberCard({ member, delay }: TeamMemberCardProps) {
+export const TeamMemberCard = ({ member, delay }: TeamMemberCardProps) => {
   return (
     <div className="col-xl-3 col-md-6">
       <div className="team-item-gold wow fadeInUp" data-wow-delay={delay}>

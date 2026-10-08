@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import type { TeamMember } from "@/data/about";
 
-interface TeamCardProps {
+type TeamCardProps = {
   member: TeamMember;
   delay?: string;
-}
+};
 
-export function TeamCard({ member, delay = "0.2s" }: TeamCardProps) {
+export const TeamCard = ({ member, delay = "0.2s" }: TeamCardProps) => {
   return (
     <div className="team-item wow fadeInUp" data-wow-delay={delay}>
       {/* Team Image */}

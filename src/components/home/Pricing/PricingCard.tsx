@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import type { PricingPlan } from "@/types";
 
-export interface PricingCardProps {
+export type PricingCardProps = {
   plan: PricingPlan;
   delay?: string;
-}
+};
 
-export function PricingCard({ plan, delay }: PricingCardProps) {
+export const PricingCard = ({ plan, delay }: PricingCardProps) => {
   return (
     <div className="col-xl-4 col-md-6">
       <div className="pricing-item-gold wow fadeInUp" data-wow-delay={delay}>

@@ -3,17 +3,19 @@
 import React from "react";
 import Link from "next/link";
 
-export function AdminHeader({
-  onToggleSidebar,
-  title = "বিজনেস ওভারভিউ (HQ Admin)",
-  subtitle = "খামারের দৈনিক বিক্রয়, অর্ডার ডেলিভারি ও পণ্য স্টক পরিচালনা",
-  actionButton,
-}: {
+export type AdminHeaderProps = {
   onToggleSidebar: () => void;
   title?: string;
   subtitle?: string;
   actionButton?: React.ReactNode;
-}) {
+};
+
+export const AdminHeader = ({
+  onToggleSidebar,
+  title = "বিজনেস ওভারভিউ (HQ Admin)",
+  subtitle = "খামারের দৈনিক বিক্রয়, অর্ডার ডেলিভারি ও পণ্য স্টক পরিচালনা",
+  actionButton,
+}: AdminHeaderProps) => {
   return (
     <header className="sticky top-0 z-30 bg-[#071911]/95 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-4 flex items-center justify-between transition-all shadow-md text-white">
       {/* Left: Mobile Toggle & Page Title */}

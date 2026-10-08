@@ -3,15 +3,15 @@
 import React from "react";
 import { VideoPopup } from "@/components/common";
 
-interface AdvantageVideoBoxProps {
+type AdvantageVideoBoxProps = {
   image: string;
   videoUrl: string;
-}
+};
 
-export function AdvantageVideoBox({
+export const AdvantageVideoBox = ({
   image,
   videoUrl,
-}: AdvantageVideoBoxProps) {
+}: AdvantageVideoBoxProps) => {
   return (
     <div
       className="our-advantage-image box-2 wow fadeInUp"

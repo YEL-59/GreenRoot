@@ -4,7 +4,7 @@ import { aboutData } from "@/data/home";
 import { AboutMission } from "./AboutMission";
 import { AboutVision } from "./AboutVision";
 
-export function AboutSection() {
+export const AboutSection = () => {
   return (
     <div className="about-us-gold">
       <div className="container">

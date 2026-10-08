@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /** Template preloader – fades out 600ms after window load. */
-export function Preloader() {
+export const Preloader = () => {
   const [state, setState] = useState<"visible" | "fading" | "hidden">("visible");
 
   useEffect(() => {
@@ -31,4 +31,4 @@ export function Preloader() {
       </div>
     </div>
   );
-}
+};

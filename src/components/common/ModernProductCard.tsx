@@ -6,10 +6,15 @@ import { useRouter } from "next/navigation";
 import type { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 
-export function ModernProductCard({ product, showQuickBuy = true }: {
+export type ModernProductCardProps = {
   product: Product;
   showQuickBuy?: boolean;
-}) {
+};
+
+export const ModernProductCard = ({
+  product,
+  showQuickBuy = true,
+}: ModernProductCardProps) => {
   const router = useRouter();
   const { items, addToCart, updateQuantity, openCart } = useCart();
   const [isWishlisted, setIsWishlisted] = useState(false);

@@ -3,7 +3,7 @@ import { WhatWeDoImages } from "./WhatWeDoImages";
 import { WhatWeDoSteps } from "./WhatWeDoSteps";
 import { WhatWeDoCounters } from "./WhatWeDoCounters";
 
-export function WhatWeDoSection() {
+export const WhatWeDoSection = () => {
   return (
     <div className="what-we-do-gold">
       <div className="container">

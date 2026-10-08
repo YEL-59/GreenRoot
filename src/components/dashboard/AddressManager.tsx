@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import type { UserAddress } from "@/types";
 import { initialUserProfile } from "@/data/userProfile";
 
-export function AddressManager() {
+export const AddressManager = () => {
   const [addresses, setAddresses] = useState<UserAddress[]>(initialUserProfile.addresses);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newLabel, setNewLabel] = useState<"Home" | "Office" | "Farm">("Home");

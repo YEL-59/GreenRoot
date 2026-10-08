@@ -5,7 +5,11 @@ import Link from "next/link";
 import type { Order } from "@/types";
 import { useCart } from "@/context/CartContext";
 
-export function OrderCard({ order }: { order: Order }) {
+export type OrderCardProps = {
+  order: Order;
+};
+
+export const OrderCard = ({ order }: OrderCardProps) => {
   const [reordered, setReordered] = useState(false);
   const { addToCart, openCart } = useCart();
 

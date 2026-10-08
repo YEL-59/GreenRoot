@@ -13,17 +13,17 @@ interface Message {
   timestamp: string;
 }
 
-interface GuideChatModalProps {
+type GuideChatModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onStartTour: () => void;
-}
+};
 
-export function GuideChatModal({
+export const GuideChatModal = ({
   isOpen,
   onClose,
   onStartTour,
-}: GuideChatModalProps) {
+}: GuideChatModalProps) => {
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([
     {

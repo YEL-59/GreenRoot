@@ -1,10 +1,10 @@
 import React from "react";
 
-interface CompanyLogosProps {
+type CompanyLogosProps = {
   logos: string[];
-}
+};
 
-export function CompanyLogos({ logos }: CompanyLogosProps) {
+export const CompanyLogos = ({ logos }: CompanyLogosProps) => {
   return (
     <div className="approach-company-slider-box wow fadeInUp" data-wow-delay="1s">
       <div className="company-supports-content">

@@ -4,7 +4,7 @@ import { FooterNewsletter } from "./FooterNewsletter";
 import { FooterLinks } from "./FooterLinks";
 import { FooterBottom } from "./FooterBottom";
 
-export function Footer() {
+export const Footer = () => {
   return (
     <footer className="main-footer-gold bg-section dark-section">
       <div className="container">

@@ -13,10 +13,15 @@ const adminNavItems = [
   { href: "/admin/settings", label: "বিজনেস সেটিংস", labelEn: "Store Settings", icon: "fa-solid fa-sliders" },
 ];
 
-export function AdminSidebar({
+export type AdminSidebarProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+};
+
+export const AdminSidebar = ({
   isOpen = false,
   onClose,
-}: { isOpen?: boolean; onClose?: () => void }) {
+}: AdminSidebarProps) => {
   const pathname = usePathname();
 
   return (

@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import type { BlogPost } from "@/types";
 
-export interface BlogCardProps {
+export type BlogCardProps = {
   post: BlogPost;
   delay?: string;
-}
+};
 
-export function BlogCard({ post, delay }: BlogCardProps) {
+export const BlogCard = ({ post, delay }: BlogCardProps) => {
   return (
     <div className="col-xl-4 col-md-6">
       <div className="post-item wow fadeInUp" data-wow-delay={delay}>

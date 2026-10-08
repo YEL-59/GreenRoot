@@ -2,7 +2,7 @@ import React from "react";
 import { WhyChooseImages } from "./WhyChooseImages";
 import { WhyChooseFeatures } from "./WhyChooseFeatures";
 
-export function WhyChooseUsSection() {
+export const WhyChooseUsSection = () => {
   return (
     <div className="why-choose-us-gold">
       <div className="container">

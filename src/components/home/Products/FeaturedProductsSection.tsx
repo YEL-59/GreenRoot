@@ -5,7 +5,7 @@ import Link from "next/link";
 import { products, productCategories } from "@/data/products";
 import { ModernProductCard } from "@/components/common";
 
-export function FeaturedProductsSection() {
+export const FeaturedProductsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const featured = products

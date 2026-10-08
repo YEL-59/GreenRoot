@@ -14,7 +14,7 @@ import {
  * Replaces the template's js/function.js.
  * Runs every scroll/entrance effect after each route change and cleans up on leave.
  */
-export function TemplateEffects() {
+export const TemplateEffects = () => {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -36,4 +36,4 @@ export function TemplateEffects() {
   }, [pathname]);
 
   return null;
-}
+};

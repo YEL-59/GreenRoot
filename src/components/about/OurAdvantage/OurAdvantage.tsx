@@ -5,7 +5,7 @@ import { AdvantageQualityBox } from "./AdvantageQualityBox";
 import { AdvantageVideoBox } from "./AdvantageVideoBox";
 import { AdvantageCounterBox } from "./AdvantageCounterBox";
 
-export function OurAdvantage() {
+export const OurAdvantage = () => {
   const { advantage } = aboutData;
 
   return (

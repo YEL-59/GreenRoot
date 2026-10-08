@@ -5,12 +5,12 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { drawerCategories } from "@/data/navigation";
 
-interface SideDrawerProps {
+type SideDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
-export function SideDrawer({ isOpen, onClose }: SideDrawerProps) {
+export const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

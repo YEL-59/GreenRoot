@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export interface SectionTitleProps {
+export type SectionTitleProps = {
   subtitle: string;
   title: ReactNode;
   description?: ReactNode;
@@ -11,10 +11,10 @@ export interface SectionTitleProps {
   as?: "h1" | "h2";
   descriptionDelay?: string;
   className?: string;
-}
+};
 
 /** Template `.section-title` block: h3 tag-line, animated heading, optional paragraph. */
-export function SectionTitle({
+export const SectionTitle = ({
   subtitle,
   title,
   description,
@@ -22,7 +22,7 @@ export function SectionTitle({
   as: Heading = "h2",
   descriptionDelay = "0.2s",
   className,
-}: SectionTitleProps) {
+}: SectionTitleProps) => {
   return (
     <div className={cn("section-title", center && "section-title-center", className)}>
       <h3 className="wow fadeInUp">{subtitle}</h3>
@@ -36,4 +36,4 @@ export function SectionTitle({
       )}
     </div>
   );
-}
+};

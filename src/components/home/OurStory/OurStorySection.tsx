@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ourStoryData } from "@/data/home";
 import { VideoPopup } from "@/components/common";
 
-export function OurStorySection() {
+export const OurStorySection = () => {
   return (
     <div className="our-story-gold bg-section dark-section parallaxie">
       <div className="container">

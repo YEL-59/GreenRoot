@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import type { FaqItemData } from "@/data/about";
 
-interface FaqAccordionProps {
+type FaqAccordionProps = {
   items: FaqItemData[];
-}
+};
 
-export function FaqAccordion({ items }: FaqAccordionProps) {
+export const FaqAccordion = ({ items }: FaqAccordionProps) => {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id || null);
 
   const toggle = (id: string) => {

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export interface StatCardProps {
+export type StatCardProps = {
   title: string;
   titleBn: string;
   value: string | number;
@@ -10,9 +10,9 @@ export interface StatCardProps {
   isPositive?: boolean;
   icon: string;
   accentColor?: "emerald" | "amber" | "blue" | "purple";
-}
+};
 
-export function StatCard({
+export const StatCard = ({
   title,
   titleBn,
   value,
@@ -20,7 +20,7 @@ export function StatCard({
   isPositive = true,
   icon,
   accentColor = "emerald",
-}: StatCardProps) {
+}: StatCardProps) => {
   const colorMap = {
     emerald: "from-emerald-500/20 to-teal-500/10 text-emerald-400 border-emerald-500/30",
     amber: "from-amber-500/20 to-yellow-500/10 text-amber-400 border-amber-500/30",

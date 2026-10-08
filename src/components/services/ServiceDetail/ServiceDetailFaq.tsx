@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import type { ServiceDetailData } from "@/data/services";
 
-interface ServiceDetailFaqProps {
+type ServiceDetailFaqProps = {
   faqs: ServiceDetailData["faqs"];
-}
+};
 
-export function ServiceDetailFaq({ faqs }: ServiceDetailFaqProps) {
+export const ServiceDetailFaq = ({ faqs }: ServiceDetailFaqProps) => {
   const [openId, setOpenId] = useState<string | null>(faqs[0]?.id || null);
 
   const toggle = (id: string) => {

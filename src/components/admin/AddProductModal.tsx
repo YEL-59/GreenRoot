@@ -4,11 +4,17 @@ import React, { useState } from "react";
 import type { Product } from "@/types";
 import { productCategories } from "@/data/products";
 
-export function AddProductModal({ isOpen, onClose, onAddProduct }: {
+export type AddProductModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onAddProduct: (product: Product) => void;
-}) {
+};
+
+export const AddProductModal = ({
+  isOpen,
+  onClose,
+  onAddProduct,
+}: AddProductModalProps) => {
   const [title, setTitle] = useState("");
   const [titleBn, setTitleBn] = useState("");
   const [category, setCategory] = useState("milk-dairy");

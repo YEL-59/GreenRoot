@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-interface AboutFooterProps {
+type AboutFooterProps = {
   tags: string[];
-}
+};
 
-export function AboutFooter({ tags }: AboutFooterProps) {
+export const AboutFooter = ({ tags }: AboutFooterProps) => {
   return (
     <div className="about-us-footer">
       {/* Footer Tags List */}

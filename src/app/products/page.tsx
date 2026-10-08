@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 import { ModernProductCard } from "@/components/common";
 import type { Product } from "@/types";
 
-function ProductsContent() {
+const ProductsContent = () => {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category") || "all";
 
@@ -233,10 +233,12 @@ function ProductsContent() {
   );
 };
 
-export default function ProductsPage() {
+const ProductsPage = () => {
   return (
     <Suspense fallback={<div className="min-h-screen pt-36 text-center text-stone-500">লোড হচ্ছে...</div>}>
       <ProductsContent />
     </Suspense>
   );
-}
+};
+
+export default ProductsPage;

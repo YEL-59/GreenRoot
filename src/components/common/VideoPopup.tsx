@@ -7,14 +7,14 @@ function toEmbedUrl(url: string) {
   return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : url;
 }
 
-export interface VideoPopupProps {
+export type VideoPopupProps = {
   url: string;
   className?: string;
   children: ReactNode;
-}
+};
 
 /** Replaces Magnific Popup's `.popup-video` iframe lightbox (reuses its CSS classes). */
-export function VideoPopup({ url, className = "popup-video", children }: VideoPopupProps) {
+export const VideoPopup = ({ url, className = "popup-video", children }: VideoPopupProps) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -71,4 +71,4 @@ export function VideoPopup({ url, className = "popup-video", children }: VideoPo
       )}
     </>
   );
-}
+};

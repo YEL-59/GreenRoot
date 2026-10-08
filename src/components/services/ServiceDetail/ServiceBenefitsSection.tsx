@@ -1,17 +1,17 @@
 import React from "react";
 import type { ServiceDetailData } from "@/data/services";
 
-interface ServiceBenefitsSectionProps {
+type ServiceBenefitsSectionProps = {
   intro: string;
   benefits: ServiceDetailData["benefits"];
   image: string;
-}
+};
 
-export function ServiceBenefitsSection({
+export const ServiceBenefitsSection = ({
   intro,
   benefits,
   image,
-}: ServiceBenefitsSectionProps) {
+}: ServiceBenefitsSectionProps) => {
   return (
     <div className="service-benefit-box">
       <h2 className="text-anime-style-3">Benefits by choosing us</h2>

@@ -7,11 +7,11 @@ import { mainNav } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
 import type { NavLink } from "@/types";
 
-interface MobileMenuProps {
+type MobileMenuProps = {
   onOpenDrawer?: () => void;
-}
+};
 
-export function MobileMenu({ onOpenDrawer }: MobileMenuProps) {
+export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const pathname = usePathname();

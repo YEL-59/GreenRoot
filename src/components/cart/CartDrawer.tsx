@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
-export function CartDrawer() {
+export const CartDrawer = () => {
   const {
     items,
     isCartOpen,

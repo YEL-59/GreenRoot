@@ -4,7 +4,7 @@ import { BlogCard } from "./BlogCard";
 
 const delays = ["0s", "0.2s", "0.4s"];
 
-export function BlogSection() {
+export const BlogSection = () => {
   return (
     <div className="our-blog">
       <div className="container">

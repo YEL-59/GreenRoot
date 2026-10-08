@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-interface PageHeaderProps {
+type PageHeaderProps = {
   title: string;
   breadcrumb: { label: string; href: string; active?: boolean }[];
-}
+};
 
-export function PageHeader({ title, breadcrumb }: PageHeaderProps) {
+export const PageHeader = ({ title, breadcrumb }: PageHeaderProps) => {
   return (
     <div className="page-header bg-section dark-section parallaxie">
       <div className="container">

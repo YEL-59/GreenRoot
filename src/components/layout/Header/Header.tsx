@@ -7,7 +7,7 @@ import { NavMenu } from "./NavMenu";
 import { MobileMenu } from "./MobileMenu";
 import { SideDrawer } from "./SideDrawer";
 
-export function Header() {
+export const Header = () => {
   const [stickyState, setStickyState] = useState<"" | "active">("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

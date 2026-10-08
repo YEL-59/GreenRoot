@@ -14,10 +14,15 @@ const menuItems = [
   { href: "/dashboard/rewards", label: "গ্রীনকয়েন ও ওয়ালেট", labelEn: "Rewards & Wallet", icon: "fa-solid fa-coins" },
 ];
 
-export function UserSidebar({
+export type UserSidebarProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+};
+
+export const UserSidebar = ({
   isOpen = false,
   onClose,
-}: { isOpen?: boolean; onClose?: () => void }) {
+}: UserSidebarProps) => {
   const pathname = usePathname();
   const user = initialUserProfile;
 

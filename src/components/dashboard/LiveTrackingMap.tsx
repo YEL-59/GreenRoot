@@ -3,7 +3,11 @@
 import React, { useState } from "react";
 import type { Order } from "@/types";
 
-export function LiveTrackingMap({ order }: { order: Order }) {
+export type LiveTrackingMapProps = {
+  order: Order;
+};
+
+export const LiveTrackingMap = ({ order }: LiveTrackingMapProps) => {
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<string>("cp-3");
   const [callActive, setCallActive] = useState(false);
 

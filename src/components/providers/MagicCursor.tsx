@@ -9,7 +9,7 @@ const POINTER_SELECTOR = "a,input,textarea,button";
  * Port of js/magiccursor.js. Renders `.cb-cursor` and reacts to
  * `data-cursor`, `data-cursor-text` and interactive elements.
  */
-export function MagicCursor() {
+export const MagicCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -95,4 +95,4 @@ export function MagicCursor() {
       <div className="cb-cursor-text" ref={textRef}></div>
     </div>
   );
-}
+};

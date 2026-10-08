@@ -1,18 +1,18 @@
 import React from "react";
 
-interface AdvantageQualityBoxProps {
+type AdvantageQualityBoxProps = {
   icon: string;
   title: string;
   description: string;
   customers: string;
-}
+};
 
-export function AdvantageQualityBox({
+export const AdvantageQualityBox = ({
   icon,
   title,
   description,
   customers,
-}: AdvantageQualityBoxProps) {
+}: AdvantageQualityBoxProps) => {
   return (
     <div className="our-advantage-box wow fadeInUp">
       <div className="our-advantage-box-body">

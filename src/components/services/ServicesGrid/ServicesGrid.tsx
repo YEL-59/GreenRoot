@@ -2,7 +2,7 @@ import React from "react";
 import { servicesList } from "@/data/services";
 import { ServiceGridCard } from "./ServiceGridCard";
 
-export function ServicesGrid() {
+export const ServicesGrid = () => {
   return (
     <div className="page-services">
       <div className="container">

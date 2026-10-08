@@ -7,11 +7,11 @@ import { mainNav } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
 import type { NavLink } from "@/types";
 
-interface NavMenuProps {
+type NavMenuProps = {
   onOpenDrawer?: () => void;
-}
+};
 
-export function NavMenu({ onOpenDrawer }: NavMenuProps) {
+export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
   const pathname = usePathname();
   const { openCart, totalItems, subtotal } = useCart();
 

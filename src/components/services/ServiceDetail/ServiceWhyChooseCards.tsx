@@ -1,17 +1,17 @@
 import React from "react";
 import type { ServiceDetailData } from "@/data/services";
 
-interface ServiceWhyChooseCardsProps {
+type ServiceWhyChooseCardsProps = {
   intro: string;
   points: ServiceDetailData["whyChoosePoints"];
   audienceDesc: string;
-}
+};
 
-export function ServiceWhyChooseCards({
+export const ServiceWhyChooseCards = ({
   intro,
   points,
   audienceDesc,
-}: ServiceWhyChooseCardsProps) {
+}: ServiceWhyChooseCardsProps) => {
   return (
     <div className="service-why-choose-box">
       <h2 className="text-anime-style-3">Why choose this service</h2>

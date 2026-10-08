@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import type { FarmSubscription } from "@/types";
 import { initialUserProfile } from "@/data/userProfile";
 
-export function SubscriptionCard() {
+export const SubscriptionCard = () => {
   const [subscriptions, setSubscriptions] = useState<FarmSubscription[]>(
     initialUserProfile.subscriptions
   );
