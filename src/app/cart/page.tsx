@@ -78,7 +78,7 @@ export default function CartPage() {
               <i className="fa-solid fa-basket-shopping text-emerald-700"></i>
               {isBn ? "খামার ফ্রেশ কার্ট" : "Farm Fresh Cart"}
             </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-stone-950 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-stone-950 tracking-tight">
               {t.cartPage.title}
             </h1>
             <p className="text-stone-500 text-xs sm:text-sm mt-1 max-w-2xl">
@@ -104,7 +104,7 @@ export default function CartPage() {
             <div className="w-20 h-20 rounded-full bg-amber-50 text-amber-500 mx-auto flex items-center justify-center text-3xl mb-5 shadow-xs border border-amber-100">
               <i className="fa-solid fa-bag-shopping"></i>
             </div>
-            <h2 className="text-2xl font-black text-stone-900 mb-2">
+            <h2 className="text-2xl font-extrabold text-stone-900 mb-2">
               {t.cart.emptyTitle}
             </h2>
             <p className="text-stone-500 text-sm max-w-md mx-auto mb-8">
@@ -113,7 +113,7 @@ export default function CartPage() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/products"
-                className="py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-black text-xs transition-all shadow-md"
+                className="py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-extrabold text-xs transition-all shadow-md"
               >
                 <i className="fa-solid fa-seedling mr-2"></i>
                 {t.cart.browseProducts}
@@ -135,7 +135,7 @@ export default function CartPage() {
               <div className="bg-white rounded-3xl p-5 sm:p-7 border border-stone-200/80 shadow-sm">
                 <div className="flex items-center justify-between pb-4 mb-4 border-b border-stone-100">
                   <div className="flex items-center gap-2">
-                    <span className="font-black text-stone-900 text-base">
+                    <span className="font-extrabold text-stone-900 text-base">
                       {isBn ? "ব্যাগের পণ্যসমূহ" : "Items in Cart"}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold font-mono">
@@ -172,7 +172,7 @@ export default function CartPage() {
                         <div className="min-w-0">
                           <Link
                             href={`/products/${item.slug}`}
-                            className="font-black text-stone-900 text-sm sm:text-base hover:text-[#002719] line-clamp-1 transition-colors block"
+                            className="font-extrabold text-stone-900 text-sm sm:text-base hover:text-[#002719] line-clamp-1 transition-colors block"
                           >
                             {isBn ? (item.titleBn || item.title) : item.title}
                           </Link>
@@ -207,7 +207,7 @@ export default function CartPage() {
                           >
                             <i className="fa-solid fa-minus text-[10px]"></i>
                           </button>
-                          <span className="w-8 text-center font-black font-mono text-stone-900 text-xs">
+                          <span className="w-8 text-center font-extrabold font-mono text-stone-900 text-xs">
                             {item.quantity}
                           </span>
                           <button
@@ -225,7 +225,7 @@ export default function CartPage() {
                           <span className="text-[10px] text-stone-400 block font-semibold sm:block hidden">
                             {isBn ? "মোট" : "Total"}
                           </span>
-                          <span className="text-sm sm:text-base font-black font-mono text-[#002719]">
+                          <span className="text-sm sm:text-base font-extrabold font-mono text-[#002719]">
                             ৳{item.price * item.quantity}
                           </span>
                         </div>
@@ -269,7 +269,7 @@ export default function CartPage() {
                       <span className="text-xs font-bold text-[#E8AF30] uppercase tracking-wider block">
                         {isBn ? "এক ক্লিকে যোগ করুন" : "Quick Add to Bag"}
                       </span>
-                      <h3 className="text-base font-black text-stone-900">
+                      <h3 className="text-base font-extrabold text-stone-900">
                         {isBn ? "খামারের জনপ্রিয় আরো খাঁটি পণ্য" : "Popular Farm Produce You May Like"}
                       </h3>
                     </div>
@@ -320,7 +320,7 @@ export default function CartPage() {
             {/* Right Column: Order Summary & Checkout (4 Cols) */}
             <div className="lg:col-span-4 space-y-4">
               <div className="bg-white rounded-3xl p-5 sm:p-7 border border-stone-200/80 shadow-sm space-y-5">
-                <h3 className="font-black text-lg text-stone-900 border-b border-stone-100 pb-3">
+                <h3 className="font-extrabold text-lg text-stone-900 border-b border-stone-100 pb-3">
                   {t.cartPage.orderSummary}
                 </h3>
 
@@ -335,7 +335,7 @@ export default function CartPage() {
                       onClick={() => setDeliveryZone("inside-dhaka")}
                       className={`p-3 rounded-2xl border text-center transition-all ${
                         deliveryZone === "inside-dhaka"
-                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-black ring-1 ring-[#002719]"
+                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-extrabold ring-1 ring-[#002719]"
                           : "border-stone-200 bg-white text-stone-600 hover:border-stone-400"
                       }`}
                     >
@@ -347,7 +347,7 @@ export default function CartPage() {
                       onClick={() => setDeliveryZone("outside-dhaka")}
                       className={`p-3 rounded-2xl border text-center transition-all ${
                         deliveryZone === "outside-dhaka"
-                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-black ring-1 ring-[#002719]"
+                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-extrabold ring-1 ring-[#002719]"
                           : "border-stone-200 bg-white text-stone-600 hover:border-stone-400"
                       }`}
                     >
@@ -405,9 +405,9 @@ export default function CartPage() {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between text-base font-black text-stone-950 pt-2.5 border-t border-stone-200">
+                  <div className="flex items-center justify-between text-base font-extrabold text-stone-950 pt-2.5 border-t border-stone-200">
                     <span>{t.cart.total}:</span>
-                    <span className="text-2xl font-black text-[#002719] font-mono">
+                    <span className="text-2xl font-extrabold text-[#002719] font-mono">
                       ৳{finalPayable}
                     </span>
                   </div>
@@ -416,7 +416,7 @@ export default function CartPage() {
                 {/* Direct Checkout CTA */}
                 <Link
                   href="/checkout"
-                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#E8AF30] to-amber-400 hover:from-amber-400 hover:to-yellow-500 text-[#002719] font-black text-sm tracking-wide flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#E8AF30]/25 active:scale-95 block text-center"
+                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#E8AF30] to-amber-400 hover:from-amber-400 hover:to-yellow-500 text-[#002719] font-extrabold text-sm tracking-wide flex items-center justify-center gap-2.5 transition-all shadow-md shadow-[#E8AF30]/25 active:scale-95 block text-center"
                 >
                   <i className="fa-solid fa-lock text-sm"></i>
                   <span>{t.cartPage.checkout}</span>

@@ -100,7 +100,7 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
           title={t.cart.title}
         >
           <i className="fa-solid fa-basket-shopping text-base text-[#002719] group-hover:scale-110 transition-transform"></i>
-          <span className="text-xs font-black hidden xl:inline text-stone-900 font-mono">৳{subtotal}</span>
+          <span className="text-xs font-extrabold hidden xl:inline text-stone-900 font-mono">৳{subtotal}</span>
           {totalItems > 0 && (
             <span className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-[#E8AF30] text-[#181818] font-extrabold text-[11px] flex items-center justify-center shadow-md animate-bounce">
               {totalItems}

@@ -55,10 +55,10 @@ export const InteractiveTour = ({
               🌾
             </div>
             <div>
-              <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100/80 px-2.5 py-0.5 rounded-full inline-block mb-0.5">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100/80 px-2.5 py-0.5 rounded-full inline-block mb-0.5">
                 {isBn ? currentStep.badgeBn : (currentStep.badgeEn || currentStep.badgeBn)}
               </span>
-              <h3 className="font-black text-lg text-stone-900">
+              <h3 className="font-extrabold text-lg text-stone-900">
                 {isBn ? currentStep.titleBn : (currentStep.titleEn || currentStep.titleBn)}
               </h3>
             </div>
@@ -118,7 +118,7 @@ export const InteractiveTour = ({
           <button
             type="button"
             onClick={handleNext}
-            className="py-2.5 px-6 rounded-xl bg-gradient-to-r from-[#002719] to-emerald-900 hover:from-[#E8AF30] hover:to-amber-400 text-white hover:text-[#002719] font-black text-xs transition-all shadow-md active:scale-95 flex items-center gap-2"
+            className="py-2.5 px-6 rounded-xl bg-gradient-to-r from-[#002719] to-emerald-900 hover:from-[#E8AF30] hover:to-amber-400 text-white hover:text-[#002719] font-extrabold text-xs transition-all shadow-md active:scale-95 flex items-center gap-2"
           >
             <span>
               {currentStepIndex === tourSteps.length - 1

@@ -146,7 +146,7 @@ export const CharacterMascot = ({
 
         {/* Unread Alert Badge (if any) */}
         {!isOpen && unreadCount > 0 && (
-          <span className="absolute -top-1 -left-1 px-1.5 py-0.5 rounded-full bg-rose-600 text-white font-black text-[10px] shadow-md border border-white">
+          <span className="absolute -top-1 -left-1 px-1.5 py-0.5 rounded-full bg-rose-600 text-white font-extrabold text-[10px] shadow-md border border-white">
             গাইড
           </span>
         )}

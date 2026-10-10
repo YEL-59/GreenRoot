@@ -1,5 +1,6 @@
 /* Import FontAwesome from npm */
 @import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "leaflet/dist/leaflet.css";
 
 /* Soilux & Framework Core Styles */
 @import "../styles/bootstrap.min.css";
@@ -91,3 +92,13 @@ body {
   padding: 14px 0px !important;
   transition: padding 0.3s ease;
 }
+
+/* Dashboard & Admin Full Width Layout (Remove default container max-width constraint) */
+.dashboard-layout-main,
+.dashboard-layout-main .container,
+.admin-layout-main,
+.admin-layout-main .container {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+

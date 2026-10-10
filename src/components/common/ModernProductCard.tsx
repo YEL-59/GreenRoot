@@ -93,7 +93,7 @@ export const ModernProductCard = ({
             {/* Top Left Floating Badges (Stacked vertically to never collide with heart) */}
             <div className="absolute top-2.5 left-2.5 flex flex-col items-start gap-1 z-10 max-w-[70%]">
               {product.badge && (
-                <span className="px-2.5 py-0.5 rounded-full bg-[#002719]/90 backdrop-blur-md text-emerald-300 border border-emerald-500/30 text-[9px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#002719]/90 backdrop-blur-md text-emerald-300 border border-emerald-500/30 text-[9px] font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-1.5 whitespace-nowrap">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
@@ -102,7 +102,7 @@ export const ModernProductCard = ({
                 </span>
               )}
               {discount > 0 && (
-                <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[9px] font-black shadow-md whitespace-nowrap">
+                <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[9px] font-extrabold shadow-md whitespace-nowrap">
                   -{discount}% {isBn ? "ছাড়" : "Off"}
                 </span>
               )}
@@ -126,7 +126,7 @@ export const ModernProductCard = ({
 
             {/* Center Hover Action: Direct Navigate to Separate Page */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 pointer-events-none z-10">
-              <span className="pointer-events-auto px-4 py-2 rounded-full bg-white/95 hover:bg-white text-[#002719] font-black text-xs shadow-xl backdrop-blur-md border border-white/80 flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95">
+              <span className="pointer-events-auto px-4 py-2 rounded-full bg-white/95 hover:bg-white text-[#002719] font-extrabold text-xs shadow-xl backdrop-blur-md border border-white/80 flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95">
                 <span>{isBn ? "বিস্তারিত দেখুন" : "View Details"}</span>
                 <i className="fa-solid fa-arrow-right text-[10px] text-[#002719]"></i>
               </span>
@@ -179,7 +179,7 @@ export const ModernProductCard = ({
               href={`/products/${product.slug}`}
               className="block group-hover:text-emerald-900 transition-colors mt-0.5"
             >
-              <h3 className="font-extrabold text-stone-900 text-sm leading-snug line-clamp-2 h-10">
+              <h3 className="font-bold text-stone-900 text-sm leading-snug line-clamp-2 h-10">
                 {isBn ? product.titleBn : product.title}
               </h3>
               <p className="text-stone-400 text-xs font-normal truncate mt-0.5">
@@ -198,7 +198,7 @@ export const ModernProductCard = ({
           <div className="pt-2.5 mt-2 border-t border-stone-100">
             <div className="flex items-center justify-between gap-1 mb-1">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xl sm:text-2xl font-black text-[#002719] tracking-tight font-mono">
+                <span className="text-xl sm:text-2xl font-extrabold text-[#002719] tracking-tight font-mono">
                   ৳{product.price}
                 </span>
                 {product.originalPrice && (
@@ -237,7 +237,7 @@ export const ModernProductCard = ({
                 <button
                   type="button"
                   onClick={handleDecrease}
-                  className="w-8 h-8 rounded-xl bg-white hover:bg-rose-50 hover:text-rose-600 text-emerald-950 font-black flex items-center justify-center transition-all shadow-xs active:scale-90"
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-rose-50 hover:text-rose-600 text-emerald-950 font-extrabold flex items-center justify-center transition-all shadow-xs active:scale-90"
                   aria-label="Decrease quantity"
                   title={isBn ? "পরিমাণ কমান" : "Decrease quantity"}
                 >
@@ -245,7 +245,7 @@ export const ModernProductCard = ({
                 </button>
 
                 <div className="flex flex-col items-center px-1">
-                  <span className="text-xs font-black text-emerald-950 font-mono leading-none">
+                  <span className="text-xs font-extrabold text-emerald-950 font-mono leading-none">
                     {cartQty} {isBn ? product.unitBn : product.unit}
                   </span>
                   <span className="text-[8px] font-bold text-emerald-700 flex items-center gap-0.5 mt-0.5">
@@ -256,7 +256,7 @@ export const ModernProductCard = ({
                 <button
                   type="button"
                   onClick={handleIncrease}
-                  className="w-8 h-8 rounded-xl bg-[#002719] hover:bg-emerald-800 text-white font-black flex items-center justify-center transition-all shadow-xs active:scale-90"
+                  className="w-8 h-8 rounded-xl bg-[#002719] hover:bg-emerald-800 text-white font-extrabold flex items-center justify-center transition-all shadow-xs active:scale-90"
                   aria-label="Increase quantity"
                   title={isBn ? "পরিমাণ বাড়ান" : "Increase quantity"}
                 >
@@ -289,7 +289,7 @@ export const ModernProductCard = ({
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`flex-1 py-2.5 px-3 rounded-2xl font-black text-xs tracking-wide flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 ${
+                  className={`flex-1 py-2.5 px-3 rounded-2xl font-extrabold text-xs tracking-wide flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 ${
                     isAdded
                       ? "bg-emerald-600 text-white shadow-emerald-600/30 ring-2 ring-emerald-400"
                       : "bg-gradient-to-r from-[#002719] via-[#003824] to-[#002719] hover:from-[#E8AF30] hover:to-amber-400 text-white hover:text-[#002719] shadow-[#002719]/15 hover:shadow-[#E8AF30]/25"

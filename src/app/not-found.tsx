@@ -18,11 +18,11 @@ export default function NotFound() {
           <i className="fa-solid fa-seedling"></i>
         </div>
 
-        <span className="px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-black uppercase tracking-wider inline-block mb-3">
+        <span className="px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase tracking-wider inline-block mb-3">
           Error 404
         </span>
 
-        <h1 className="text-2xl sm:text-3xl font-black text-stone-900 mb-2 leading-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-2 leading-tight">
           {isBn ? "অনুরোধকৃত পৃষ্ঠাটি পাওয়া যায়নি" : "Harvest Not Found"}
         </h1>
 
@@ -36,7 +36,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href="/"
-            className="w-full sm:w-auto py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-black text-xs transition-all shadow-md flex items-center justify-center gap-2"
+            className="w-full sm:w-auto py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-extrabold text-xs transition-all shadow-md flex items-center justify-center gap-2"
           >
             <i className="fa-solid fa-house text-xs"></i>
             <span>{isBn ? "হোমপেজে ফিরে যান" : "Back to Home"}</span>

@@ -41,7 +41,7 @@ export const LanguageSwitcher = ({
         <div className="flex items-center bg-black/40 p-1 rounded-xl border border-white/10">
           <button
             onClick={() => setLanguage("bn")}
-            className={`px-3 py-1 rounded-lg text-xs font-black transition-all ${
+            className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all ${
               language === "bn"
                 ? "bg-[#E8AF30] text-[#002719] shadow-sm"
                 : "text-stone-300 hover:text-white"
@@ -51,7 +51,7 @@ export const LanguageSwitcher = ({
           </button>
           <button
             onClick={() => setLanguage("en")}
-            className={`px-3 py-1 rounded-lg text-xs font-black transition-all ${
+            className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all ${
               language === "en"
                 ? "bg-[#E8AF30] text-[#002719] shadow-sm"
                 : "text-stone-300 hover:text-white"
@@ -73,7 +73,7 @@ export const LanguageSwitcher = ({
     >
       <button
         onClick={() => setLanguage("bn")}
-        className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black transition-all duration-200 ${
+        className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold transition-all duration-200 ${
           language === "bn"
             ? "bg-[#002719] text-[#E8AF30] shadow-sm scale-100"
             : "text-stone-600 hover:text-stone-900"
@@ -85,7 +85,7 @@ export const LanguageSwitcher = ({
 
       <button
         onClick={() => setLanguage("en")}
-        className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black transition-all duration-200 ${
+        className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold transition-all duration-200 ${
           language === "en"
             ? "bg-[#002719] text-[#E8AF30] shadow-sm scale-100"
             : "text-stone-600 hover:text-stone-900"

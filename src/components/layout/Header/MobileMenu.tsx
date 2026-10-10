@@ -41,7 +41,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
         >
           <i className="fa-solid fa-basket-shopping text-sm text-[#002719]"></i>
           {totalItems > 0 && (
-            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-black text-[10px] flex items-center justify-center shadow-md animate-bounce">
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-extrabold text-[10px] flex items-center justify-center shadow-md animate-bounce">
               {totalItems}
             </span>
           )}

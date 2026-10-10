@@ -24,11 +24,11 @@ export default function GlobalErrorPage({ error, reset }: ErrorProps) {
           <i className="fa-solid fa-triangle-exclamation"></i>
         </div>
 
-        <span className="px-3.5 py-1 rounded-full bg-rose-100 text-rose-900 text-xs font-black uppercase tracking-wider inline-block mb-3">
+        <span className="px-3.5 py-1 rounded-full bg-rose-100 text-rose-900 text-xs font-extrabold uppercase tracking-wider inline-block mb-3">
           {isBn ? "সিস্টেম সতর্কতা" : "System Notice"}
         </span>
 
-        <h1 className="text-2xl sm:text-3xl font-black text-stone-900 mb-2 leading-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-2 leading-tight">
           {isBn ? "একটি অপ্রত্যাশিত সমস্যা ঘটেছে" : "Something Went Unexpectedly"}
         </h1>
 
@@ -42,7 +42,7 @@ export default function GlobalErrorPage({ error, reset }: ErrorProps) {
           <button
             type="button"
             onClick={() => reset()}
-            className="w-full sm:w-auto py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-black text-xs transition-all shadow-md flex items-center justify-center gap-2"
+            className="w-full sm:w-auto py-3 px-6 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-extrabold text-xs transition-all shadow-md flex items-center justify-center gap-2"
           >
             <i className="fa-solid fa-rotate text-xs"></i>
             <span>{isBn ? "আবার চেষ্টা করুন" : "Try Again"}</span>

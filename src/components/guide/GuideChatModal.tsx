@@ -88,7 +88,7 @@ export const GuideChatModal = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-black text-sm text-white">{t.guide.mascotName}</h3>
+              <h3 className="font-extrabold text-sm text-white">{t.guide.mascotName}</h3>
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             </div>
             <p className="text-[11px] text-emerald-200/80">
@@ -119,7 +119,7 @@ export const GuideChatModal = ({
             onClose();
             onStartTour();
           }}
-          className="px-2.5 py-1 rounded-lg bg-[#002719] hover:bg-emerald-800 text-white font-black text-[11px] transition-all shrink-0 active:scale-95"
+          className="px-2.5 py-1 rounded-lg bg-[#002719] hover:bg-emerald-800 text-white font-extrabold text-[11px] transition-all shrink-0 active:scale-95"
         >
           {isBn ? "ট্যুর শুরু করুন" : "Start Tour"}
         </button>
@@ -149,7 +149,7 @@ export const GuideChatModal = ({
                   <button
                     type="button"
                     onClick={() => handleActionClick(m.intent!.actionUrl!)}
-                    className="py-1.5 px-3 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-black text-[11px] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                    className="py-1.5 px-3 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-extrabold text-[11px] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
                   >
                     <span>
                       {isBn
