@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { initialCustomers, type AdminCustomer } from "@/data/adminData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const CustomerDirectory = () => {
+  const { isBn } = useLanguage();
   const [customers] = useState<AdminCustomer[]>(initialCustomers);
   const [search, setSearch] = useState("");
 
@@ -19,10 +21,12 @@ export const CustomerDirectory = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-            গ্রাহক ডাটাবেজ ও সিআরএম
+            {isBn ? "গ্রাহক ডাটাবেজ ও সিআরএম" : "Customer Database & CRM"}
           </span>
           <h3 className="text-xl font-extrabold text-white">
-            রেজিস্টার্ড কাস্টমার তালিকা ({filtered.length} জন)
+            {isBn
+              ? `রেজিস্টার্ড কাস্টমার তালিকা (${filtered.length} জন)`
+              : `Registered Customers (${filtered.length} users)`}
           </h3>
         </div>
 
@@ -32,7 +36,7 @@ export const CustomerDirectory = () => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="গ্রাহকের নাম বা ফোন..."
+            placeholder={isBn ? "গ্রাহকের নাম বা ফোন..." : "Search customer name or phone..."}
             className="pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-stone-400 focus:outline-none focus:border-[#E8AF30] w-60"
           />
         </div>
@@ -42,12 +46,12 @@ export const CustomerDirectory = () => {
         <table className="w-full text-left text-xs">
           <thead>
             <tr className="border-b border-white/10 text-stone-400 uppercase tracking-wider text-[10px]">
-              <th className="py-3 px-4">গ্রাহক</th>
-              <th className="py-3 px-4">ঠিকানা / শহর</th>
-              <th className="py-3 px-4">মোট অর্ডার</th>
-              <th className="py-3 px-4">লাইফটাইম খরচ (LTV)</th>
-              <th className="py-3 px-4">সর্বশেষ অর্ডার</th>
-              <th className="py-3 px-4 text-right">স্ট্যাটাস</th>
+              <th className="py-3 px-4">{isBn ? "গ্রাহক" : "Customer"}</th>
+              <th className="py-3 px-4">{isBn ? "ঠিকানা / শহর" : "City / Location"}</th>
+              <th className="py-3 px-4">{isBn ? "মোট অর্ডার" : "Total Orders"}</th>
+              <th className="py-3 px-4">{isBn ? "লাইফটাইম খরচ (LTV)" : "Lifetime Value (LTV)"}</th>
+              <th className="py-3 px-4">{isBn ? "সর্বশেষ অর্ডার" : "Last Order"}</th>
+              <th className="py-3 px-4 text-right">{isBn ? "স্ট্যাটাস" : "Status"}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
@@ -59,7 +63,7 @@ export const CustomerDirectory = () => {
                 </td>
                 <td className="py-3.5 px-4 text-stone-300">{c.city}</td>
                 <td className="py-3.5 px-4 font-mono font-bold text-stone-200">
-                  {c.totalOrders} টি
+                  {c.totalOrders} {isBn ? "টি" : "orders"}
                 </td>
                 <td className="py-3.5 px-4 font-mono font-extrabold text-emerald-400">
                   ৳{c.totalSpent.toLocaleString()}
@@ -73,7 +77,7 @@ export const CustomerDirectory = () => {
                         : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
                     }`}
                   >
-                    {c.status === "vip" ? "★ Green VIP" : "Active"}
+                    {c.status === "vip" ? (isBn ? "★ গ্রীন ভিআইপি" : "★ Green VIP") : (isBn ? "সক্রিয়" : "Active")}
                   </span>
                 </td>
               </tr>
