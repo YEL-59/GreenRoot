@@ -7,10 +7,13 @@ import { LanguageSwitcher } from "@/components/common";
 
 const adminNavItems = [
   { href: "/admin", label: "বিজনেস ওভারভিউ", labelEn: "Overview & Analytics", icon: "fa-solid fa-chart-pie" },
+  { href: "/admin/fleet", label: "লাইভ ডেলিভারি ফ্লিট ম্যাপ", labelEn: "Fleet Live Map", icon: "fa-solid fa-map-location-dot", badge: "Live GPS" },
   { href: "/admin/products", label: "পণ্য ও স্টক পরিচালনা", labelEn: "Products & Stock", icon: "fa-solid fa-boxes-stacked", badge: "20" },
   { href: "/admin/orders", label: "অর্ডার ও ডেলিভারি", labelEn: "Orders & Shipping", icon: "fa-solid fa-truck-ramp-box", badge: "12 New" },
+  { href: "/admin/harvest", label: "দৈনিক সংগ্রহ ও কোল্ড চেইন", labelEn: "Harvest & Cold Chain", icon: "fa-solid fa-wheat-awn" },
+  { href: "/admin/coupons", label: "ডিসকাউন্ট ও কুপন কোড", labelEn: "Coupons & Promos", icon: "fa-solid fa-ticket" },
   { href: "/admin/customers", label: "গ্রাহক তালিকা", labelEn: "Customers Directory", icon: "fa-solid fa-users" },
-  { href: "/admin/content", label: "খামার নোটিশ ও ব্লগ", labelEn: "Notices & Blog", icon: "fa-solid fa-newspaper" },
+  { href: "/admin/content", label: "ওয়েবসাইট কনটেন্ট ও CMS", labelEn: "Site Content CMS", icon: "fa-solid fa-file-pen", badge: "Live CMS" },
   { href: "/admin/settings", label: "বিজনেস সেটিংস", labelEn: "Store Settings", icon: "fa-solid fa-sliders" },
 ];
 
@@ -44,7 +47,7 @@ export const AdminSidebar = ({
         {/* Admin Brand */}
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#E8AF30] to-amber-300 flex items-center justify-center text-[#002719] font-black text-xl shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#E8AF30] to-amber-300 flex items-center justify-center text-[#002719] font-extrabold text-xl shadow-lg">
               <i className="fa-solid fa-tractor"></i>
             </div>
             <div>

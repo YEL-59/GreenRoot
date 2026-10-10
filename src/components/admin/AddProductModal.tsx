@@ -74,7 +74,7 @@ export const AddProductModal = ({
             <span className="text-[10px] text-[#E8AF30] font-bold uppercase tracking-wider block">
               ইনভেন্টরি ম্যানেজমেন্ট
             </span>
-            <h3 className="text-xl font-black text-white">নতুন অর্গানিক পণ্য আপলোড করুন (Upload Product)</h3>
+            <h3 className="text-xl font-extrabold text-white">নতুন অর্গানিক পণ্য আপলোড করুন (Upload Product)</h3>
           </div>
 
           <button
@@ -231,7 +231,7 @@ export const AddProductModal = ({
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-black shadow-lg transition-all"
+              className="px-6 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-lg transition-all"
             >
               পণ্য আপলোড সম্পন্ন করুন ✓
             </button>

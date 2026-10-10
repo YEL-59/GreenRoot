@@ -45,7 +45,7 @@ export const OrderManagementTable = () => {
           <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
             অর্ডার ফুলফিলমেন্ট ও ডেলিভারি
           </span>
-          <h3 className="text-xl font-black text-white">
+          <h3 className="text-xl font-extrabold text-white">
             গ্রাহক অর্ডার তালিকা ({filteredOrders.length} টি)
           </h3>
         </div>
@@ -113,7 +113,7 @@ export const OrderManagementTable = () => {
                 </td>
 
                 <td className="py-3.5 px-4">
-                  <div className="text-sm font-black text-white font-mono">৳{o.total}</div>
+                  <div className="text-sm font-extrabold text-white font-mono">৳{o.total}</div>
                   <span
                     className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${
                       o.paymentMethod === "cod"
@@ -173,7 +173,7 @@ export const OrderManagementTable = () => {
                 <span className="text-[10px] text-[#E8AF30] font-bold uppercase tracking-wider block">
                   অর্ডার মেমো ও ইনভয়েস
                 </span>
-                <h3 className="text-xl font-black text-white">ইনভয়েস #{selectedOrder.id}</h3>
+                <h3 className="text-xl font-extrabold text-white">ইনভয়েস #{selectedOrder.id}</h3>
               </div>
               <button
                 onClick={() => setSelectedOrder(null)}
@@ -215,7 +215,7 @@ export const OrderManagementTable = () => {
                   <span className="text-stone-400">ডেলিভারি চার্জ:</span>
                   <span>৳{selectedOrder.shippingFee}</span>
                 </div>
-                <div className="flex justify-between font-black text-sm text-[#E8AF30] pt-1.5 border-t border-white/10">
+                <div className="flex justify-between font-extrabold text-sm text-[#E8AF30] pt-1.5 border-t border-white/10">
                   <span>সর্বমোট বিল:</span>
                   <span>৳{selectedOrder.total}</span>
                 </div>
@@ -225,7 +225,7 @@ export const OrderManagementTable = () => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="px-5 py-2 rounded-xl bg-[#E8AF30] text-[#002719] text-xs font-black shadow-md"
+                className="px-5 py-2 rounded-xl bg-[#E8AF30] text-[#002719] text-xs font-extrabold shadow-md"
               >
                 বন্ধ করুন
               </button>

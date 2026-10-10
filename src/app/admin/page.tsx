@@ -20,7 +20,7 @@ export default function AdminOverviewPage() {
               গ্রীনরুট কেন্দ্রীয় খামার কমান্ড সেন্টার (HQ)
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
             ফার্ম বিজনেস ও ইনভেন্টরি কন্ট্রোল
           </h2>
           <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-2xl">
@@ -31,7 +31,7 @@ export default function AdminOverviewPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/admin/products"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-black text-xs shadow-lg transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-extrabold text-xs shadow-lg transition-all"
           >
             <i className="fa-solid fa-plus"></i>
             <span>নতুন পণ্য আপলোড</span>
@@ -43,6 +43,44 @@ export default function AdminOverviewPage() {
             <i className="fa-solid fa-truck-fast text-[#E8AF30]"></i>
             <span>ডেলিভারি হ্যান্ডলার</span>
           </Link>
+          <Link
+            href="/admin/content"
+            className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 font-bold text-xs transition-all border border-emerald-500/40"
+          >
+            <i className="fa-solid fa-file-pen text-[#E8AF30]"></i>
+            <span>সাইট কনটেন্ট CMS</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Live Operational Ticker Bar */}
+      <div className="p-4 rounded-2xl bg-[#071911] border border-emerald-500/20 text-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span className="text-stone-400 font-semibold">মানিকগঞ্জ চিলার ভ্যাট:</span>
+            <strong className="text-emerald-400 font-mono">৩.৪°C (স্বাভাবিক)</strong>
+          </div>
+          <div className="flex items-center gap-2">
+            <i className="fa-solid fa-leaf text-emerald-400 text-[10px]"></i>
+            <span className="text-stone-400 font-semibold">সাভার হারভেস্ট লট:</span>
+            <strong className="text-white font-mono">১৪০ আঁটি রেডি</strong>
+          </div>
+          <div className="flex items-center gap-2">
+            <i className="fa-solid fa-truck text-[#E8AF30] text-[10px]"></i>
+            <span className="text-stone-400 font-semibold">সক্রিয় কোল্ড-বহর:</span>
+            <strong className="text-[#E8AF30] font-mono">৩/৩ টি রুট অন-টাইম</strong>
+          </div>
+          <div className="flex items-center gap-2">
+            <i className="fa-solid fa-building-columns text-blue-400 text-[10px]"></i>
+            <span className="text-stone-400 font-semibold">ব্র্যাক ব্যাংক সেটেলমেন্ট:</span>
+            <strong className="text-blue-300 font-mono">৳১,৮৮,০৫৫ সম্পন্ন</strong>
+          </div>
+        </div>
+
+        <div className="text-[11px] text-stone-400 flex items-center gap-1.5 font-mono">
+          <i className="fa-solid fa-clock-rotate-left text-stone-500"></i>
+          <span>সর্বশেষ আপডেট: ১০:০৫ AM (BST)</span>
         </div>
       </div>
 
@@ -98,7 +136,7 @@ export default function AdminOverviewPage() {
               <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
                 সাম্প্রতিক লেনদেন
               </span>
-              <h3 className="text-lg font-black text-white">সর্বশেষ অর্ডারসমূহ</h3>
+              <h3 className="text-lg font-extrabold text-white">সর্বশেষ অর্ডারসমূহ</h3>
             </div>
 
             <Link
@@ -158,7 +196,7 @@ export default function AdminOverviewPage() {
             <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
               খামার কমিউনিকেশন
             </span>
-            <h3 className="text-lg font-black text-white mb-4">লাইভ খামার নোটিশ</h3>
+            <h3 className="text-lg font-extrabold text-white mb-4">লাইভ খামার নোটিশ</h3>
 
             <div className="space-y-3">
               {initialFarmNotices.map((n) => (
@@ -184,6 +222,119 @@ export default function AdminOverviewPage() {
         </div>
       </div>
 
+      {/* Top Selling Agro Products Leaderboard */}
+      <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
+              সর্বোচ্চ বিক্রিত পণ্য
+            </span>
+            <h3 className="text-lg md:text-xl font-extrabold text-white">
+              শীর্ষ ৫টি জনপ্রিয় খামার পণ্য লিডারবোর্ড (Top Farm Produce)
+            </h3>
+          </div>
+          <Link
+            href="/admin/products"
+            className="text-xs font-bold text-[#E8AF30] hover:text-amber-300 transition-colors"
+          >
+            ইনভেন্টরি ও স্টক পরিচালনা করুন →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {[
+            {
+              rank: 1,
+              title: "ঘরোয়া খাঁটি গরুর দুধ",
+              origin: "মানিকগঞ্জ ডেইরি",
+              units: "৪৮০ লিটার",
+              revenue: "৳৫২,৮০০",
+              stock: "২৮০ লিটার অবশিষ্ট",
+              growth: "+২৪%",
+              image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80",
+            },
+            {
+              rank: 2,
+              title: "কাঠের ঘানি ভাঙা সরিষার তেল",
+              origin: "পাবনা কাঠের ঘানি",
+              units: "২১০ লিটার",
+              revenue: "৳৬১,৯৫০",
+              stock: "৬৫ লিটার অবশিষ্ট",
+              growth: "+১৮%",
+              image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80",
+            },
+            {
+              rank: 3,
+              title: "সুন্দরবনের খলিশা মধু",
+              origin: "সাতক্ষীরা সুন্দরবন",
+              units: "৯৫ কেজি",
+              revenue: "৳৯৩,১০০",
+              stock: "৪০ কেজি অবশিষ্ট",
+              growth: "+১৫%",
+              image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80",
+            },
+            {
+              rank: 4,
+              title: "ঐতিহ্যবাহী বিলোনা ঘি",
+              origin: "সিরাজগঞ্জ খামার",
+              units: "৭২ কেজি",
+              revenue: "৳১,০৮,০০০",
+              stock: "১৮ কেজি (সীমিত)",
+              growth: "+৩১%",
+              image: "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=400&q=80",
+            },
+            {
+              rank: 5,
+              title: "যশোরের খাঁটি নলেন গুড়",
+              origin: "যশোর গুড় কুটির",
+              units: "১৩০ কেজি",
+              revenue: "৳৪৫,৫০০",
+              stock: "৫০ কেজি অবশিষ্ট",
+              growth: "+৪০%",
+              image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80",
+            },
+          ].map((prod) => (
+            <div
+              key={prod.rank}
+              className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#E8AF30]/40 transition-all flex flex-col justify-between group"
+            >
+              <div>
+                <div className="relative mb-3 rounded-xl overflow-hidden aspect-video border border-white/10">
+                  <img
+                    src={prod.image}
+                    alt={prod.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute top-2 left-2 w-6 h-6 rounded-full bg-[#E8AF30] text-[#002719] font-extrabold text-xs flex items-center justify-center shadow-md">
+                    #{prod.rank}
+                  </span>
+                  <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/60 text-emerald-400 font-mono text-[10px] font-bold">
+                    {prod.growth}
+                  </span>
+                </div>
+
+                <h4 className="text-xs font-extrabold text-white line-clamp-1">{prod.title}</h4>
+                <p className="text-[10px] text-stone-400 mt-0.5">{prod.origin}</p>
+              </div>
+
+              <div className="mt-3 pt-2.5 border-t border-white/10 space-y-1 text-[11px]">
+                <div className="flex justify-between">
+                  <span className="text-stone-400">বিক্রয়:</span>
+                  <strong className="text-white font-mono">{prod.units}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-400">মোট রাজস্ব:</span>
+                  <strong className="text-[#E8AF30] font-mono">{prod.revenue}</strong>
+                </div>
+                <div className="text-[10px] text-stone-400 text-right mt-1">
+                  স্টক: <span className="text-stone-300 font-mono">{prod.stock}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Cold-Chain Fleet Status & Farm Harvest Production (Advanced Operations) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Cold-Chain Fleet Monitor */}
@@ -193,7 +344,7 @@ export default function AdminOverviewPage() {
               <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
                 লজিস্টিকস ও বহর ট্র্যাকিং
               </span>
-              <h3 className="text-lg font-black text-white">
+              <h3 className="text-lg font-extrabold text-white">
                 কোল্ড-চেইন ডেলিভারি বহর (Active Fleet)
               </h3>
             </div>
@@ -282,7 +433,7 @@ export default function AdminOverviewPage() {
               <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
                 খামার উৎপাদন ও ফসল কর্তন
               </span>
-              <h3 className="text-lg font-black text-white">
+              <h3 className="text-lg font-extrabold text-white">
                 আজকের খামার উৎপাদন (Daily Harvest)
               </h3>
             </div>
@@ -297,7 +448,7 @@ export default function AdminOverviewPage() {
                 <span className="text-[11px] text-stone-400">মানিকগঞ্জ ডেইরি</span>
                 <i className="fa-solid fa-cow text-[#E8AF30] text-xs"></i>
               </div>
-              <div className="text-xl font-black text-white">৩২০ লিটার</div>
+              <div className="text-xl font-extrabold text-white">৩২০ লিটার</div>
               <div className="text-[10px] text-emerald-400 font-semibold mt-1">
                 ভোরের কাঁচা দুধ দোহন সম্পন্ন ✓
               </div>
@@ -308,7 +459,7 @@ export default function AdminOverviewPage() {
                 <span className="text-[11px] text-stone-400">সাভার অর্গানিক প্লট</span>
                 <i className="fa-solid fa-leaf text-emerald-400 text-xs"></i>
               </div>
-              <div className="text-xl font-black text-white">১৪০ আঁটি</div>
+              <div className="text-xl font-extrabold text-white">১৪০ আঁটি</div>
               <div className="text-[10px] text-emerald-400 font-semibold mt-1">
                 লাল শাক ও পালং শাক ফ্রেশ হারভেস্ট ✓
               </div>
@@ -319,7 +470,7 @@ export default function AdminOverviewPage() {
                 <span className="text-[11px] text-stone-400">যশোর গুড় কুটির</span>
                 <i className="fa-solid fa-jar text-amber-400 text-xs"></i>
               </div>
-              <div className="text-xl font-black text-white">৪৫ কেজি</div>
+              <div className="text-xl font-extrabold text-white">৪৫ কেজি</div>
               <div className="text-[10px] text-emerald-400 font-semibold mt-1">
                 খাঁটি পাটালি গুড় তৈরি ও প্যাকিং ✓
               </div>
@@ -330,7 +481,7 @@ export default function AdminOverviewPage() {
                 <span className="text-[11px] text-stone-400">পাবনা কাঠের ঘানি</span>
                 <i className="fa-solid fa-mortar-pestle text-yellow-400 text-xs"></i>
               </div>
-              <div className="text-xl font-black text-white">৬০ লিটার</div>
+              <div className="text-xl font-extrabold text-white">৬০ লিটার</div>
               <div className="text-[10px] text-emerald-400 font-semibold mt-1">
                 কোল্ড-প্রেসড সরিষার তেল ছাঁকন ✓
               </div>

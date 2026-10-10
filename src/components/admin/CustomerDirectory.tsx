@@ -21,7 +21,7 @@ export const CustomerDirectory = () => {
           <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
             গ্রাহক ডাটাবেজ ও সিআরএম
           </span>
-          <h3 className="text-xl font-black text-white">
+          <h3 className="text-xl font-extrabold text-white">
             রেজিস্টার্ড কাস্টমার তালিকা ({filtered.length} জন)
           </h3>
         </div>
@@ -61,7 +61,7 @@ export const CustomerDirectory = () => {
                 <td className="py-3.5 px-4 font-mono font-bold text-stone-200">
                   {c.totalOrders} টি
                 </td>
-                <td className="py-3.5 px-4 font-mono font-black text-emerald-400">
+                <td className="py-3.5 px-4 font-mono font-extrabold text-emerald-400">
                   ৳{c.totalSpent.toLocaleString()}
                 </td>
                 <td className="py-3.5 px-4 text-stone-400">{c.lastOrderDate}</td>
