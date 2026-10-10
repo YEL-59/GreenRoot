@@ -24,7 +24,7 @@ export const FeaturedProductsSection = () => {
               <i className="fa-solid fa-basket-shopping text-xs"></i>
               {t.productsSection.badge}
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-stone-900 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-medium text-stone-900 leading-tight">
               {t.productsSection.title}
             </h2>
             <p className="text-stone-500 text-sm mt-2 leading-relaxed">
@@ -75,7 +75,7 @@ export const FeaturedProductsSection = () => {
             <span className="text-[#E8AF30] text-xs font-bold uppercase tracking-wider block mb-1">
               {t.productsSection.bannerBadge}
             </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
+            <h3 className="text-2xl md:text-3xl font-medium text-white mb-2">
               {t.productsSection.bannerTitle}
             </h3>
             <p className="text-emerald-200/80 text-xs md:text-sm">
