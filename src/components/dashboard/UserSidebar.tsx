@@ -12,6 +12,8 @@ const menuItems = [
   { href: "/dashboard/orders", label: "আমার সকল অর্ডার", labelEn: "My Orders", icon: "fa-solid fa-box-open" },
   { href: "/dashboard/track/GR-2026-8841", label: "লাইভ ডেলিভারি ট্র্যাকিং", labelEn: "Live Track Map", icon: "fa-solid fa-map-location-dot", badge: "Live" },
   { href: "/dashboard/subscriptions", label: "ফার্ম সাবস্ক্রিপশন", labelEn: "Subscriptions", icon: "fa-solid fa-repeat" },
+  { href: "/dashboard/tours", label: "ফার্ম ভিজিট ও ট্যুর", labelEn: "Farm Tours & Visit", icon: "fa-solid fa-calendar-check", badge: "Weekend" },
+  { href: "/dashboard/invoices", label: "অফিশিয়াল ইনভয়েস", labelEn: "Tax Invoices", icon: "fa-solid fa-file-invoice-dollar" },
   { href: "/dashboard/addresses", label: "সংরক্ষিত ঠিকানা", labelEn: "Saved Addresses", icon: "fa-solid fa-location-dot" },
   { href: "/dashboard/rewards", label: "গ্রীনকয়েন ও ওয়ালেট", labelEn: "Rewards & Wallet", icon: "fa-solid fa-coins" },
 ];
@@ -47,7 +49,7 @@ export const UserSidebar = ({
         {/* Brand / Logo */}
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-[#E8AF30] flex items-center justify-center text-[#002719] font-black text-xl shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-[#E8AF30] flex items-center justify-center text-[#002719] font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform">
               <i className="fa-solid fa-seedling"></i>
             </div>
             <div>

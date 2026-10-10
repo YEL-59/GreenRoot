@@ -157,7 +157,7 @@ export default function DashboardCartPage() {
             <i className="fa-solid fa-cart-shopping"></i>
             {isBn ? "গ্রাহক কার্ট পোর্টাল" : "Customer Cart Portal"}
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-white">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
             {t.dashboardCart.title}
           </h1>
           <p className="text-emerald-200/80 text-xs sm:text-sm mt-1 max-w-xl">
@@ -169,15 +169,15 @@ export default function DashboardCartPage() {
         <div className="flex flex-wrap items-center gap-3 relative z-10">
           <div className="px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
             <span className="text-[10px] text-emerald-300 block">{isBn ? "সক্রিয় আইটেম" : "Active Items"}</span>
-            <span className="text-lg font-black text-white font-mono">{totalItems}</span>
+            <span className="text-lg font-extrabold text-white font-mono">{totalItems}</span>
           </div>
           <div className="px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-center">
             <span className="text-[10px] text-emerald-300 block">{isBn ? "বর্তমান মূল্য" : "Cart Subtotal"}</span>
-            <span className="text-lg font-black text-[#E8AF30] font-mono">৳{subtotal}</span>
+            <span className="text-lg font-extrabold text-[#E8AF30] font-mono">৳{subtotal}</span>
           </div>
           <Link
             href="/cart"
-            className="px-4 py-2.5 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-black text-xs transition-colors shadow-md inline-flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-extrabold text-xs transition-colors shadow-md inline-flex items-center gap-1.5"
           >
             <i className="fa-solid fa-arrow-up-right-from-square"></i>
             <span>{isBn ? "ফুল কার্ট পেজ" : "Full Cart Page"}</span>
@@ -206,7 +206,7 @@ export default function DashboardCartPage() {
         <button
           type="button"
           onClick={() => setActiveTab("active")}
-          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 whitespace-nowrap ${
+          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "active"
               ? "bg-[#002719] text-white shadow-sm"
               : "bg-white text-stone-600 hover:text-stone-900 border border-stone-200"
@@ -224,7 +224,7 @@ export default function DashboardCartPage() {
         <button
           type="button"
           onClick={() => setActiveTab("baskets")}
-          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 whitespace-nowrap ${
+          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "baskets"
               ? "bg-[#002719] text-white shadow-sm"
               : "bg-white text-stone-600 hover:text-stone-900 border border-stone-200"
@@ -240,7 +240,7 @@ export default function DashboardCartPage() {
         <button
           type="button"
           onClick={() => setActiveTab("reorder")}
-          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 whitespace-nowrap ${
+          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "reorder"
               ? "bg-[#002719] text-white shadow-sm"
               : "bg-white text-stone-600 hover:text-stone-900 border border-stone-200"
@@ -262,7 +262,7 @@ export default function DashboardCartPage() {
               <div className="w-16 h-16 rounded-full bg-stone-100 text-stone-400 mx-auto flex items-center justify-center text-2xl mb-4">
                 <i className="fa-solid fa-bag-shopping"></i>
               </div>
-              <h3 className="text-xl font-black text-stone-900 mb-1">
+              <h3 className="text-xl font-extrabold text-stone-900 mb-1">
                 {t.dashboardCart.cartEmpty}
               </h3>
               <p className="text-stone-500 text-xs sm:text-sm max-w-md mx-auto mb-6">
@@ -338,7 +338,7 @@ export default function DashboardCartPage() {
                           >
                             -
                           </button>
-                          <span className="w-7 text-center font-black font-mono text-stone-900 text-xs">
+                          <span className="w-7 text-center font-extrabold font-mono text-stone-900 text-xs">
                             {item.quantity}
                           </span>
                           <button
@@ -350,7 +350,7 @@ export default function DashboardCartPage() {
                           </button>
                         </div>
 
-                        <span className="font-black font-mono text-stone-900 text-sm min-w-[60px] text-right">
+                        <span className="font-extrabold font-mono text-stone-900 text-sm min-w-[60px] text-right">
                           ৳{item.price * item.quantity}
                         </span>
 
@@ -369,7 +369,7 @@ export default function DashboardCartPage() {
 
               {/* Order Calculations Box (4 Cols) */}
               <div className="lg:col-span-4 bg-white rounded-3xl p-5 sm:p-7 border border-stone-200 shadow-sm space-y-4">
-                <h3 className="font-black text-sm text-stone-900 uppercase tracking-wider pb-2 border-b border-stone-100">
+                <h3 className="font-extrabold text-sm text-stone-900 uppercase tracking-wider pb-2 border-b border-stone-100">
                   {t.cartPage.orderSummary}
                 </h3>
 
@@ -384,7 +384,7 @@ export default function DashboardCartPage() {
                       onClick={() => setDeliveryZone("inside-dhaka")}
                       className={`p-2.5 rounded-xl border text-center transition-all ${
                         deliveryZone === "inside-dhaka"
-                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-black"
+                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-extrabold"
                           : "border-stone-200 bg-white text-stone-600"
                       }`}
                     >
@@ -395,7 +395,7 @@ export default function DashboardCartPage() {
                       onClick={() => setDeliveryZone("outside-dhaka")}
                       className={`p-2.5 rounded-xl border text-center transition-all ${
                         deliveryZone === "outside-dhaka"
-                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-black"
+                          ? "border-[#002719] bg-emerald-50 text-[#002719] font-extrabold"
                           : "border-stone-200 bg-white text-stone-600"
                       }`}
                     >
@@ -414,7 +414,7 @@ export default function DashboardCartPage() {
                     <span>{t.cart.deliveryFee}:</span>
                     <span className="font-bold text-stone-900 font-mono">৳{deliveryFee}</span>
                   </div>
-                  <div className="flex justify-between text-base font-black text-stone-900 pt-2 border-t border-stone-200">
+                  <div className="flex justify-between text-base font-extrabold text-stone-900 pt-2 border-t border-stone-200">
                     <span>{t.cart.total}:</span>
                     <span className="text-[#002719] font-mono">৳{total}</span>
                   </div>
@@ -434,7 +434,7 @@ export default function DashboardCartPage() {
                 <div className="space-y-2 pt-2">
                   <Link
                     href="/checkout"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#002719] hover:bg-emerald-900 text-white font-black text-xs text-center block transition-all shadow-md tracking-wide"
+                    className="w-full py-3.5 px-4 rounded-xl bg-[#002719] hover:bg-emerald-900 text-white font-extrabold text-xs text-center block transition-all shadow-md tracking-wide"
                   >
                     {t.cartPage.checkout}
                   </Link>
@@ -456,7 +456,7 @@ export default function DashboardCartPage() {
       {activeTab === "baskets" && (
         <div className="space-y-6 animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm">
-            <h3 className="font-black text-lg text-stone-900 mb-1">
+            <h3 className="font-extrabold text-lg text-stone-900 mb-1">
               {isBn ? "প্রস্তুতকৃত স্বাস্থ্যকর ফ্যামিলি বাস্কেট" : "Pre-Configured Healthy Family Baskets"}
             </h3>
             <p className="text-stone-500 text-xs sm:text-sm">
@@ -479,11 +479,11 @@ export default function DashboardCartPage() {
                       <span className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-lg text-white">
                         <i className={basket.icon}></i>
                       </span>
-                      <span className="px-3 py-1 rounded-full bg-[#E8AF30] text-[#002719] text-[10px] font-black uppercase tracking-wider shadow-xs">
+                      <span className="px-3 py-1 rounded-full bg-[#E8AF30] text-[#002719] text-[10px] font-extrabold uppercase tracking-wider shadow-xs">
                         {isBn ? basket.badge : basket.badgeEn}
                       </span>
                     </div>
-                    <h4 className="font-black text-base sm:text-lg leading-tight text-white mb-1">
+                    <h4 className="font-extrabold text-base sm:text-lg leading-tight text-white mb-1">
                       {isBn ? basket.titleBn : basket.title}
                     </h4>
                     <p className="text-white/80 text-xs line-clamp-2">
@@ -530,7 +530,7 @@ export default function DashboardCartPage() {
                         {isBn ? "কম্বো বান্ডেল মূল্য" : "Bundle Price"}
                       </span>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-black text-[#002719] font-mono">
+                        <span className="text-xl font-extrabold text-[#002719] font-mono">
                           ৳{basket.bundlePrice}
                         </span>
                         <span className="text-xs text-stone-400 line-through font-mono">
@@ -547,7 +547,7 @@ export default function DashboardCartPage() {
                   <button
                     type="button"
                     onClick={() => handleLoadBasket(basket)}
-                    className="w-full py-3 px-4 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-black text-xs transition-all shadow-sm flex items-center justify-center gap-2 active:scale-95"
+                    className="w-full py-3 px-4 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-extrabold text-xs transition-all shadow-sm flex items-center justify-center gap-2 active:scale-95"
                   >
                     <i className="fa-solid fa-basket-shopping text-xs"></i>
                     <span>{t.dashboardCart.loadBasket}</span>
@@ -564,7 +564,7 @@ export default function DashboardCartPage() {
         <div className="space-y-6 animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-black text-lg text-stone-900 mb-1">
+              <h3 className="font-extrabold text-lg text-stone-900 mb-1">
                 {isBn ? "অর্ডার #GR-2026-8841 থেকে দ্রুত রি-কার্ট" : "Quick Reorder from Order #GR-2026-8841"}
               </h3>
               <p className="text-stone-500 text-xs sm:text-sm">
@@ -577,7 +577,7 @@ export default function DashboardCartPage() {
             <button
               type="button"
               onClick={handleReorderAll}
-              className="py-2.5 px-5 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-black text-xs transition-colors shadow-sm shrink-0 flex items-center gap-2"
+              className="py-2.5 px-5 rounded-xl bg-[#002719] hover:bg-[#E8AF30] text-white hover:text-[#002719] font-extrabold text-xs transition-colors shadow-sm shrink-0 flex items-center gap-2"
             >
               <i className="fa-solid fa-rotate text-xs"></i>
               <span>{t.dashboardCart.reorderAll}</span>

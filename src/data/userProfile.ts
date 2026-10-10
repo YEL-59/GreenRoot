@@ -65,7 +65,9 @@ export interface UserNotification {
   title: string;
   titleBn: string;
   message: string;
+  messageEn?: string;
   time: string;
+  timeBn?: string;
   read: boolean;
   type: "order" | "offer" | "harvest";
 }
@@ -76,7 +78,9 @@ export const initialNotifications: UserNotification[] = [
     title: "Order Out for Delivery!",
     titleBn: "আপনার অর্ডার ডেলিভারির পথে!",
     message: "অর্ডার #GR-2026-8841 এর রাইডার সাইফুল ইসলাম আপনার ধানমন্ডি ঠিকানায় রওনা হয়েছেন।",
+    messageEn: "Rider Saiful Islam is on the way to your Dhanmondi address for Order #GR-2026-8841.",
     time: "15 min ago",
+    timeBn: "১৫ মিনিট আগে",
     read: false,
     type: "order",
   },
@@ -85,7 +89,9 @@ export const initialNotifications: UserNotification[] = [
     title: "Winter Harvest Alert!",
     titleBn: "নতুন নলেন গুড় ও খলিশা মধু এসে পৌঁছেছে!",
     message: "যশোরের খাঁটি নলেন গুড়ের নতুন চালান খামার থেকে ঢাকায় পৌঁছেছে। স্টক সীমিত!",
+    messageEn: "Fresh batch of pure Nolen Gur from Jashore has arrived at Dhaka cold hub. Limited stock!",
     time: "2 hours ago",
+    timeBn: "২ ঘণ্টা আগে",
     read: false,
     type: "harvest",
   },
@@ -94,8 +100,11 @@ export const initialNotifications: UserNotification[] = [
     title: "GreenCoins Earned!",
     titleBn: "৫০ গ্রীনকয়েন অর্জিত হয়েছে!",
     message: "আপনার বিগত অর্ডারের জন্য ওয়ালেটে ৫০ কয়েন ক্যাশব্যাক যুক্ত হয়েছে।",
+    messageEn: "50 GreenCoins cashback has been credited to your wallet from your recent order.",
     time: "Yesterday",
+    timeBn: "গতকাল",
     read: true,
     type: "offer",
   },
 ];
+
