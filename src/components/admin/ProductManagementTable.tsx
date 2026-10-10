@@ -3,9 +3,11 @@
 import { useState } from "react";
 import type { Product } from "@/types";
 import { products as initialProductList, productCategories } from "@/data/products";
+import { useLanguage } from "@/context/LanguageContext";
 import { AddProductModal } from "./AddProductModal";
 
 export const ProductManagementTable = () => {
+  const { isBn } = useLanguage();
   const [productList, setProductList] = useState<Product[]>(initialProductList);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -16,7 +18,8 @@ export const ProductManagementTable = () => {
     const matchesSearch =
       p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.titleBn.includes(searchTerm) ||
-      p.originBn.includes(searchTerm);
+      p.originBn.includes(searchTerm) ||
+      (p.origin && p.origin.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCat && matchesSearch;
   });
 
@@ -33,7 +36,10 @@ export const ProductManagementTable = () => {
   };
 
   const handleDeleteProduct = (id: string) => {
-    if (confirm("আপনি কি নিশ্চিত এই পণ্যটি ইনভেন্টরি থেকে মুছে ফেলতে চান?")) {
+    const confirmMsg = isBn
+      ? "আপনি কি নিশ্চিত এই পণ্যটি ইনভেন্টরি থেকে মুছে ফেলতে চান?"
+      : "Are you sure you want to remove this product from inventory?";
+    if (confirm(confirmMsg)) {
       setProductList(productList.filter((p) => p.id !== id));
     }
   };
@@ -48,10 +54,12 @@ export const ProductManagementTable = () => {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
         <div>
           <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-            ইনভেন্টরি ও পণ্য ক্যাটালগ
+            {isBn ? "ইনভেন্টরি ও পণ্য ক্যাটালগ" : "Inventory & Catalog"}
           </span>
           <h3 className="text-xl font-extrabold text-white">
-            ফার্ম পণ্য তালিকা ({filteredProducts.length} টি আইটেম)
+            {isBn
+              ? `ফার্ম পণ্য তালিকা (${filteredProducts.length} টি আইটেম)`
+              : `Farm Product Catalog (${filteredProducts.length} items)`}
           </h3>
         </div>
 
@@ -63,7 +71,7 @@ export const ProductManagementTable = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="পণ্য বা উৎস খুঁজুন..."
+              placeholder={isBn ? "পণ্য বা উৎস খুঁজুন..." : "Search product or source..."}
               className="pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-stone-400 focus:outline-none focus:border-[#E8AF30] w-48 sm:w-60"
             />
           </div>
@@ -76,7 +84,7 @@ export const ProductManagementTable = () => {
           >
             {productCategories.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.nameBn}
+                {isBn ? c.nameBn : c.name}
               </option>
             ))}
           </select>
@@ -87,7 +95,7 @@ export const ProductManagementTable = () => {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-lg transition-all"
           >
             <i className="fa-solid fa-plus text-xs"></i>
-            <span>নতুন পণ্য যোগ করুন (Upload)</span>
+            <span>{isBn ? "নতুন পণ্য যোগ করুন (Upload)" : "Add Product (Upload)"}</span>
           </button>
         </div>
       </div>
@@ -97,12 +105,12 @@ export const ProductManagementTable = () => {
         <table className="w-full text-left text-xs">
           <thead>
             <tr className="border-b border-white/10 text-stone-400 uppercase tracking-wider text-[10px]">
-              <th className="py-3 px-4">পণ্য ও বিবরণ</th>
-              <th className="py-3 px-4">ক্যাটাগরি</th>
-              <th className="py-3 px-4">মূল্য (Price)</th>
-              <th className="py-3 px-4">মজুদ (Stock)</th>
-              <th className="py-3 px-4">স্ট্যাটাস</th>
-              <th className="py-3 px-4 text-right">অ্যাকশন</th>
+              <th className="py-3 px-4">{isBn ? "পণ্য ও বিবরণ" : "Product & Details"}</th>
+              <th className="py-3 px-4">{isBn ? "ক্যাটাগরি" : "Category"}</th>
+              <th className="py-3 px-4">{isBn ? "মূল্য (Price)" : "Price"}</th>
+              <th className="py-3 px-4">{isBn ? "মজুদ (Stock)" : "Stock"}</th>
+              <th className="py-3 px-4">{isBn ? "স্ট্যাটাস" : "Status"}</th>
+              <th className="py-3 px-4 text-right">{isBn ? "অ্যাকশন" : "Actions"}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
@@ -116,15 +124,19 @@ export const ProductManagementTable = () => {
                     <div className="flex items-center gap-3">
                       <img
                         src={p.image}
-                        alt={p.titleBn}
+                        alt={isBn ? p.titleBn : p.title}
                         className="w-12 h-12 rounded-xl object-cover border border-white/10 shrink-0"
                       />
                       <div>
-                        <h4 className="font-bold text-white text-sm line-clamp-1">{p.titleBn}</h4>
-                        <span className="text-[11px] text-stone-400">{p.title}</span>
+                        <h4 className="font-bold text-white text-sm line-clamp-1">
+                          {isBn ? p.titleBn : p.title}
+                        </h4>
+                        <span className="text-[11px] text-stone-400">
+                          {isBn ? p.title : p.titleBn}
+                        </span>
                         <div className="text-[10px] text-[#E8AF30] mt-0.5 flex items-center gap-1">
                           <i className="fa-solid fa-location-dot text-[9px]"></i>
-                          {p.originBn}
+                          {isBn ? p.originBn : (p.origin || p.originBn)}
                         </div>
                       </div>
                     </div>
@@ -132,13 +144,15 @@ export const ProductManagementTable = () => {
 
                   <td className="py-3.5 px-4">
                     <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-stone-300 text-[11px] font-semibold whitespace-nowrap">
-                      {p.categoryBn}
+                      {isBn ? p.categoryBn : (productCategories.find(c => c.id === p.category)?.name || p.category)}
                     </span>
                   </td>
 
                   <td className="py-3.5 px-4 font-mono">
                     <div className="text-sm font-extrabold text-white">৳{p.price}</div>
-                    <div className="text-[10px] text-stone-400">প্রতি {p.unitBn}</div>
+                    <div className="text-[10px] text-stone-400">
+                      {isBn ? `প্রতি ${p.unitBn}` : `per ${p.unit || p.unitBn}`}
+                    </div>
                   </td>
 
                   <td className="py-3.5 px-4">
@@ -146,7 +160,7 @@ export const ProductManagementTable = () => {
                       <button
                         onClick={() => handleUpdateStock(p.id, -5)}
                         className="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 text-stone-300 flex items-center justify-center font-bold"
-                        title="Reduce 5"
+                        title={isBn ? "৫ টি কমান" : "Reduce 5"}
                       >
                         -
                       </button>
@@ -156,7 +170,7 @@ export const ProductManagementTable = () => {
                       <button
                         onClick={() => handleUpdateStock(p.id, 5)}
                         className="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 text-stone-300 flex items-center justify-center font-bold"
-                        title="Add 5"
+                        title={isBn ? "৫ টি বাড়ান" : "Add 5"}
                       >
                         +
                       </button>
@@ -178,7 +192,11 @@ export const ProductManagementTable = () => {
                           isOutOfStock ? "bg-red-400" : isLowStock ? "bg-amber-400" : "bg-emerald-400"
                         }`}
                       ></span>
-                      {isOutOfStock ? "স্টক শেষ" : isLowStock ? "সীমিত মজুদ" : "পর্যাপ্ত স্টক"}
+                      {isOutOfStock
+                        ? (isBn ? "স্টক শেষ" : "Out of Stock")
+                        : isLowStock
+                        ? (isBn ? "সীমিত মজুদ" : "Low Stock")
+                        : (isBn ? "পর্যাপ্ত স্টক" : "In Stock")}
                     </span>
                   </td>
 
