@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 type Coupon = {
   id: string;
@@ -63,6 +64,7 @@ const initialCoupons: Coupon[] = [
 ];
 
 export default function AdminCouponsPage() {
+  const { isBn } = useLanguage();
   const [coupons, setCoupons] = useState<Coupon[]>(initialCoupons);
   const [showModal, setShowModal] = useState(false);
   const [newCode, setNewCode] = useState("");
@@ -101,12 +103,18 @@ export default function AdminCouponsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <nav className="flex items-center gap-2 text-xs text-stone-400 mb-1">
-            <Link href="/admin" className="hover:text-emerald-400">অ্যাডমিন কনসোল</Link>
+            <Link href="/admin" className="hover:text-emerald-400">
+              {isBn ? "অ্যাডমিন কনসোল" : "Admin Console"}
+            </Link>
             <span>/</span>
-            <span className="text-white font-bold">ডিসকাউন্ট ভাউচার ও কুপন</span>
+            <span className="text-white font-bold">
+              {isBn ? "ডিসকাউন্ট ভাউচার ও কুপন" : "Discount Vouchers & Coupons"}
+            </span>
           </nav>
           <h1 className="text-2xl font-extrabold text-white">
-            প্রমোশন ক্যাম্পেইন ও ডিসকাউন্ট কুপন ম্যানেজমেন্ট
+            {isBn
+              ? "প্রমোশন ক্যাম্পেইন ও ডিসকাউন্ট কুপন ম্যানেজমেন্ট"
+              : "Promotion Campaigns & Discount Coupons"}
           </h1>
         </div>
 
@@ -115,7 +123,7 @@ export default function AdminCouponsPage() {
           className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#E8AF30] to-amber-500 hover:from-amber-400 hover:to-[#E8AF30] text-[#002719] font-extrabold text-xs shadow-lg transition-all flex items-center gap-2"
         >
           <i className="fa-solid fa-plus text-xs"></i>
-          নতুন কুপন কোড তৈরি করুন
+          {isBn ? "নতুন কুপন কোড তৈরি করুন" : "Create New Coupon"}
         </button>
       </div>
 
@@ -126,8 +134,12 @@ export default function AdminCouponsPage() {
             <i className="fa-solid fa-ticket"></i>
           </div>
           <div>
-            <div className="text-[11px] text-stone-400 uppercase font-bold">সক্রিয় কুপন ক্যাম্পেইন</div>
-            <div className="text-2xl font-extrabold">{coupons.filter((c) => c.isActive).length} টি চালু আছে</div>
+            <div className="text-[11px] text-stone-400 uppercase font-bold">
+              {isBn ? "সক্রিয় কুপন ক্যাম্পেইন" : "Active Coupon Campaigns"}
+            </div>
+            <div className="text-2xl font-extrabold">
+              {coupons.filter((c) => c.isActive).length} {isBn ? "টি চালু আছে" : "Active"}
+            </div>
           </div>
         </div>
 
@@ -136,8 +148,12 @@ export default function AdminCouponsPage() {
             <i className="fa-solid fa-users"></i>
           </div>
           <div>
-            <div className="text-[11px] text-stone-400 uppercase font-bold">মোট কুপন রিডেম্পশন</div>
-            <div className="text-2xl font-extrabold">৪১২ বার ব্যবহার হয়েছে</div>
+            <div className="text-[11px] text-stone-400 uppercase font-bold">
+              {isBn ? "মোট কুপন রিডেম্পশন" : "Total Coupon Redemptions"}
+            </div>
+            <div className="text-2xl font-extrabold">
+              {isBn ? "৪১২ বার ব্যবহার হয়েছে" : "412 Times Redeemed"}
+            </div>
           </div>
         </div>
 
@@ -146,8 +162,12 @@ export default function AdminCouponsPage() {
             <i className="fa-solid fa-hand-holding-dollar"></i>
           </div>
           <div>
-            <div className="text-[11px] text-stone-400 uppercase font-bold">গ্রাহকদের মোট সাশ্রয়</div>
-            <div className="text-2xl font-extrabold text-emerald-400">৳৩৮,৫০০ BDT</div>
+            <div className="text-[11px] text-stone-400 uppercase font-bold">
+              {isBn ? "গ্রাহকদের মোট সাশ্রয়" : "Total Customer Savings"}
+            </div>
+            <div className="text-2xl font-extrabold text-emerald-400">
+              {isBn ? "৳৩৮,৫০০ টাকা" : "৳38,500 BDT"}
+            </div>
           </div>
         </div>
       </div>
@@ -155,22 +175,28 @@ export default function AdminCouponsPage() {
       {/* Coupons Table */}
       <div className="bg-white/5 rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
-          <h3 className="font-extrabold text-white text-base">সকল প্রমো কোড ও ক্যাম্পেইন</h3>
-          <span className="text-xs text-stone-400">গ্রাহকরা চেকআউট এবং কার্ট পেজে কোডটি ব্যবহার করতে পারেন</span>
+          <h3 className="font-extrabold text-white text-base">
+            {isBn ? "সকল প্রমো কোড ও ক্যাম্পেইন" : "All Promo Codes & Campaigns"}
+          </h3>
+          <span className="text-xs text-stone-400">
+            {isBn
+              ? "গ্রাহকরা চেকআউট এবং কার্ট পেজে কোডটি ব্যবহার করতে পারেন"
+              : "Customers can apply coupons at checkout and shopping bag"}
+          </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-stone-300">
             <thead className="bg-white/5 uppercase tracking-wider text-stone-400 font-semibold border-b border-white/10">
               <tr>
-                <th className="py-4 px-6">কুপন কোড</th>
-                <th className="py-4 px-6">ডিসকাউন্টের ধরন</th>
-                <th className="py-4 px-6">ডিসকাউন্ট মান</th>
-                <th className="py-4 px-6">নূন্যতম অর্ডার</th>
-                <th className="py-4 px-6">ব্যবহারের হিসেব</th>
-                <th className="py-4 px-6">মেয়াদ শেষ</th>
-                <th className="py-4 px-6 text-center">স্ট্যাটাস</th>
-                <th className="py-4 px-6 text-right">অ্যাকশন</th>
+                <th className="py-4 px-6">{isBn ? "কুপন কোড" : "Coupon Code"}</th>
+                <th className="py-4 px-6">{isBn ? "ডিসকাউন্টের ধরন" : "Discount Type"}</th>
+                <th className="py-4 px-6">{isBn ? "ডিসকাউন্ট মান" : "Discount Value"}</th>
+                <th className="py-4 px-6">{isBn ? "নূন্যতম অর্ডার" : "Min. Order"}</th>
+                <th className="py-4 px-6">{isBn ? "ব্যবহারের হিসেব" : "Usage / Limit"}</th>
+                <th className="py-4 px-6">{isBn ? "মেয়াদ শেষ" : "Expires"}</th>
+                <th className="py-4 px-6 text-center">{isBn ? "স্ট্যাটাস" : "Status"}</th>
+                <th className="py-4 px-6 text-right">{isBn ? "অ্যাকশন" : "Action"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 font-medium">
@@ -182,9 +208,9 @@ export default function AdminCouponsPage() {
                     </span>
                   </td>
                   <td className="py-4 px-6">
-                    {c.discountType === "percentage" && "শতাংশ (%) ছাড়"}
-                    {c.discountType === "fixed" && "নির্দিষ্ট টাকা (BDT) ছাড়"}
-                    {c.discountType === "free_shipping" && "ফ্রি হোম ডেলিভারি"}
+                    {c.discountType === "percentage" && (isBn ? "শতাংশ (%) ছাড়" : "Percentage (%) Off")}
+                    {c.discountType === "fixed" && (isBn ? "নির্দিষ্ট টাকা (BDT) ছাড়" : "Flat Cash (BDT) Off")}
+                    {c.discountType === "free_shipping" && (isBn ? "ফ্রি হোম ডেলিভারি" : "Free Shipping")}
                   </td>
                   <td className="py-4 px-6 text-white font-bold">
                     {c.discountType === "percentage" ? `${c.discountValue}%` : `৳${c.discountValue}`}
@@ -210,7 +236,7 @@ export default function AdminCouponsPage() {
                           : "bg-stone-500/20 text-stone-400 border border-stone-500/30"
                       }`}
                     >
-                      {c.isActive ? "সক্রিয়" : "স্থগিত"}
+                      {c.isActive ? (isBn ? "সক্রিয়" : "Active") : (isBn ? "স্থগিত" : "Inactive")}
                     </span>
                   </td>
                   <td className="py-4 px-6 text-right">
@@ -222,7 +248,7 @@ export default function AdminCouponsPage() {
                           : "bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30"
                       }`}
                     >
-                      {c.isActive ? "বন্ধ করুন" : "চালু করুন"}
+                      {c.isActive ? (isBn ? "বন্ধ করুন" : "Deactivate") : (isBn ? "চালু করুন" : "Activate")}
                     </button>
                   </td>
                 </tr>
@@ -237,7 +263,9 @@ export default function AdminCouponsPage() {
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-[#071911] border border-white/20 rounded-3xl max-w-md w-full p-6 text-white shadow-2xl animate-scaleUp">
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
-              <h3 className="font-extrabold text-lg text-white">নতুন কুপন কোড তৈরি করুন</h3>
+              <h3 className="font-extrabold text-lg text-white">
+                {isBn ? "নতুন কুপন কোড তৈরি করুন" : "Create New Coupon Code"}
+              </h3>
               <button onClick={() => setShowModal(false)} className="text-stone-400 hover:text-white">
                 <i className="fa-solid fa-xmark text-lg"></i>
               </button>
@@ -245,11 +273,13 @@ export default function AdminCouponsPage() {
 
             <form onSubmit={handleCreateCoupon} className="space-y-4 text-xs">
               <div>
-                <label className="font-bold text-stone-300 block mb-1">কুপন কোড (যেমন: SUMMER20)</label>
+                <label className="font-bold text-stone-300 block mb-1">
+                  {isBn ? "কুপন কোড (যেমন: SUMMER20)" : "Coupon Code (e.g. SUMMER20)"}
+                </label>
                 <input
                   type="text"
                   required
-                  placeholder="E.g. ORGANIC15"
+                  placeholder={isBn ? "E.g. ORGANIC15" : "E.g. ORGANIC15"}
                   value={newCode}
                   onChange={(e) => setNewCode(e.target.value)}
                   className="w-full px-3 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-mono uppercase focus:outline-none focus:border-[#E8AF30]"
@@ -258,19 +288,27 @@ export default function AdminCouponsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-stone-300 block mb-1">ছাড়ের ধরন</label>
+                  <label className="font-bold text-stone-300 block mb-1">
+                    {isBn ? "ছাড়ের ধরন" : "Discount Type"}
+                  </label>
                   <select
                     value={newType}
                     onChange={(e: any) => setNewType(e.target.value)}
                     className="w-full px-3 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#E8AF30]"
                   >
-                    <option value="percentage" className="bg-stone-900">শতাংশ (%)</option>
-                    <option value="fixed" className="bg-stone-900">নির্দিষ্ট টাকা (BDT)</option>
+                    <option value="percentage" className="bg-stone-900">
+                      {isBn ? "শতাংশ (%)" : "Percentage (%)"}
+                    </option>
+                    <option value="fixed" className="bg-stone-900">
+                      {isBn ? "নির্দিষ্ট টাকা (BDT)" : "Flat Cash (BDT)"}
+                    </option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="font-bold text-stone-300 block mb-1">ছাড়ের পরিমাণ</label>
+                  <label className="font-bold text-stone-300 block mb-1">
+                    {isBn ? "ছাড়ের পরিমাণ" : "Discount Amount"}
+                  </label>
                   <input
                     type="number"
                     required
@@ -283,7 +321,9 @@ export default function AdminCouponsPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-stone-300 block mb-1">নূন্যতম অর্ডার (BDT)</label>
+                  <label className="font-bold text-stone-300 block mb-1">
+                    {isBn ? "নূন্যতম অর্ডার (BDT)" : "Min Order (BDT)"}
+                  </label>
                   <input
                     type="number"
                     required
@@ -294,7 +334,9 @@ export default function AdminCouponsPage() {
                 </div>
 
                 <div>
-                  <label className="font-bold text-stone-300 block mb-1">মেয়াদ উত্তীর্ণের তারিখ</label>
+                  <label className="font-bold text-stone-300 block mb-1">
+                    {isBn ? "মেয়াদ উত্তীর্ণের তারিখ" : "Expiry Date"}
+                  </label>
                   <input
                     type="date"
                     required
@@ -310,7 +352,7 @@ export default function AdminCouponsPage() {
                   type="submit"
                   className="w-full py-3 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-extrabold text-xs shadow-lg transition-all"
                 >
-                  কুপন সেভ ও সক্রিয় করুন
+                  {isBn ? "কুপন সেভ ও সক্রিয় করুন" : "Save & Activate Coupon"}
                 </button>
               </div>
             </form>

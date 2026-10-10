@@ -11,8 +11,10 @@ import {
   harvestVsDemandStats,
   AnalyticsTimeframeData,
 } from "@/data/adminData";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const SalesRevenueChart = () => {
+  const { isBn } = useLanguage();
   const [timeframe, setTimeframe] = useState<"7d" | "30d" | "12m">("7d");
   const [metric, setMetric] = useState<"revenue" | "orders" | "aov" | "margin">("revenue");
   const [chartType, setChartType] = useState<"area" | "bar">("area");
@@ -50,16 +52,36 @@ export const SalesRevenueChart = () => {
   const metricLabel = useMemo(() => {
     switch (metric) {
       case "orders":
-        return { name: "অর্ডার সংখ্যা (Orders)", unit: "টি", prefix: "", isCurrency: false };
+        return {
+          name: isBn ? "অর্ডার সংখ্যা (Orders)" : "Total Orders",
+          unit: isBn ? "টি" : "orders",
+          prefix: "",
+          isCurrency: false,
+        };
       case "aov":
-        return { name: "গড় অর্ডার মূল্য (AOV)", unit: "", prefix: "৳", isCurrency: true };
+        return {
+          name: isBn ? "গড় অর্ডার মূল্য (AOV)" : "Average Order Value (AOV)",
+          unit: "",
+          prefix: "৳",
+          isCurrency: true,
+        };
       case "margin":
-        return { name: "নিট লাভ মার্জিন (Margin)", unit: "%", prefix: "", isCurrency: false };
+        return {
+          name: isBn ? "নিট লাভ মার্জিন (Margin)" : "Net Profit Margin",
+          unit: "%",
+          prefix: "",
+          isCurrency: false,
+        };
       case "revenue":
       default:
-        return { name: "মোট রাজস্ব আয় (Revenue)", unit: "", prefix: "৳", isCurrency: true };
+        return {
+          name: isBn ? "মোট রাজস্ব আয় (Revenue)" : "Total Sales Revenue",
+          unit: "",
+          prefix: "৳",
+          isCurrency: true,
+        };
     }
-  }, [metric]);
+  }, [metric, isBn]);
 
   const values = activeDataset.map(getMetricValue);
   const maxValue = Math.max(...values, 1);
@@ -157,25 +179,26 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#E8AF30] animate-pulse"></span>
               <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#E8AF30]">
-                গ্রীনরুট সুপার অ্যানালিটিক্স ও ডায়নামিক গ্রাফ
+                {isBn ? "গ্রীনরুট সুপার অ্যানালিটিক্স ও ডায়নামিক গ্রাফ" : "GreenRoot Super Analytics & Live Trends"}
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-stone-300">
-                লাইভ রিফ্রেশ
+                {isBn ? "লাইভ রিফ্রেশ" : "Live Realtime"}
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
-              <span>খামার বিক্রয় ও পারফরম্যান্স মেট্রিক</span>
+              <span>{isBn ? "খামার বিক্রয় ও পারফরম্যান্স মেট্রিক" : "Farm Sales & Performance Analytics"}</span>
               <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
-                +{timeframe === "7d" ? "১৮.৪%" : timeframe === "30d" ? "২৪.২%" : "৪৮.৫%"} গ্রোথ
+                +{timeframe === "7d" ? "১৮.৪%" : timeframe === "30d" ? "২৪.২%" : "৪৮.৫%"} {isBn ? "গ্রোথ" : "Growth"}
               </span>
             </h3>
             <p className="text-xs text-stone-400 mt-1">
-              মোট সংগৃহীত রাজস্ব:{" "}
+              {isBn ? "মোট সংগৃহীত রাজস্ব: " : "Total Sales Revenue: "}
               <span className="text-[#E8AF30] font-extrabold font-mono">
                 ৳{totalSum.toLocaleString()}
               </span>{" "}
-              | সর্বমোট সফল ডেলিভারি:{" "}
-              <span className="text-white font-bold">{totalOrdersSum} টি</span> | গড় মুনাফা:{" "}
+              | {isBn ? "সর্বমোট সফল ডেলিভারি: " : "Total Delivered: "}
+              <span className="text-white font-bold">{totalOrdersSum} {isBn ? "টি" : "orders"}</span> |{" "}
+              {isBn ? "গড় মুনাফা: " : "Avg Margin: "}
               <span className="text-emerald-400 font-bold">{avgMargin}%</span>
             </p>
           </div>
@@ -186,9 +209,9 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center p-1 rounded-2xl bg-white/5 border border-white/10 text-xs">
               {(
                 [
-                  { id: "7d", label: "৭ দিন" },
-                  { id: "30d", label: "৩০ দিন" },
-                  { id: "12m", label: "১২ মাস" },
+                  { id: "7d", label: isBn ? "৭ দিন" : "7 Days" },
+                  { id: "30d", label: isBn ? "৩০ দিন" : "30 Days" },
+                  { id: "12m", label: isBn ? "১২ মাস" : "12 Mos" },
                 ] as const
               ).map((tf) => (
                 <button
@@ -209,10 +232,10 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center p-1 rounded-2xl bg-white/5 border border-white/10 text-xs">
               {(
                 [
-                  { id: "revenue", label: "রাজস্ব (৳)", icon: "fa-bangladeshi-taka-sign" },
-                  { id: "orders", label: "অর্ডার", icon: "fa-boxes-packing" },
+                  { id: "revenue", label: isBn ? "রাজস্ব (৳)" : "Revenue", icon: "fa-bangladeshi-taka-sign" },
+                  { id: "orders", label: isBn ? "অর্ডার" : "Orders", icon: "fa-boxes-packing" },
                   { id: "aov", label: "AOV", icon: "fa-calculator" },
-                  { id: "margin", label: "মার্জিন %", icon: "fa-chart-pie" },
+                  { id: "margin", label: isBn ? "মার্জিন %" : "Margin %", icon: "fa-chart-pie" },
                 ] as const
               ).map((m) => (
                 <button
@@ -239,7 +262,7 @@ export const SalesRevenueChart = () => {
                     ? "bg-white/20 text-[#E8AF30]"
                     : "text-stone-400 hover:text-white"
                 }`}
-                title="কার্ভড এরিয়া চার্ট"
+                title={isBn ? "কার্ভড এরিয়া চার্ট" : "Curved Area Chart"}
               >
                 <i className="fa-solid fa-chart-area"></i>
               </button>
@@ -250,7 +273,7 @@ export const SalesRevenueChart = () => {
                     ? "bg-white/20 text-[#E8AF30]"
                     : "text-stone-400 hover:text-white"
                 }`}
-                title="ভার্টিকাল বার চার্ট"
+                title={isBn ? "ভার্টিকাল বার চার্ট" : "Vertical Bar Chart"}
               >
                 <i className="fa-solid fa-chart-column"></i>
               </button>
@@ -260,10 +283,10 @@ export const SalesRevenueChart = () => {
             <button
               onClick={handleExportData}
               className="p-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-stone-200 hover:text-white text-xs font-bold border border-white/10 transition-all flex items-center gap-1.5"
-              title="CSV রিপোর্ট ডাউনলোড"
+              title={isBn ? "CSV রিপোর্ট ডাউনলোড" : "Download CSV Report"}
             >
               <i className="fa-solid fa-file-csv text-[#E8AF30]"></i>
-              <span className="hidden sm:inline">CSV এক্সপোর্ট</span>
+              <span className="hidden sm:inline">{isBn ? "CSV এক্সপোর্ট" : "Export CSV"}</span>
             </button>
           </div>
         </div>
@@ -273,7 +296,7 @@ export const SalesRevenueChart = () => {
           {/* Active Highlight Summary Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-xs text-stone-300">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-stone-400">বর্তমান ভিউ:</span>
+              <span className="font-semibold text-stone-400">{isBn ? "বর্তমান ভিউ:" : "Current View:"}</span>
               <span className="px-2.5 py-1 rounded-lg bg-white/10 text-white font-extrabold font-mono">
                 {metricLabel.name}
               </span>
@@ -282,7 +305,7 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center gap-4 text-[11px]">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#E8AF30]"></span>
-                সর্বোচ্চ পিক:{" "}
+                {isBn ? "সর্বোচ্চ পিক: " : "Peak Peak: "}
                 <strong className="text-white font-mono">
                   {metricLabel.prefix}
                   {maxValue.toLocaleString()}
@@ -291,7 +314,7 @@ export const SalesRevenueChart = () => {
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                গড় মান:{" "}
+                {isBn ? "গড় মান: " : "Average: "}
                 <strong className="text-white font-mono">
                   {metricLabel.prefix}
                   {Math.round(
@@ -449,9 +472,9 @@ export const SalesRevenueChart = () => {
                       </span>
                     </div>
                     <div>
-                      অর্ডার:{" "}
+                      {isBn ? "অর্ডার: " : "Orders: "}
                       <span className="font-mono text-white font-bold">
-                        {points[hoveredIdx].item.orders} টি
+                        {points[hoveredIdx].item.orders} {isBn ? "টি" : "orders"}
                       </span>
                     </div>
                     <div>
@@ -461,7 +484,7 @@ export const SalesRevenueChart = () => {
                       </span>
                     </div>
                     <div>
-                      মার্জিন:{" "}
+                      {isBn ? "মার্জিন: " : "Margin: "}
                       <span className="font-mono text-[#E8AF30] font-bold">
                         {points[hoveredIdx].item.margin}%
                       </span>
@@ -493,7 +516,7 @@ export const SalesRevenueChart = () => {
                           {metricLabel.unit}
                         </span>
                         <span className="text-stone-400 block text-[10px]">
-                          {item.orders} টি সফল ডেলিভারি
+                          {item.orders} {isBn ? "টি সফল ডেলিভারি" : "completed orders"}
                         </span>
                       </div>
                     )}
@@ -521,11 +544,16 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center gap-2">
               <i className="fa-solid fa-wand-magic-sparkles text-[#E8AF30]"></i>
               <span>
-                <strong>ফার্ম ইনসাইট:</strong> প্রতিদিন সকাল ৬টা থেকে ৯টার মধ্যে ভোরের তাজা দুধ ও শাকসবজির অর্ডার ৬০% বৃদ্ধি পায়।
+                <strong>{isBn ? "ফার্ম ইনসাইট: " : "Farm Insight: "}</strong>
+                {isBn
+                  ? "প্রতিদিন সকাল ৬টা থেকে ৯টার মধ্যে ভোরের তাজা দুধ ও শাকসবজির অর্ডার ৬০% বৃদ্ধি পায়।"
+                  : "Fresh morning raw milk & vegetable orders surge by 60% between 6 AM and 9 AM."}
               </span>
             </div>
             <div className="text-[11px] text-stone-400">
-              * বিএসটিআই ও খামার ল্যাব টেস্ট রিপোর্ট অনুযায়ী প্রতিদিনের কোল্ড-চেইন ডেটা সিঙ্ক করা
+              {isBn
+                ? "* বিএসটিআই ও খামার ল্যাব টেস্ট রিপোর্ট অনুযায়ী প্রতিদিনের কোল্ড-চেইন ডেটা সিঙ্ক করা"
+                : "* Cold-chain and lab verified quality parameters synced continuously"}
             </div>
           </div>
         </div>
@@ -539,14 +567,16 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-                  আঞ্চলিক বিক্রয় ও ডেলিভারি কর্মক্ষমতা
+                  {isBn ? "আঞ্চলিক বিক্রয় ও ডেলিভারি কর্মক্ষমতা" : "Regional Sales & Delivery Breakdown"}
                 </span>
                 <h4 className="text-lg font-extrabold text-white">
-                  বাংলাদেশের বিভাগ ও জোনভিত্তিক বিতরণ (Regional Share)
+                  {isBn
+                    ? "বাংলাদেশের বিভাগ ও জোনভিত্তিক বিতরণ (Regional Share)"
+                    : "Bangladesh Regional Distribution Share"}
                 </h4>
               </div>
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                ৫টি সক্রিয় হাব
+                {isBn ? "৫টি সক্রিয় হাব" : "5 Active Hubs"}
               </span>
             </div>
 
@@ -558,7 +588,9 @@ export const SalesRevenueChart = () => {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
                     <div>
-                      <h5 className="text-xs font-extrabold text-white">{region.divisionBn}</h5>
+                      <h5 className="text-xs font-extrabold text-white">
+                        {isBn ? region.divisionBn : region.division}
+                      </h5>
                       <span className="text-[10px] text-stone-400 block">{region.topAreas}</span>
                     </div>
 
@@ -566,7 +598,9 @@ export const SalesRevenueChart = () => {
                       <span className="font-mono font-bold text-[#E8AF30]">
                         ৳{region.revenue.toLocaleString()}
                       </span>
-                      <span className="font-mono text-stone-300">({region.orders} অর্ডার)</span>
+                      <span className="font-mono text-stone-300">
+                        ({region.orders} {isBn ? "অর্ডার" : "orders"})
+                      </span>
                       <span className="font-extrabold text-white px-2 py-0.5 rounded bg-white/10 text-[10px]">
                         {region.percentage}%
                       </span>
@@ -584,9 +618,13 @@ export const SalesRevenueChart = () => {
                   <div className="flex items-center justify-between text-[10px] text-stone-400 mt-2">
                     <span className="flex items-center gap-1 text-emerald-400">
                       <i className="fa-solid fa-circle-check text-[9px]"></i>
-                      সফলতা হার: {region.deliverySuccess}%
+                      {isBn ? `সফলতা হার: ${region.deliverySuccess}%` : `Success Rate: ${region.deliverySuccess}%`}
                     </span>
-                    <span>গড় ডেলিভারি সময়: {region.avgHours} ঘণ্টা</span>
+                    <span>
+                      {isBn
+                        ? `গড় ডেলিভারি সময়: ${region.avgHours} ঘণ্টা`
+                        : `Avg Delivery: ${region.avgHours} hrs`}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -595,7 +633,9 @@ export const SalesRevenueChart = () => {
 
           <div className="mt-4 p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-stone-300 flex items-center justify-between">
             <span className="text-[11px]">
-              ঢাকা সিটিতে ভোরবেলার এক্সপ্রেস কোল্ড-চেইন বহর কার্যকর হওয়ায় রিটার্ন হার ১% এর নিচে।
+              {isBn
+                ? "ঢাকা সিটিতে ভোরবেলার এক্সপ্রেস কোল্ড-চেইন বহর কার্যকর হওয়ায় রিটার্ন হার ১% এর নিচে।"
+                : "Morning cold-chain express vans in Dhaka achieve sub-1% return rates."}
             </span>
           </div>
         </div>
@@ -606,14 +646,14 @@ export const SalesRevenueChart = () => {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-                  পেমেন্ট পদ্ধতি ও তহবিল সেটেলমেন্ট
+                  {isBn ? "পেমেন্ট পদ্ধতি ও তহবিল সেটেলমেন্ট" : "Payment Methods & Settlement Mix"}
                 </span>
                 <h4 className="text-lg font-extrabold text-white">
-                  লেনদেন অনুপাত (Payment Mix)
+                  {isBn ? "লেনদেন অনুপাত (Payment Mix)" : "Transaction Mix (Payment Share)"}
                 </h4>
               </div>
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#E8AF30]/20 text-[#E8AF30]">
-                ১০০% ভেরিফাইড
+                {isBn ? "১০০% ভেরিফাইড" : "100% Reconciled"}
               </span>
             </div>
 
@@ -623,7 +663,7 @@ export const SalesRevenueChart = () => {
                 <div
                   key={p.method}
                   style={{ width: `${p.share}%`, backgroundColor: p.color }}
-                  title={`${p.methodBn}: ${p.share}%`}
+                  title={`${isBn ? p.methodBn : p.method}: ${p.share}%`}
                   className="h-full transition-all hover:opacity-90"
                 />
               ))}
@@ -645,7 +685,9 @@ export const SalesRevenueChart = () => {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-extrabold text-white">{p.methodBn}</span>
+                        <span className="text-xs font-extrabold text-white">
+                          {isBn ? p.methodBn : p.method}
+                        </span>
                         <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/10 text-stone-300">
                           {p.badge}
                         </span>
@@ -669,7 +711,10 @@ export const SalesRevenueChart = () => {
 
           <div className="mt-6 p-3.5 rounded-2xl bg-amber-500/10 border border-[#E8AF30]/30 text-xs text-amber-200">
             <i className="fa-solid fa-coins text-[#E8AF30] mr-2"></i>
-            <strong>নগদ ট্র্যাকিং:</strong> ক্যাশ অন ডেলিভারি (COD) এর ৯৭,৫১০ টাকা রাইডারদের কোল্ড-ভল্ট থেকে প্রতিদিন ব্যাংকে ডিপোজিট হয়।
+            <strong>{isBn ? "নগদ ট্র্যাকিং: " : "Cash Logistics: "}</strong>
+            {isBn
+              ? "ক্যাশ অন ডেলিভারি (COD) এর ৯৭,৫১০ টাকা রাইডারদের কোল্ড-ভল্ট থেকে প্রতিদিন ব্যাংকে ডিপোজিট হয়।"
+              : "৳97,510 from Cash on Delivery (COD) riders deposited into bank account daily."}
           </div>
         </div>
       </div>
@@ -679,14 +724,17 @@ export const SalesRevenueChart = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-              আজকের সরবরাহ ও চাহিদা ভারসাম্য
+              {isBn ? "আজকের সরবরাহ ও চাহিদা ভারসাম্য" : "Daily Supply & Demand Balance"}
             </span>
             <h4 className="text-lg font-extrabold text-white">
-              খামার উৎপাদন বনাম গ্রাহকের অর্ডার চাহিদা (Harvest vs Demand Matrix)
+              {isBn
+                ? "খামার উৎপাদন বনাম গ্রাহকের অর্ডার চাহিদা (Harvest vs Demand Matrix)"
+                : "Farm Yield vs Customer Order Demand Matrix"}
             </h4>
           </div>
           <span className="text-xs text-stone-300 px-3 py-1 rounded-full bg-white/5 border border-white/10">
-            আজকের ফিল রেট: <strong className="text-emerald-400">১০২.২%</strong>
+            {isBn ? "আজকের ফিল রেট: " : "Daily Fill Rate: "}
+            <strong className="text-emerald-400">১০২.২%</strong>
           </span>
         </div>
 
@@ -708,29 +756,31 @@ export const SalesRevenueChart = () => {
                     }`}
                   >
                     {item.status === "surplus"
-                      ? "উদ্বৃত্ত মজুদ"
+                      ? (isBn ? "উদ্বৃত্ত মজুদ" : "Surplus Stock")
                       : item.status === "balanced"
-                      ? "ভারসাম্যপূর্ণ"
-                      : "উচ্চ চাহিদা"}
+                      ? (isBn ? "ভারসাম্যপূর্ণ" : "Balanced")
+                      : (isBn ? "উচ্চ চাহিদা" : "High Demand")}
                   </span>
                   <span className="text-[10px] font-mono text-[#E8AF30] font-bold">
                     {item.fillRate}%
                   </span>
                 </div>
 
-                <h5 className="text-xs font-bold text-white mt-1 leading-snug">{item.itemBn}</h5>
+                <h5 className="text-xs font-bold text-white mt-1 leading-snug">
+                  {isBn ? item.itemBn : item.item}
+                </h5>
                 <span className="text-[10px] text-stone-400 block mt-0.5">{item.sourceOrigin}</span>
               </div>
 
               <div className="mt-4 pt-3 border-t border-white/10 space-y-1 text-xs">
                 <div className="flex justify-between text-stone-300">
-                  <span>আজকের ফলন:</span>
+                  <span>{isBn ? "আজকের ফলন:" : "Harvest Yield:"}</span>
                   <strong className="text-white font-mono">
                     {item.harvestToday} {item.unit}
                   </strong>
                 </div>
                 <div className="flex justify-between text-stone-400 text-[11px]">
-                  <span>অর্ডার চাহিদা:</span>
+                  <span>{isBn ? "অর্ডার চাহিদা:" : "Order Demand:"}</span>
                   <span className="font-mono text-stone-300">
                     {item.demandToday} {item.unit}
                   </span>
