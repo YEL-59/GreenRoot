@@ -13,10 +13,12 @@ import {
   type FarmNoticeCMS,
   type PolicySectionCMS,
 } from "@/data/siteContent";
+import { useLanguage } from "@/context/LanguageContext";
 
 type CmsTab = "home" | "about" | "contact" | "faqs" | "blog" | "notices" | "policies";
 
 export default function AdminContentManagementPage() {
+  const { isBn } = useLanguage();
   const [content, setContent] = useState<SiteContentState>(defaultSiteContent);
   const [activeTab, setActiveTab] = useState<CmsTab>("home");
   const [saveToast, setSaveToast] = useState<string | null>(null);
@@ -41,17 +43,27 @@ export default function AdminContentManagementPage() {
     setTimeout(() => setSaveToast(null), 3000);
   };
 
-  const persist = (nextState: SiteContentState, msg = "সফলভাবে পরিবর্তন সেভ করা হয়েছে!") => {
+  const persist = (
+    nextState: SiteContentState,
+    msg = isBn ? "সফলভাবে পরিবর্তন সেভ করা হয়েছে!" : "Changes saved successfully!"
+  ) => {
     setContent(nextState);
     saveStoredSiteContent(nextState);
     triggerToast(msg);
   };
 
   const handleResetDefaults = () => {
-    if (confirm("আপনি কি নিশ্চিত সব পেজ কনটেন্ট ডিফল্ট ফ্যাক্টরি সেটিংসে রিসেট করতে চান?")) {
+    const confirmMsg = isBn
+      ? "আপনি কি নিশ্চিত সব পেজ কনটেন্ট ডিফল্ট ফ্যাক্টরি সেটিংসে রিসেট করতে চান?"
+      : "Are you sure you want to reset all site content to factory defaults?";
+    if (confirm(confirmMsg)) {
       const reset = resetStoredSiteContent();
       setContent(reset);
-      triggerToast("সব কনটেন্ট ডিফল্ট সেটিংসে রিসেট করা হয়েছে!");
+      triggerToast(
+        isBn
+          ? "সব কনটেন্ট ডিফল্ট সেটিংসে রিসেট করা হয়েছে!"
+          : "All site content reset to defaults!"
+      );
     }
   };
 
@@ -305,14 +317,18 @@ export default function AdminContentManagementPage() {
             </span>
             <span className="flex items-center gap-1.5 text-xs text-emerald-300 font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              লাইভ অটো-সিঙ্ক চালু
+              {isBn ? "লাইভ অটো-সিঙ্ক চালু" : "Live Auto-Sync Active"}
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-            ওয়েবসাইট কনটেন্ট ও পেজ ম্যানেজমেন্ট CMS
+            {isBn
+              ? "ওয়েবসাইট কনটেন্ট ও পেজ ম্যানেজমেন্ট CMS"
+              : "Website Content & CMS Studio"}
           </h1>
           <p className="text-xs sm:text-sm text-emerald-200/80 mt-1 max-w-2xl">
-            হোমপেজ, আমাদের সম্পর্কে, পলিসি, এফএকিউ, নোটিশ ও ব্লগ আর্টিকেলের লেখা, ব্যানার, ফোন নম্বর ও ছবি সরাসরি সংশোধন, নতুন যোগ এবং ডিলিট করুন।
+            {isBn
+              ? "হোমপেজ, আমাদের সম্পর্কে, পলিসি, এফএকিউ, নোটিশ ও ব্লগ আর্টিকেলের লেখা, ব্যানার, ফোন নম্বর ও ছবি সরাসরি সংশোধন, নতুন যোগ এবং ডিলিট করুন।"
+              : "Manage homepage banners, about page, policies, FAQs, farm notices, blogs, contact info, and imagery in real-time."}
           </p>
         </div>
 
@@ -322,28 +338,28 @@ export default function AdminContentManagementPage() {
             href="/"
             target="_blank"
             className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs flex items-center gap-2 transition-all"
-            title="লাইভ সাইট দেখুন"
+            title={isBn ? "লাইভ সাইট দেখুন" : "View Live Site"}
           >
             <i className="fa-solid fa-arrow-up-right-from-square text-xs text-[#E8AF30]"></i>
-            <span>লাইভ সাইট</span>
+            <span>{isBn ? "লাইভ সাইট" : "Live Store"}</span>
           </Link>
           <button
             type="button"
             onClick={handleExportBackup}
             className="px-4 py-2.5 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 font-bold text-xs flex items-center gap-2 transition-all shadow-sm"
-            title="সব কনটেন্ট JSON ফাইলে ডাউনলোড করুন"
+            title={isBn ? "সব কনটেন্ট JSON ফাইলে ডাউনলোড করুন" : "Export content as JSON"}
           >
             <i className="fa-solid fa-download text-xs text-emerald-400"></i>
-            <span>ব্যাকআপ এক্সপোর্ট</span>
+            <span>{isBn ? "ব্যাকআপ এক্সপোর্ট" : "Export Backup"}</span>
           </button>
           <button
             type="button"
             onClick={handleResetDefaults}
             className="px-4 py-2.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 font-bold text-xs flex items-center gap-2 transition-all"
-            title="সব কিছু প্রাথমিক ফ্যাক্টরি অবস্থায় ফিরিয়ে নিন"
+            title={isBn ? "সব কিছু প্রাথমিক ফ্যাক্টরি অবস্থায় ফিরিয়ে নিন" : "Reset all content to defaults"}
           >
             <i className="fa-solid fa-rotate-left text-xs"></i>
-            <span>ফ্যাক্টরি রিসেট</span>
+            <span>{isBn ? "ফ্যাক্টরি রিসেট" : "Factory Reset"}</span>
           </button>
         </div>
       </div>
@@ -351,41 +367,65 @@ export default function AdminContentManagementPage() {
       {/* Metric Counters Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">সক্রিয় FAQ</span>
-          <span className="text-xl font-extrabold text-[#E8AF30] font-mono">{content.faqs.filter((f) => f.active).length} টি</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "সক্রিয় FAQ" : "Active FAQs"}
+          </span>
+          <span className="text-xl font-extrabold text-[#E8AF30] font-mono">
+            {content.faqs.filter((f) => f.active).length} {isBn ? "টি" : "items"}
+          </span>
         </div>
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">ব্লগ আর্টিকেল</span>
-          <span className="text-xl font-extrabold text-emerald-400 font-mono">{content.articles.length} টি</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "ব্লগ আর্টিকেল" : "Articles"}
+          </span>
+          <span className="text-xl font-extrabold text-emerald-400 font-mono">
+            {content.articles.length} {isBn ? "টি" : "posts"}
+          </span>
         </div>
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">লাইভ নোটিশ</span>
-          <span className="text-xl font-extrabold text-amber-400 font-mono">{content.notices.filter((n) => n.active).length} টি</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "লাইভ নোটিশ" : "Live Notices"}
+          </span>
+          <span className="text-xl font-extrabold text-amber-400 font-mono">
+            {content.notices.filter((n) => n.active).length} {isBn ? "টি" : "live"}
+          </span>
         </div>
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">খামার মূল্যবোধ</span>
-          <span className="text-xl font-extrabold text-white font-mono">{content.about.values.length} টি</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "খামার মূল্যবোধ" : "Farm Values"}
+          </span>
+          <span className="text-xl font-extrabold text-white font-mono">
+            {content.about.values.length} {isBn ? "টি" : "pillars"}
+          </span>
         </div>
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">টিম মেম্বার</span>
-          <span className="text-xl font-extrabold text-white font-mono">{content.about.team.length} জন</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "টিম মেম্বার" : "Team Members"}
+          </span>
+          <span className="text-xl font-extrabold text-white font-mono">
+            {content.about.team.length} {isBn ? "জন" : "staff"}
+          </span>
         </div>
         <div className="p-4 rounded-2xl bg-[#0b2218] border border-white/10 text-center">
-          <span className="text-[10px] text-stone-400 uppercase font-bold block">পলিসি সেকশন</span>
-          <span className="text-xl font-extrabold text-emerald-300 font-mono">{content.policies.length} টি</span>
+          <span className="text-[10px] text-stone-400 uppercase font-bold block">
+            {isBn ? "পলিসি সেকশন" : "Policy Sections"}
+          </span>
+          <span className="text-xl font-extrabold text-emerald-300 font-mono">
+            {content.policies.length} {isBn ? "টি" : "clauses"}
+          </span>
         </div>
       </div>
 
       {/* Navigation Pills for CMS Pages */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-white/10">
         {[
-          { id: "home", label: "হোমপেজ ও ব্যানার", icon: "fa-solid fa-house" },
-          { id: "about", label: "আমাদের সম্পর্কে ও টিম", icon: "fa-solid fa-leaf" },
-          { id: "contact", label: "যোগাযোগ ও কাস্টমার কেয়ার", icon: "fa-solid fa-phone" },
-          { id: "faqs", label: "সাধারণ জিজ্ঞাসা (FAQs)", icon: "fa-solid fa-circle-question" },
-          { id: "blog", label: "ব্লগ ও কৃষি গাইড", icon: "fa-solid fa-newspaper" },
-          { id: "notices", label: "লাইভ খামার নোটিশ", icon: "fa-solid fa-bullhorn" },
-          { id: "policies", label: "রিটার্ন ও কোল্ড-চেইন পলিসি", icon: "fa-solid fa-shield-halved" },
+          { id: "home", label: isBn ? "হোমপেজ ও ব্যানার" : "Home & Hero", icon: "fa-solid fa-house" },
+          { id: "about", label: isBn ? "আমাদের সম্পর্কে ও টিম" : "About & Team", icon: "fa-solid fa-leaf" },
+          { id: "contact", label: isBn ? "যোগাযোগ ও কাস্টমার কেয়ার" : "Contact & Support", icon: "fa-solid fa-phone" },
+          { id: "faqs", label: isBn ? "সাধারণ জিজ্ঞাসা (FAQs)" : "FAQs Q&A", icon: "fa-solid fa-circle-question" },
+          { id: "blog", label: isBn ? "ব্লগ ও কৃষি গাইড" : "Blog & Agro Guides", icon: "fa-solid fa-newspaper" },
+          { id: "notices", label: isBn ? "লাইভ খামার নোটিশ" : "Live Farm Notices", icon: "fa-solid fa-bullhorn" },
+          { id: "policies", label: isBn ? "রিটার্ন ও কোল্ড-চেইন পলিসি" : "Return & Cold-Chain Policy", icon: "fa-solid fa-shield-halved" },
         ].map((tab) => (
           <button
             key={tab.id}
