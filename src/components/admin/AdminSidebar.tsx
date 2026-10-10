@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/common";
 
 const adminNavItems = [
   { href: "/admin", label: "বিজনেস ওভারভিউ", labelEn: "Overview & Analytics", icon: "fa-solid fa-chart-pie" },
+  { href: "/admin/fleet", label: "লাইভ ডেলিভারি ফ্লিট ম্যাপ", labelEn: "Fleet Live Map", icon: "fa-solid fa-map-location-dot", badge: "Live GPS" },
   { href: "/admin/products", label: "পণ্য ও স্টক পরিচালনা", labelEn: "Products & Stock", icon: "fa-solid fa-boxes-stacked", badge: "20" },
   { href: "/admin/orders", label: "অর্ডার ও ডেলিভারি", labelEn: "Orders & Shipping", icon: "fa-solid fa-truck-ramp-box", badge: "12 New" },
+  { href: "/admin/harvest", label: "দৈনিক সংগ্রহ ও কোল্ড চেইন", labelEn: "Harvest & Cold Chain", icon: "fa-solid fa-wheat-awn" },
+  { href: "/admin/coupons", label: "ডিসকাউন্ট ও কুপন কোড", labelEn: "Coupons & Promos", icon: "fa-solid fa-ticket" },
   { href: "/admin/customers", label: "গ্রাহক তালিকা", labelEn: "Customers Directory", icon: "fa-solid fa-users" },
-  { href: "/admin/content", label: "খামার নোটিশ ও ব্লগ", labelEn: "Notices & Blog", icon: "fa-solid fa-newspaper" },
+  { href: "/admin/content", label: "ওয়েবসাইট কনটেন্ট ও CMS", labelEn: "Site Content CMS", icon: "fa-solid fa-file-pen", badge: "Live CMS" },
   { href: "/admin/settings", label: "বিজনেস সেটিংস", labelEn: "Store Settings", icon: "fa-solid fa-sliders" },
 ];
 
@@ -22,6 +27,7 @@ export const AdminSidebar = ({
   onClose,
 }: AdminSidebarProps) => {
   const pathname = usePathname();
+  const { isBn } = useLanguage();
 
   return (
     <>
@@ -41,7 +47,7 @@ export const AdminSidebar = ({
         {/* Admin Brand */}
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#E8AF30] to-amber-300 flex items-center justify-center text-[#002719] font-black text-xl shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#E8AF30] to-amber-300 flex items-center justify-center text-[#002719] font-extrabold text-xl shadow-lg">
               <i className="fa-solid fa-tractor"></i>
             </div>
             <div>
@@ -72,7 +78,9 @@ export const AdminSidebar = ({
               <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#071911]"></span>
             </div>
             <div>
-              <div className="text-xs font-bold text-white">খামার প্রশাসক (Super Admin)</div>
+              <div className="text-xs font-bold text-white">
+                {isBn ? "খামার প্রশাসক (Super Admin)" : "Super Administrator"}
+              </div>
               <div className="text-[11px] text-stone-400">admin@greenrootfarm.com</div>
               <span className="inline-block px-1.5 py-0.2 mt-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 Full HQ Access
@@ -88,6 +96,9 @@ export const AdminSidebar = ({
               item.href === "/admin"
                 ? pathname === "/admin"
                 : pathname.startsWith(item.href);
+
+            const primaryLabel = isBn ? item.label : item.labelEn;
+            const secondaryLabel = isBn ? item.labelEn : item.label;
 
             return (
               <Link
@@ -107,9 +118,9 @@ export const AdminSidebar = ({
                     }`}
                   ></i>
                   <div>
-                    <span className="block">{item.label}</span>
+                    <span className="block">{primaryLabel}</span>
                     <span className={`text-[10px] block opacity-75 font-normal ${isActive ? "text-[#002719]" : "text-stone-400"}`}>
-                      {item.labelEn}
+                      {secondaryLabel}
                     </span>
                   </div>
                 </div>
@@ -130,21 +141,29 @@ export const AdminSidebar = ({
           })}
         </nav>
 
-        {/* Footer shortcuts */}
-        <div className="p-4 border-t border-white/10 space-y-2">
+        {/* Footer shortcuts & Language Switcher */}
+        <div className="p-4 border-t border-white/10 space-y-2.5">
+          {/* Language Switcher in Admin Sidebar */}
+          <div className="pb-1">
+            <span className="text-[10px] uppercase font-bold text-stone-400 block mb-1 tracking-wider">
+              {isBn ? "ভাষা নির্বাচন:" : "Select Language:"}
+            </span>
+            <LanguageSwitcher variant="drawer" />
+          </div>
+
           <Link
             href="/dashboard"
             className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white text-[11px] font-bold transition-all text-center"
           >
             <i className="fa-solid fa-user text-[#E8AF30]"></i>
-            গ্রাহক ড্যাশবোর্ড (User Portal)
+            {isBn ? "গ্রাহক ড্যাশবোর্ড (User Portal)" : "Customer Portal"}
           </Link>
           <Link
             href="/products"
             className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#002719] hover:bg-[#003824] border border-[#E8AF30]/40 text-[#E8AF30] text-xs font-bold transition-all text-center"
           >
             <i className="fa-solid fa-store"></i>
-            লাইভ শপ ভিউ (Live Store)
+            {isBn ? "লাইভ শপ ভিউ (Live Store)" : "Live Farm Store"}
           </Link>
         </div>
       </aside>

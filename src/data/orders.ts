@@ -115,7 +115,9 @@ export const initialOrders: Order[] = [
           title: "Order Placed & Confirmed",
           titleBn: "অর্ডার কনফার্ম হয়েছে",
           description: "আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।",
+          descriptionEn: "Your order has been verified and placed into the farm production queue.",
           time: "07 Oct, 09:30 PM",
+          timeBn: "০৭ অক্টোবর, ০৯:৩০ রাত",
           completed: true,
           current: false,
         },
@@ -124,7 +126,9 @@ export const initialOrders: Order[] = [
           title: "Farm Harvest & Inspected",
           titleBn: "খামার থেকে সংগ্রহ ও প্যাকিং সম্পন্ন",
           description: "সকালে মানিকগঞ্জ খামার থেকে সংগৃহীত দুধ ও উপাদান মান যাচাই করা হয়েছে।",
+          descriptionEn: "Fresh harvest and milking completed with lab grade safety test at Manikganj farm.",
           time: "08 Oct, 05:30 AM",
+          timeBn: "০৮ অক্টোবর, ০৫:৩০ সকাল",
           completed: true,
           current: false,
         },
@@ -133,7 +137,9 @@ export const initialOrders: Order[] = [
           title: "Dispatched from Hub",
           titleBn: "গাবতলী কোল্ড-চেইন হাব থেকে রওনা",
           description: "ইলেকট্রিক ডেলিভারি ভ্যানে আপনার এলাকার সাব-হাবে পাঠানো হয়েছে।",
+          descriptionEn: "Dispatched via temperature-controlled EV van to Dhanmondi neighborhood hub.",
           time: "08 Oct, 07:15 AM",
+          timeBn: "০৮ অক্টোবর, ০৭:১৫ সকাল",
           completed: true,
           current: false,
         },
@@ -142,7 +148,9 @@ export const initialOrders: Order[] = [
           title: "Out for Delivery",
           titleBn: "ডেলিভারি রাইডার আপনার পথে রওনা দিয়েছেন",
           description: "রাইডার সাইফুল ইসলাম আপনার ঠিকানার দিকে আসছেন।",
+          descriptionEn: "Eco-courier rider Saiful Islam is actively en route with insulated cold pack.",
           time: "08 Oct, 08:45 AM",
+          timeBn: "০৮ অক্টোবর, ০৮:৪৫ সকাল",
           completed: false,
           current: true,
         },
@@ -151,7 +159,9 @@ export const initialOrders: Order[] = [
           title: "Delivered",
           titleBn: "সফলভাবে ডেলিভারি সম্পন্ন",
           description: "পণ্য গ্রহণ ও ক্যাশ অন ডেলিভারি সম্পন্ন হবে।",
+          descriptionEn: "Doorstep delivery inspection, freshness verification and handover.",
           time: "Pending",
+          timeBn: "অপেক্ষমান",
           completed: false,
           current: false,
         },
@@ -333,3 +343,12 @@ export const initialOrders: Order[] = [
     ],
   },
 ];
+
+export function addPlacedOrder(order: Order) {
+  initialOrders.unshift(order);
+}
+
+export function findOrderById(id: string): Order | undefined {
+  return initialOrders.find((o) => o.id === id);
+}
+

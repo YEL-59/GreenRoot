@@ -2,6 +2,7 @@
 
 export interface NavLink {
   label: string;
+  labelBn?: string;
   href: string;
   children?: NavLink[];
 }
@@ -178,7 +179,9 @@ export interface OrderTrackingInfo {
     title: string;
     titleBn: string;
     description: string;
+    descriptionEn?: string;
     time: string;
+    timeBn?: string;
     completed: boolean;
     current: boolean;
   }[];

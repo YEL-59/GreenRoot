@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { initialOrders } from "@/data/orders";
 import { OrderCard } from "@/components/dashboard";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function UserOrdersPage() {
+  const { isBn } = useLanguage();
   const [filter, setFilter] = useState<"all" | "out_for_delivery" | "delivered">("all");
   const [search, setSearch] = useState("");
 
@@ -21,11 +23,13 @@ export default function UserOrdersPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-stone-900">
-            আমার সকল অর্ডার (Order History)
+          <h2 className="text-xl sm:text-2xl font-extrabold text-stone-900">
+            {isBn ? "আমার সকল অর্ডার (Order History)" : "My Orders (Order History)"}
           </h2>
           <p className="text-xs text-stone-500">
-            মোট {initialOrders.length} টি খামার অর্ডারের বিস্তারিত রেকর্ড
+            {isBn
+              ? `মোট ${initialOrders.length} টি খামার অর্ডারের বিস্তারিত রেকর্ড`
+              : `Complete records of all ${initialOrders.length} farm-to-table deliveries`}
           </p>
         </div>
 
@@ -35,7 +39,7 @@ export default function UserOrdersPage() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="অর্ডার ID বা পণ্য খুঁজুন..."
+            placeholder={isBn ? "অর্ডার ID বা পণ্য খুঁজুন..." : "Search Order ID or item..."}
             className="pl-9 pr-4 py-2.5 rounded-xl bg-white border border-stone-200 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#002719] shadow-sm w-full sm:w-64"
           />
         </div>
@@ -51,18 +55,18 @@ export default function UserOrdersPage() {
               : "bg-white text-stone-600 border border-stone-200 hover:bg-stone-50"
           }`}
         >
-          সব অর্ডার ({initialOrders.length})
+          {isBn ? `সব অর্ডার (${initialOrders.length})` : `All Orders (${initialOrders.length})`}
         </button>
         <button
           onClick={() => setFilter("out_for_delivery")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
             filter === "out_for_delivery"
-              ? "bg-[#E8AF30] text-[#002719] shadow-md font-black"
+              ? "bg-[#E8AF30] text-[#002719] shadow-md font-extrabold"
               : "bg-white text-stone-600 border border-stone-200 hover:bg-stone-50"
           }`}
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-          ডেলিভারির পথে (Live Tracking)
+          {isBn ? "ডেলিভারির পথে (Live Tracking)" : "Out for Delivery (Live Track)"}
         </button>
         <button
           onClick={() => setFilter("delivered")}
@@ -72,7 +76,7 @@ export default function UserOrdersPage() {
               : "bg-white text-stone-600 border border-stone-200 hover:bg-stone-50"
           }`}
         >
-          ডেলিভারি সম্পন্ন
+          {isBn ? "ডেলিভারি সম্পন্ন" : "Delivered"}
         </button>
       </div>
 
@@ -85,11 +89,18 @@ export default function UserOrdersPage() {
             <div className="w-16 h-16 rounded-full bg-stone-100 text-stone-400 flex items-center justify-center mx-auto mb-4 text-2xl">
               <i className="fa-solid fa-box-open"></i>
             </div>
-            <h4 className="text-base font-bold text-stone-900 mb-1">কোনো অর্ডার পাওয়া যায়নি</h4>
-            <p className="text-xs text-stone-500">অনুসন্ধান বা ফিল্টারের সাথে মিল রেখে কোনো অর্ডার নেই।</p>
+            <h4 className="text-base font-bold text-stone-900 mb-1">
+              {isBn ? "কোনো অর্ডার পাওয়া যায়নি" : "No Orders Found"}
+            </h4>
+            <p className="text-xs text-stone-500">
+              {isBn
+                ? "অনুসন্ধান বা ফিল্টারের সাথে মিল রেখে কোনো অর্ডার নেই।"
+                : "No orders match your search term or active filter criteria."}
+            </p>
           </div>
         )}
       </div>
     </div>
   );
 }
+

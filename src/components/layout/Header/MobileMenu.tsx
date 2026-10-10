@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { mainNav } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 import type { NavLink } from "@/types";
 
 type MobileMenuProps = {
@@ -16,6 +18,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
   const { openCart, totalItems } = useCart();
+  const { isBn, t } = useLanguage();
 
   const toggleSubmenu = (label: string) => {
     setOpenSubmenu((prev) => (prev === label ? null : label));
@@ -24,18 +27,21 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
   return (
     <>
       {/* Mobile Controls (Visible on mobile & tablet, hidden on desktop lg+) */}
-      <div className="flex lg:hidden items-center gap-2 shrink-0">
+      <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+        {/* Mobile Language Switcher */}
+        <LanguageSwitcher variant="compact" />
+
         {/* Mobile Cart Trigger */}
         <button
           type="button"
           onClick={openCart}
           className="relative w-10 h-10 rounded-full bg-stone-100 hover:bg-[#E8AF30]/20 border border-stone-200/90 text-stone-800 flex items-center justify-center transition-all duration-200 focus:outline-none shadow-xs"
-          aria-label="Open Shopping Cart"
-          title="Cart"
+          aria-label={t.cart.title}
+          title={t.cart.title}
         >
           <i className="fa-solid fa-basket-shopping text-sm text-[#002719]"></i>
           {totalItems > 0 && (
-            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-black text-[10px] flex items-center justify-center shadow-md animate-bounce">
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E8AF30] text-[#181818] font-extrabold text-[10px] flex items-center justify-center shadow-md animate-bounce">
               {totalItems}
             </span>
           )}
@@ -106,7 +112,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                               : "text-white hover:text-[#E8AF30]"
                           }`}
                         >
-                          <span>{item.label}</span>
+                          <span>{isBn ? (item.labelBn || item.label) : item.label}</span>
                           <i
                             className={`fa-solid fa-chevron-down text-xs transition-transform duration-200 ${
                               isSubOpen ? "rotate-180 text-[#E8AF30]" : "text-white/60"
@@ -118,6 +124,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                           <ul className="pl-4 pr-2 py-2 space-y-1 bg-black/40 rounded-xl mt-1.5 mb-2 border border-white/10 list-none">
                             {item.children?.map((sub: NavLink) => {
                               const isSubActive = pathname === sub.href;
+                              const subLabel = isBn ? (sub.labelBn || sub.label) : sub.label;
                               return (
                                 <li key={sub.label}>
                                   <Link
@@ -129,7 +136,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                                         : "text-emerald-100/90 hover:text-white hover:bg-white/10"
                                     }`}
                                   >
-                                    {sub.label}
+                                    {subLabel}
                                   </Link>
                                 </li>
                               );
@@ -147,7 +154,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                             : "text-white hover:text-[#E8AF30]"
                         }`}
                       >
-                        {item.label}
+                        {isBn ? (item.labelBn || item.label) : item.label}
                       </Link>
                     )}
                   </li>
@@ -157,12 +164,15 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
 
             {/* Mobile Actions */}
             <div className="mt-5 pt-4 border-t border-white/15 flex flex-col gap-2.5">
+              {/* Language Switcher in Mobile Drawer */}
+              <LanguageSwitcher variant="drawer" className="mb-1" />
+
               <Link
-                href="/services"
+                href="/products"
                 onClick={() => setIsOpen(false)}
                 className="w-full text-center py-3 px-4 rounded-full bg-[#E8AF30] hover:bg-[#dfbe2c] text-[#181818] font-bold text-sm tracking-wide transition-colors shadow-md"
               >
-                Get Started
+                {t.nav.shop}
               </Link>
               <div className="grid grid-cols-2 gap-2">
                 <Link
@@ -171,7 +181,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                   className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10 text-center"
                 >
                   <i className="fa-regular fa-user text-xs text-[#E8AF30]"></i>
-                  <span>ইউজার ড্যাশবোর্ড</span>
+                  <span>{t.nav.dashboard}</span>
                 </Link>
                 <Link
                   href="/admin"
@@ -179,7 +189,7 @@ export const MobileMenu = ({ onOpenDrawer }: MobileMenuProps) => {
                   className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10 text-center"
                 >
                   <i className="fa-solid fa-shield-halved text-xs text-[#E8AF30]"></i>
-                  <span>অ্যাডমিন প্যানেল</span>
+                  <span>{t.nav.admin}</span>
                 </Link>
               </div>
 

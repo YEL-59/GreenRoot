@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { mainNav } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 import type { NavLink } from "@/types";
 
 type NavMenuProps = {
@@ -13,6 +15,7 @@ type NavMenuProps = {
 export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
   const pathname = usePathname();
   const { openCart, totalItems, subtotal } = useCart();
+  const { isBn, t } = useLanguage();
 
   return (
     <div className="!hidden lg:!flex items-center justify-between flex-1 ml-6 xl:ml-12 main-menu">
@@ -27,6 +30,8 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
                 item.children.some(
                   (sub: NavLink) => pathname === sub.href || pathname?.startsWith(sub.href + "/")
                 ));
+
+            const displayLabel = isBn ? (item.labelBn || item.label) : item.label;
 
             return (
               <li
@@ -43,7 +48,7 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
                   }`}
                   href={item.href}
                 >
-                  <span className="whitespace-nowrap">{item.label}</span>
+                  <span className="whitespace-nowrap">{displayLabel}</span>
                   {item.children && (
                     <i className="fa-solid fa-chevron-down text-[10px] ml-0.5 opacity-60 group-hover:rotate-180 group-hover:opacity-100 group-hover:text-[#E8AF30] transition-all duration-200"></i>
                   )}
@@ -57,6 +62,7 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
                   <ul className="sub-menu transition-all duration-200 absolute top-full left-0 min-w-[240px] bg-[#00281b] rounded-2xl p-2.5 shadow-2xl border border-[#E8AF30]/30 z-50 text-left">
                     {item.children.map((sub: NavLink) => {
                       const isSubActive = pathname === sub.href;
+                      const subLabel = isBn ? (sub.labelBn || sub.label) : sub.label;
                       return (
                         <li key={sub.label} className="nav-item my-0.5 list-none">
                           <Link
@@ -67,7 +73,7 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
                             }`}
                             href={sub.href}
                           >
-                            {sub.label}
+                            {subLabel}
                           </Link>
                         </li>
                       );
@@ -80,18 +86,21 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
         </ul>
       </div>
 
-      {/* Right Actions: Cart, CTA & Explore Side Drawer Button */}
+      {/* Right Actions: Language Switcher, Cart, Dashboard & Side Drawer */}
       <div className="header-btn flex items-center gap-2 xl:gap-3 shrink-0">
+        {/* Language Switcher Pill (বাংলা / EN) */}
+        <LanguageSwitcher variant="pill" />
+
         {/* Cart Drawer Trigger Button */}
         <button
           type="button"
           onClick={openCart}
           className="relative flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-stone-100 hover:bg-[#E8AF30]/20 border border-stone-200/90 hover:border-[#E8AF30] text-stone-800 transition-all duration-300 shadow-xs group focus:outline-none"
-          aria-label="View Shopping Cart"
-          title="View Cart"
+          aria-label={t.cart.title}
+          title={t.cart.title}
         >
           <i className="fa-solid fa-basket-shopping text-base text-[#002719] group-hover:scale-110 transition-transform"></i>
-          <span className="text-xs font-black hidden xl:inline text-stone-900 font-mono">৳{subtotal}</span>
+          <span className="text-xs font-extrabold hidden xl:inline text-stone-900 font-mono">৳{subtotal}</span>
           {totalItems > 0 && (
             <span className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-[#E8AF30] text-[#181818] font-extrabold text-[11px] flex items-center justify-center shadow-md animate-bounce">
               {totalItems}
@@ -103,8 +112,8 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
         <Link
           href="/dashboard"
           className="relative flex items-center justify-center w-10 h-10 rounded-full bg-stone-100 hover:bg-[#002719] hover:text-[#E8AF30] border border-stone-200/90 text-stone-700 transition-all duration-300 shadow-xs group focus:outline-none"
-          aria-label="Customer Dashboard & Track Orders"
-          title="Customer Dashboard & Track Orders"
+          aria-label={t.dashboard.title}
+          title={t.dashboard.title}
         >
           <i className="fa-regular fa-user text-sm group-hover:scale-110 transition-transform"></i>
         </Link>
@@ -114,7 +123,7 @@ export const NavMenu = ({ onOpenDrawer }: NavMenuProps) => {
           href="/products"
           className="btn-default shadow-xs hover:shadow-md transition-all whitespace-nowrap text-xs font-extrabold uppercase tracking-wider py-2.5 px-5"
         >
-          Shop Fresh
+          {t.nav.shop}
         </Link>
 
         {/* Right-Side Offcanvas Drawer Toggle Button */}

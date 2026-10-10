@@ -3,8 +3,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const CartDrawer = () => {
+  const { t, isBn } = useLanguage();
   const {
     items,
     isCartOpen,
@@ -62,9 +64,11 @@ export const CartDrawer = () => {
             </div>
             <div>
               <h3 className="text-white font-bold text-base leading-tight">
-                Farm Cart ({totalItems})
+                {t.cart.title} ({totalItems})
               </h3>
-              <p className="text-emerald-300/70 text-xs">আপনার নির্বাচিত পণ্যসমূহ</p>
+              <p className="text-emerald-300/70 text-xs">
+                {isBn ? "আপনার নির্বাচিত পণ্যসমূহ" : "Selected farm produce"}
+              </p>
             </div>
           </div>
           <button
@@ -80,9 +84,9 @@ export const CartDrawer = () => {
         <div className="bg-[#E8AF30]/10 border-y border-[#E8AF30]/20 px-5 py-2.5 flex items-center justify-between text-xs">
           <span className="text-[#E8AF30] font-semibold flex items-center gap-2">
             <i className="fa-solid fa-truck-fast"></i>
-            ফার্ম থেকে সরাসরি ফ্রেশ হোম ডেলিভারি
+            {isBn ? "ফার্ম থেকে সরাসরি ফ্রেশ হোম ডেলিভারি" : "Farm-fresh direct home delivery"}
           </span>
-          <span className="text-emerald-200/80">১০০% অর্গানিক</span>
+          <span className="text-emerald-200/80">{isBn ? "১০০% অর্গানিক" : "100% Organic"}</span>
         </div>
 
         {/* Items List Body */}
@@ -93,17 +97,17 @@ export const CartDrawer = () => {
                 <i className="fa-solid fa-bag-shopping"></i>
               </div>
               <h4 className="text-white font-bold text-lg mb-1">
-                আপনার ব্যাগ এখন খালি
+                {t.cart.emptyTitle}
               </h4>
               <p className="text-emerald-200/70 text-xs max-w-xs mb-6">
-                খাঁটি গরুর দুধ, গাওয়া ঘি, প্রিমিয়াম খেজুর, মধু ও দেশি তাজা মাছ দিয়ে আপনার স্বাস্থ্যকর বাজার সাজান।
+                {t.cart.emptySubtitle}
               </p>
               <Link
                 href="/products"
                 onClick={closeCart}
                 className="btn-default py-2.5 px-6 text-sm"
               >
-                পণ্য দেখতে ক্লিক করুন
+                {t.cart.browseProducts}
               </Link>
             </div>
           ) : (
@@ -119,10 +123,10 @@ export const CartDrawer = () => {
                 />
                 <div className="flex-1 min-w-0">
                   <h4 className="text-white text-sm font-semibold truncate leading-snug">
-                    {item.titleBn}
+                    {isBn ? (item.titleBn || item.title) : item.title}
                   </h4>
                   <p className="text-emerald-300/70 text-xs truncate mb-1">
-                    {item.title} • {item.unit}
+                    {isBn ? item.title : item.titleBn} • {item.unit}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-[#E8AF30] font-bold text-sm">
@@ -173,7 +177,7 @@ export const CartDrawer = () => {
             {/* Delivery Location Selector */}
             <div className="space-y-1.5">
               <span className="text-emerald-200/80 text-xs font-medium block">
-                ডেলিভারি এরিয়া নির্বাচন করুন:
+                {isBn ? "ডেলিভারি এরিয়া নির্বাচন করুন:" : "Select Delivery Area:"}
               </span>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <button
@@ -185,7 +189,7 @@ export const CartDrawer = () => {
                       : "border-white/10 bg-black/20 text-emerald-100/70 hover:border-white/20"
                   }`}
                 >
-                  ঢাকা সিটি (৳৬০)
+                  {t.cart.insideDhaka}
                 </button>
                 <button
                   type="button"
@@ -196,7 +200,7 @@ export const CartDrawer = () => {
                       : "border-white/10 bg-black/20 text-emerald-100/70 hover:border-white/20"
                   }`}
                 >
-                  ঢাকার বাইরে (৳১২০)
+                  {t.cart.outsideDhaka}
                 </button>
               </div>
             </div>
@@ -204,15 +208,15 @@ export const CartDrawer = () => {
             {/* Price Calculations */}
             <div className="space-y-1.5 text-xs text-emerald-100/80 pt-2 border-t border-white/10">
               <div className="flex justify-between">
-                <span>পণ্য সাবটোটাল:</span>
+                <span>{t.cart.subtotal}:</span>
                 <span className="font-semibold text-white">৳{subtotal}</span>
               </div>
               <div className="flex justify-between">
-                <span>হোম ডেলিভারি চার্জ:</span>
+                <span>{t.cart.deliveryFee}:</span>
                 <span className="font-semibold text-white">৳{deliveryFee}</span>
               </div>
               <div className="flex justify-between text-base font-bold text-white pt-1.5 border-t border-white/10">
-                <span>সর্বমোট প্রদেয় বিল:</span>
+                <span>{t.cart.total}:</span>
                 <span className="text-[#E8AF30] text-lg">৳{total}</span>
               </div>
             </div>
@@ -224,14 +228,32 @@ export const CartDrawer = () => {
                 onClick={closeCart}
                 className="w-full block py-3.5 px-4 rounded-xl bg-[#E8AF30] hover:bg-[#d9a024] text-[#181818] font-bold text-center text-sm transition-all shadow-lg hover:shadow-[#E8AF30]/20 tracking-wide"
               >
-                অর্ডার সম্পন্ন করুন (Proceed to Checkout)
+                {t.cart.checkoutBtn}
               </Link>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <Link
+                  href="/cart"
+                  onClick={closeCart}
+                  className="py-2.5 px-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-center text-xs transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <i className="fa-solid fa-basket-shopping text-[#E8AF30] text-xs"></i>
+                  <span>{isBn ? "কার্ট পেজ দেখুন" : "View Full Cart"}</span>
+                </Link>
+                <Link
+                  href="/dashboard/cart"
+                  onClick={closeCart}
+                  className="py-2.5 px-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 text-emerald-300 font-bold text-center text-xs transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <i className="fa-solid fa-gauge-high text-xs"></i>
+                  <span>{isBn ? "ড্যাশবোর্ড কার্ট" : "Dashboard Cart"}</span>
+                </Link>
+              </div>
               <button
                 type="button"
                 onClick={closeCart}
-                className="w-full py-2 text-xs text-emerald-300/80 hover:text-white transition-colors"
+                className="w-full py-1 text-xs text-emerald-300/80 hover:text-white transition-colors"
               >
-                আরো পণ্য যোগ করুন (Continue Shopping)
+                {isBn ? "আরো পণ্য যোগ করুন (Continue Shopping)" : "Continue Shopping"}
               </button>
             </div>
           </div>

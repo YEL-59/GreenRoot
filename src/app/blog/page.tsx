@@ -1,5 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { articles } from "@/data/blog";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: `কৃষি ও স্বাস্থ্য ব্লগ | ${siteConfig.title}`,
+  description:
+    "খাঁটি অর্গানিক জীবনযাত্রা, প্রাকৃতিক খাদ্য উপাদান ও খামারভিত্তিক কৃষির সর্বশেষ তথ্য, গবেষণা ও স্বাস্থ্য পরামর্শ।",
+  keywords: [
+    "organic farming blog",
+    "স্বাস্থ্য পরামর্শ",
+    "অর্গানিক ফুড ব্লগ",
+    "গ্রীনরুট ব্লগ",
+    "কৃষি তথ্য",
+  ],
+};
 
 export default function BlogPage() {
   return (

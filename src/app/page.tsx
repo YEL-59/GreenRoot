@@ -12,6 +12,7 @@ import {
   TestimonialsSection,
   BlogSection,
   FeaturedProductsSection,
+  BangladeshMarketTrustSection,
 } from "@/components/home";
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection />
       <FeaturedProductsSection />
+      <BangladeshMarketTrustSection />
       <ServicesSection />
       <WhyChooseUsSection />
       <OurStorySection />

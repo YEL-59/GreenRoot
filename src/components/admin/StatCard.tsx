@@ -45,7 +45,7 @@ export const StatCard = ({
       </div>
 
       <div className="flex items-baseline justify-between gap-2 mt-2">
-        <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+        <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
           {value}
         </div>
 

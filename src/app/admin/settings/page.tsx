@@ -22,12 +22,12 @@ export default function AdminSettingsPage() {
   };
 
   return (
-    <div className="space-y-8 text-white max-w-4xl">
+    <div className="space-y-8 text-white w-full">
       <div>
         <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
           কনফিগারেশন ও সেটিংস
         </span>
-        <h2 className="text-xl sm:text-2xl font-black text-white">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-white">
           বিজনেস ও ডেলিভারি সেটিংস (Store Settings)
         </h2>
       </div>
@@ -42,7 +42,7 @@ export default function AdminSettingsPage() {
       <form onSubmit={handleSave} className="space-y-6">
         {/* General Store Info */}
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
-          <h3 className="text-base font-black text-white pb-3 border-b border-white/10 flex items-center gap-2">
+          <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-store text-[#E8AF30]"></i>
             খামার ও ব্যবসা পরিচিতি
           </h3>
@@ -82,7 +82,7 @@ export default function AdminSettingsPage() {
 
         {/* Bangladeshi Delivery Fee Setup */}
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
-          <h3 className="text-base font-black text-white pb-3 border-b border-white/10 flex items-center gap-2">
+          <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-truck-fast text-[#E8AF30]"></i>
             ডেলিভারি চার্জ ও ফ্রি ডেলিভারি শর্ত
           </h3>
@@ -122,7 +122,7 @@ export default function AdminSettingsPage() {
 
         {/* Bangladeshi Payments Setup */}
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
-          <h3 className="text-base font-black text-white pb-3 border-b border-white/10 flex items-center gap-2">
+          <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-money-bill-wave text-[#E8AF30]"></i>
             পেমেন্ট মেথড কনফিগারেশন
           </h3>
@@ -174,7 +174,7 @@ export default function AdminSettingsPage() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-8 py-3 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-black shadow-xl transition-all"
+            className="px-8 py-3 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-xl transition-all"
           >
             পরিবর্তন সংরক্ষণ করুন (Save Settings)
           </button>

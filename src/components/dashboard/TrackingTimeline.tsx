@@ -1,21 +1,30 @@
 "use client";
 
 import type { OrderTrackingInfo } from "@/types";
+import { useLanguage } from "@/context/LanguageContext";
 
 export type TrackingTimelineProps = {
   tracking: OrderTrackingInfo;
 };
 
 export const TrackingTimeline = ({ tracking }: TrackingTimelineProps) => {
+  const { isBn } = useLanguage();
+
   return (
     <div className="bg-white rounded-3xl p-6 md:p-8 border border-stone-200/90 shadow-sm">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h3 className="text-lg font-black text-stone-900">ডেলিভারি পর্যায়ক্রম (Delivery Timeline)</h3>
-          <p className="text-xs text-stone-500">প্রতিটি ধাপ খামার ও কোল্ড-চেইন প্রক্রিয়ার মাধ্যমে ট্র্যাক করা হয়</p>
+          <h3 className="text-lg font-extrabold text-stone-900">
+            {isBn ? "ডেলিভারি পর্যায়ক্রম (Delivery Timeline)" : "Delivery Progress & Timeline"}
+          </h3>
+          <p className="text-xs text-stone-500">
+            {isBn
+              ? "প্রতিটি ধাপ খামার ও কোল্ড-চেইন প্রক্রিয়ার মাধ্যমে ট্র্যাক করা হয়"
+              : "Every stage is tracked and validated through cold-chain logistics"}
+          </p>
         </div>
         <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E8AF30]/15 text-[#002719] border border-[#E8AF30]/30">
-          অগ্রগতি: {tracking.routeProgress}%
+          {isBn ? "অগ্রগতি:" : "Progress:"} {tracking.routeProgress}%
         </span>
       </div>
 
@@ -74,7 +83,7 @@ export const TrackingTimeline = ({ tracking }: TrackingTimelineProps) => {
                           : "text-stone-400"
                       }`}
                     >
-                      {step.titleBn}
+                      {isBn ? (step.titleBn || step.title) : (step.title || step.titleBn)}
                     </h4>
                     <span
                       className={`text-xs font-semibold px-2 py-0.5 rounded ${
@@ -83,18 +92,18 @@ export const TrackingTimeline = ({ tracking }: TrackingTimelineProps) => {
                           : "text-stone-400 bg-white border border-stone-200"
                       }`}
                     >
-                      {step.time}
+                      {isBn ? (step.timeBn || step.time) : step.time}
                     </span>
                   </div>
 
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    {step.description}
+                    {isBn ? step.description : (step.descriptionEn || step.description)}
                   </p>
 
                   {isCurrent && (
                     <div className="mt-3 flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-xl w-fit">
                       <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
-                      বর্তমানে এই ধাপে সক্রিয়ভাবে কাজ চলছে
+                      {isBn ? "বর্তমানে এই ধাপে সক্রিয়ভাবে কাজ চলছে" : "This stage is actively in progress right now"}
                     </div>
                   )}
                 </div>

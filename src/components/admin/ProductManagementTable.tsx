@@ -50,7 +50,7 @@ export const ProductManagementTable = () => {
           <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
             ইনভেন্টরি ও পণ্য ক্যাটালগ
           </span>
-          <h3 className="text-xl font-black text-white">
+          <h3 className="text-xl font-extrabold text-white">
             ফার্ম পণ্য তালিকা ({filteredProducts.length} টি আইটেম)
           </h3>
         </div>
@@ -84,7 +84,7 @@ export const ProductManagementTable = () => {
           {/* Upload Product Trigger Button */}
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-black shadow-lg transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-lg transition-all"
           >
             <i className="fa-solid fa-plus text-xs"></i>
             <span>নতুন পণ্য যোগ করুন (Upload)</span>
@@ -137,7 +137,7 @@ export const ProductManagementTable = () => {
                   </td>
 
                   <td className="py-3.5 px-4 font-mono">
-                    <div className="text-sm font-black text-white">৳{p.price}</div>
+                    <div className="text-sm font-extrabold text-white">৳{p.price}</div>
                     <div className="text-[10px] text-stone-400">প্রতি {p.unitBn}</div>
                   </td>
 

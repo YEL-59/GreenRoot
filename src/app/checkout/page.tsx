@@ -4,6 +4,8 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { addPlacedOrder } from "@/data/orders";
+import type { Order } from "@/types";
 
 export default function CheckoutPage() {
   const {
@@ -21,6 +23,8 @@ export default function CheckoutPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [district, setDistrict] = useState("Dhaka");
+  const [deliverySlot, setDeliverySlot] = useState<"morning" | "evening" | "regular">("morning");
+  const [trxId, setTrxId] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "bkash" | "card">("cod");
 
@@ -40,6 +44,8 @@ export default function CheckoutPage() {
     total: number;
     paymentMethod: string;
     itemsCount: number;
+    deliverySlot: string;
+    deliveryPin: string;
   } | null>(null);
 
   const applyCoupon = () => {
@@ -71,6 +77,134 @@ export default function CheckoutPage() {
 
     setTimeout(() => {
       const randomOrderId = "GR-" + Math.floor(100000 + Math.random() * 900000);
+      const randomPin = Math.floor(1000 + Math.random() * 9000).toString();
+      const slotText =
+        deliverySlot === "morning"
+          ? "ভোরের স্লট (সকাল ৭:০০ - ১০:০০ টা)"
+          : deliverySlot === "evening"
+          ? "বিকালের স্লট (বিকাল ৪:০০ - রাত ৮:০০ টা)"
+          : "রেগুলার ডেলিভারি (পরবর্তী ২৪ ঘণ্টার মধ্যে)";
+
+      const newOrder: Order = {
+        id: randomOrderId,
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        dateBn: "আজ, " + new Date().toLocaleTimeString("bn-BD", { hour: "2-digit", minute: "2-digit" }),
+        customerName: fullName,
+        customerPhone: phoneNumber,
+        customerEmail: "customer@greenroot.com",
+        subtotal,
+        shippingFee: deliveryFee,
+        discount: discountAmount,
+        total: finalPayable,
+        status: "out_for_delivery",
+        statusBn: "ডেলিভারির পথে (Out for Delivery)",
+        paymentMethod: paymentMethod as any,
+        paymentStatus: paymentMethod === "cod" ? "unpaid" : "paid",
+        shippingAddress: {
+          name: fullName,
+          phone: phoneNumber,
+          address: address,
+          district: district,
+          city: district,
+          zone: deliveryZone === "inside-dhaka" ? "dhaka" : "outside_dhaka",
+        },
+        items: items.map((i) => ({
+          id: i.id,
+          slug: i.slug,
+          title: i.title,
+          titleBn: i.titleBn,
+          price: i.price,
+          unit: i.unit,
+          quantity: i.quantity,
+          image: i.image,
+        })),
+        tracking: {
+          courierName: "গ্রীনরুট কোল্ড-চেইন এক্সপ্রেস বহর (GreenRoot Cold Fleet)",
+          trackingNumber: `GRX-${randomOrderId.replace("GR-", "")}`,
+          currentLocation: "মিরপুর রোড, সাইন্সল্যাব মোড় সংলগ্ন",
+          riderName: "মোঃ সাইফুল ইসলাম (ID: #402)",
+          riderPhone: "01712345678",
+          riderPhoto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+          estimatedDelivery: deliverySlot === "morning" ? "সকাল ৯:১৫ - ১০:০০" : "বিকাল ৫:৩০ - ৬:১৫",
+          deliveryDate: "আজকের ডেলিভারি",
+          deliverySlot: slotText,
+          routeProgress: 75,
+          checkpoints: [
+            {
+              id: "cp-1",
+              name: "Savar Organic Farm Hub",
+              nameBn: "সাভার খামার কালেকশন পয়েন্ট",
+              description: "ভোর ৫:৩০ এ খাঁটি পণ্য প্যাকেজিং সম্পন্ন",
+              lat: 23.8583,
+              lng: 90.2667,
+              status: "passed",
+              time: "05:30 AM",
+            },
+            {
+              id: "cp-2",
+              name: "Gabtoli Cold Hub",
+              nameBn: "গাবতলী কোল্ড-স্টোরেজ হাব",
+              description: "তাপমাত্রা নিয়ন্ত্রিত চিলারে স্ক্যান সম্পন্ন",
+              lat: 23.7779,
+              lng: 90.3524,
+              status: "passed",
+              time: "07:15 AM",
+            },
+            {
+              id: "cp-3",
+              name: "Local Delivery Hub",
+              nameBn: `${district} লোকাল ডেলিভারি জোন`,
+              description: "রাইডারের ব্যাগে হস্তান্তর ও ডেলিভারির জন্য রওনা",
+              lat: 23.7461,
+              lng: 90.3742,
+              status: "active",
+              time: "08:45 AM",
+            },
+            {
+              id: "cp-4",
+              name: "Customer Destination",
+              nameBn: `${address}`,
+              description: "আপনার দরজায় ডেলিভারি ও যাচাইকরণ",
+              lat: 23.7508,
+              lng: 90.3789,
+              status: "upcoming",
+              time: "Est. ৯:৪৫ AM",
+            },
+          ],
+          timeline: [
+            {
+              status: "confirmed",
+              title: "Order Placed & Confirmed",
+              titleBn: "অর্ডার সফলভাবে কনফার্ম হয়েছে",
+              description: "সিস্টেমে আপনার অর্ডার গৃহীত হয়েছে।",
+              time: "এখনই",
+              completed: true,
+              current: false,
+            },
+            {
+              status: "processing",
+              title: "Packed in Cold Chain Box",
+              titleBn: "খামার থেকে কোল্ড-চেইনে সিল ও প্যাকিং",
+              description: "৪°C তাপমাত্রায় পণ্য সিল করা হয়েছে।",
+              time: "ভোর ৬:০০ AM",
+              completed: true,
+              current: false,
+            },
+            {
+              status: "out_for_delivery",
+              title: "Out for Delivery",
+              titleBn: "রাইডার ডেলিভারির উদ্দেশ্যে পথে রয়েছে",
+              description: "রাইডার সাইফুল ইসলাম আপনার ঠিকানার দিকে অগ্রসর হচ্ছেন।",
+              time: "সকাল ৮:৩০ AM",
+              completed: false,
+              current: true,
+            },
+          ],
+        },
+      };
+
+      addPlacedOrder(newOrder);
+
       setOrderPlaced({
         orderId: randomOrderId,
         name: fullName,
@@ -81,9 +215,11 @@ export default function CheckoutPage() {
           paymentMethod === "cod"
             ? "ক্যাশ অন ডেলিভারি (Cash on Delivery)"
             : paymentMethod === "bkash"
-            ? "বিকাশ / নগদ (bKash / Nagad)"
+            ? "বিকাশ মার্চেন্ট পেমেন্ট"
             : "অনলাইন কার্ড পেমেন্ট",
         itemsCount: items.reduce((acc, i) => acc + i.quantity, 0),
+        deliverySlot: slotText,
+        deliveryPin: randomPin,
       });
 
       clearCart();
@@ -94,66 +230,125 @@ export default function CheckoutPage() {
   if (orderPlaced) {
     return (
       <div className="bg-[#FAF9F5] min-h-screen pt-36 pb-24">
-        <div className="container max-w-2xl px-4 mx-auto">
-          <div className="bg-white rounded-3xl p-8 md:p-12 border border-stone-200/90 shadow-xl text-center">
-            <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-4xl mx-auto mb-6 shadow-sm">
-              <i className="fa-solid fa-check"></i>
+        <div className="container max-w-3xl px-4 mx-auto">
+          <div className="bg-white rounded-3xl p-6 sm:p-10 md:p-12 border border-stone-200/90 shadow-2xl text-center relative overflow-hidden">
+            {/* Top decorative gradient */}
+            <div className="absolute top-0 inset-x-0 h-3 bg-gradient-to-r from-emerald-600 via-[#E8AF30] to-emerald-600" />
+
+            <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-4xl mx-auto mb-5 shadow-sm animate-bounce">
+              <i className="fa-solid fa-circle-check text-emerald-600"></i>
             </div>
 
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-4 py-1.5 rounded-full inline-block mb-3">
-              অর্ডার সফল হয়েছে! (Order Confirmed)
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/70 border border-emerald-300 px-4 py-1.5 rounded-full inline-block mb-3">
+              অর্ডার সফল হয়েছে! (Order Placed Successfully)
             </span>
 
             <h1 className="text-2xl md:text-3xl font-extrabold text-stone-900 mb-2">
-              ধন্যবাদ, আপনার অর্ডারটি গ্রহণ করা হয়েছে
+              ধন্যবাদ, আপনার তাজা খামার অর্ডারটি গ্রহণ করা হয়েছে!
             </h1>
             <p className="text-stone-500 text-sm mb-6">
-              অর্ডার ট্র্যাকিং আইডি: <span className="font-bold text-[#002f1f] text-base">{orderPlaced.orderId}</span>
+              অর্ডার আইডি: <span className="font-mono font-extrabold text-[#002f1f] text-base px-2 py-0.5 rounded bg-stone-100">{orderPlaced.orderId}</span>
             </p>
 
-            <div className="bg-stone-50 rounded-2xl p-6 text-left border border-stone-200/80 mb-8 space-y-3 text-xs md:text-sm">
+            {/* Handover Security OTP PIN Card */}
+            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-amber-500/10 border-2 border-[#E8AF30] flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#E8AF30] text-[#002719] flex items-center justify-center text-lg font-extrabold shrink-0">
+                  <i className="fa-solid fa-key"></i>
+                </div>
+                <div>
+                  <span className="text-[11px] text-stone-600 font-bold uppercase block">
+                    ডেলিভারি হ্যান্ডওভার নিরাপত্তা পিন (Security PIN)
+                  </span>
+                  <span className="text-xs text-stone-700">
+                    রাইডার আপনার বাসায় পৌঁছালে এই পিন কোডটি দেখান:
+                  </span>
+                </div>
+              </div>
+
+              <div className="px-5 py-2 rounded-xl bg-[#002719] text-[#E8AF30] font-mono text-2xl font-extrabold tracking-widest shadow-md">
+                {orderPlaced.deliveryPin}
+              </div>
+            </div>
+
+            {/* Order Summary Details */}
+            <div className="bg-stone-50 rounded-2xl p-6 text-left border border-stone-200/80 mb-6 space-y-3 text-xs md:text-sm">
               <div className="flex justify-between border-b border-stone-200/60 pb-2">
                 <span className="text-stone-500">গ্রাহকের নাম:</span>
                 <span className="font-bold text-stone-900">{orderPlaced.name}</span>
               </div>
               <div className="flex justify-between border-b border-stone-200/60 pb-2">
                 <span className="text-stone-500">মোবাইল নম্বর:</span>
-                <span className="font-bold text-stone-900">{orderPlaced.phone}</span>
+                <span className="font-bold text-stone-900 font-mono">{orderPlaced.phone}</span>
               </div>
               <div className="flex justify-between border-b border-stone-200/60 pb-2">
                 <span className="text-stone-500">ডেলিভারি ঠিকানা:</span>
                 <span className="font-bold text-stone-900 max-w-xs text-right truncate">{orderPlaced.address}</span>
               </div>
               <div className="flex justify-between border-b border-stone-200/60 pb-2">
+                <span className="text-stone-500">নির্বাচিত ডেলিভারি স্লট:</span>
+                <span className="font-bold text-emerald-800">{orderPlaced.deliverySlot}</span>
+              </div>
+              <div className="flex justify-between border-b border-stone-200/60 pb-2">
                 <span className="text-stone-500">পেমেন্ট মেথড:</span>
-                <span className="font-bold text-emerald-800">{orderPlaced.paymentMethod}</span>
+                <span className="font-bold text-stone-900">{orderPlaced.paymentMethod}</span>
               </div>
               <div className="flex justify-between pt-1 text-base">
                 <span className="font-bold text-stone-900">সর্বমোট প্রদেয়:</span>
-                <span className="font-extrabold text-[#002f1f]">৳{orderPlaced.total}</span>
+                <span className="font-extrabold text-[#002f1f] text-xl">৳{orderPlaced.total}</span>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 text-left mb-8 flex items-start gap-3">
-              <i className="fa-solid fa-bell text-amber-600 text-base mt-0.5"></i>
-              <div>
-                <span className="font-bold block mb-0.5">ডেলিভারি সংক্রান্ত নোটিশ:</span>
-                আমাদের কাস্টমার কেয়ার থেকে আপনার নম্বরে কল দিয়ে অর্ডারটি চূড়ান্ত নিশ্চিত করা হবে। ২৪ ঘণ্টার মধ্যে খামার থেকে তাজা পণ্য আপনার ঘরে পৌঁছে যাবে।
+            {/* Primary Action: Go to Live Tracker */}
+            <div className="p-4 rounded-2xl bg-[#002719] text-white text-left mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-[#E8AF30] text-[#002719] flex items-center justify-center text-xl font-extrabold shrink-0 animate-pulse">
+                  <i className="fa-solid fa-location-crosshairs"></i>
+                </div>
+                <div>
+                  <h4 className="text-sm font-extrabold text-white">
+                    লাইভ কোল্ড-চেইন ম্যাপে রাইডার দেখুন
+                  </h4>
+                  <p className="text-xs text-stone-300">
+                    রাইডারের রুট, গাড়ির তাপমাত্রা এবং পৌঁছানোর সময় সরাসরি ট্র্যাক করুন।
+                  </p>
+                </div>
               </div>
+
+              <Link
+                href={`/dashboard/track/${orderPlaced.orderId}`}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] font-extrabold text-xs shadow-lg transition-all shrink-0"
+              >
+                <span>লাইভ ট্র্যাকিং খুলুন →</span>
+              </Link>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            {/* Secondary Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <a
+                href={`https://wa.me/8801712345678?text=${encodeURIComponent(
+                  `হ্যালো গ্রীনরুট! আমি অর্ডার #${orderPlaced.orderId} সম্পন্ন করেছি (মোট ৳${orderPlaced.total})। ডেলিভারির আপডেট জানতে চাই।`
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 py-3 px-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all"
+              >
+                <i className="fa-brands fa-whatsapp text-sm"></i>
+                <span>হোয়াটসঅ্যাপে নোটিফিকেশন পান</span>
+              </a>
+
               <Link
                 href="/products"
-                className="btn-default py-3.5 px-8 text-sm"
+                className="py-3 px-5 rounded-full border border-stone-300 text-stone-700 font-bold text-xs hover:bg-stone-50 transition-colors"
               >
-                আরো পণ্য কিনুন (Continue Shopping)
+                আরো কেনাকাটা করুন
               </Link>
+
               <Link
-                href="/"
-                className="py-3.5 px-6 rounded-full border border-stone-300 text-stone-700 font-bold text-sm hover:bg-stone-50 transition-colors"
+                href="/dashboard"
+                className="py-3 px-5 rounded-full border border-stone-300 text-stone-700 font-bold text-xs hover:bg-stone-50 transition-colors"
               >
-                হোম পেজে ফিরুন
+                কাস্টমার ড্যাশবোর্ড
               </Link>
             </div>
           </div>
@@ -293,6 +488,67 @@ export default function CheckoutPage() {
                       className="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:outline-none focus:border-[#E8AF30]"
                     />
                   </div>
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-2">
+                      পছন্দের ডেলিভারি সময়সূচী (Delivery Time Slot) <span className="text-red-500">*</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {[
+                        {
+                          id: "morning",
+                          label: "ভোরের স্লট (Dawn Slot)",
+                          time: "সকাল ৭:০০ - ১০:০০ টা",
+                          badge: "তাজা দুধ ও শাক",
+                          icon: "fa-sun text-amber-500",
+                        },
+                        {
+                          id: "evening",
+                          label: "বিকালের স্লট (Evening)",
+                          time: "বিকাল ৪:০০ - রাত ৮:০০ টা",
+                          badge: "অফিস ফেরত",
+                          icon: "fa-moon text-indigo-400",
+                        },
+                        {
+                          id: "regular",
+                          label: "রেগুলার ডেলিভারি",
+                          time: "২৪ ঘণ্টার মধ্যে",
+                          badge: "সারা বাংলাদেশ",
+                          icon: "fa-truck text-emerald-500",
+                        },
+                      ].map((slot) => (
+                        <div
+                          key={slot.id}
+                          onClick={() => setDeliverySlot(slot.id as any)}
+                          className={`p-3 rounded-2xl border cursor-pointer transition-all ${
+                            deliverySlot === slot.id
+                              ? "bg-[#002f1f] text-white border-[#002f1f] shadow-md shadow-[#002f1f]/20"
+                              : "bg-stone-50 hover:bg-stone-100 text-stone-800 border-stone-200"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <i className={`fa-solid ${slot.icon} text-xs`}></i>
+                            <span
+                              className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                                deliverySlot === slot.id
+                                  ? "bg-[#E8AF30] text-[#002719]"
+                                  : "bg-white text-stone-600 border border-stone-200"
+                              }`}
+                            >
+                              {slot.badge}
+                            </span>
+                          </div>
+                          <div className="text-xs font-bold">{slot.label}</div>
+                          <div
+                            className={`text-[10px] mt-0.5 ${
+                              deliverySlot === slot.id ? "text-stone-300" : "text-stone-500"
+                            }`}
+                          >
+                            {slot.time}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Payment Method Selector */}
@@ -350,15 +606,45 @@ export default function CheckoutPage() {
                         />
                         <div>
                           <span className="font-bold text-sm text-stone-900 block">
-                            বিকাশ / নগদ (bKash / Nagad)
+                            বিকাশ / নগদ (bKash / Nagad Wallet)
                           </span>
                           <span className="text-xs text-stone-500">
-                            মোবাইল ব্যাংকিং ওয়ালেটের মাধ্যমে পরিশোধ
+                            মার্চেন্ট বা পার্সোনাল একাউন্ট থেকে ইনস্ট্যান্ট পরিশোধ
                           </span>
                         </div>
                       </div>
-                      <span className="text-pink-600 font-bold text-xs">bKash</span>
+                      <span className="text-pink-600 font-bold text-xs">bKash / Nagad</span>
                     </label>
+
+                    {/* bKash Details box when active */}
+                    {paymentMethod === "bkash" && (
+                      <div className="p-4 rounded-2xl bg-pink-50/70 border border-pink-200 text-xs space-y-3 animate-fadeIn">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-pink-900 flex items-center gap-2">
+                            <i className="fa-solid fa-mobile-screen-button text-pink-600"></i>
+                            গ্রীনরুট বিকাশ মার্চেন্ট অ্যাকাউন্ট
+                          </span>
+                          <span className="font-mono font-bold text-pink-700 bg-white px-2.5 py-0.5 rounded border border-pink-200">
+                            01711-987654
+                          </span>
+                        </div>
+                        <p className="text-stone-600 text-[11px] leading-relaxed">
+                          বিকাশ অ্যাপের &quot;Payment&quot; অপশনে গিয়ে উপরের নম্বরে ৳{finalPayable} পাঠিয়ে TrxID নিচে লিখুন অথবা খালি রেখে অর্ডার কনফার্ম করুন (আমাদের প্রতিনিধি কল দিয়ে ভেরিফাই করবেন)।
+                        </p>
+                        <div>
+                          <label className="block text-[11px] font-bold text-stone-700 mb-1">
+                            বিকাশ ট্রানজেকশন আইডি (TrxID - ঐচ্ছিক)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="যেমন: 9J4K28L9P"
+                            value={trxId}
+                            onChange={(e) => setTrxId(e.target.value)}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-pink-200 text-stone-800 text-xs font-mono uppercase focus:outline-none focus:border-pink-500"
+                          />
+                        </div>
+                      </div>
+                    )}
 
                     <label
                       className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all ${
