@@ -2,8 +2,10 @@
 import type { FormEvent } from "react";
 
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AdminSettingsPage() {
+  const { isBn } = useLanguage();
   const [farmName, setFarmName] = useState("GreenRoot Agriculture & Organic Farm");
   const [hotline, setHotline] = useState("+880 1712-345678");
   const [email, setEmail] = useState("support@greenrootfarm.com");
@@ -25,17 +27,21 @@ export default function AdminSettingsPage() {
     <div className="space-y-8 text-white w-full">
       <div>
         <span className="text-[11px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-          কনফিগারেশন ও সেটিংস
+          {isBn ? "কনফিগারেশন ও সেটিংস" : "Configuration & Settings"}
         </span>
         <h2 className="text-xl sm:text-2xl font-extrabold text-white">
-          বিজনেস ও ডেলিভারি সেটিংস (Store Settings)
+          {isBn ? "বিজনেস ও ডেলিভারি সেটিংস (Store Settings)" : "Store & Delivery Settings"}
         </h2>
       </div>
 
       {saved && (
         <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold flex items-center gap-2 animate-fadeIn">
           <i className="fa-solid fa-circle-check text-base"></i>
-          <span>সেটিংস সফলভাবে সংরক্ষিত ও আপডেট করা হয়েছে! (Settings Saved)</span>
+          <span>
+            {isBn
+              ? "সেটিংস সফলভাবে সংরক্ষিত ও আপডেট করা হয়েছে!"
+              : "Settings saved and updated successfully!"}
+          </span>
         </div>
       )}
 
@@ -44,12 +50,14 @@ export default function AdminSettingsPage() {
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
           <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-store text-[#E8AF30]"></i>
-            খামার ও ব্যবসা পরিচিতি
+            {isBn ? "খামার ও ব্যবসা পরিচিতি" : "Farm & Business Profile"}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">খামারের নাম</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "খামারের নাম" : "Farm / Store Name"}
+              </label>
               <input
                 type="text"
                 value={farmName}
@@ -59,7 +67,9 @@ export default function AdminSettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">কাস্টমার সাপোর্ট হটলাইন</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "কাস্টমার সাপোর্ট হটলাইন" : "Customer Support Hotline"}
+              </label>
               <input
                 type="text"
                 value={hotline}
@@ -69,7 +79,9 @@ export default function AdminSettingsPage() {
             </div>
 
             <div className="sm:col-span-2">
-              <label className="block text-xs font-bold text-stone-300 mb-1">অফিসিয়াল ইমেইল</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "অফিসিয়াল ইমেইল" : "Official Support Email"}
+              </label>
               <input
                 type="email"
                 value={email}
@@ -84,12 +96,14 @@ export default function AdminSettingsPage() {
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
           <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-truck-fast text-[#E8AF30]"></i>
-            ডেলিভারি চার্জ ও ফ্রি ডেলিভারি শর্ত
+            {isBn ? "ডেলিভারি চার্জ ও ফ্রি ডেলিভারি শর্ত" : "Delivery Fees & Thresholds"}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">ঢাকা সিটির ভিতরে (৳)</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "ঢাকা সিটির ভিতরে (৳)" : "Inside Dhaka City (৳)"}
+              </label>
               <input
                 type="number"
                 value={insideDhakaFee}
@@ -99,7 +113,9 @@ export default function AdminSettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">ঢাকার বাহিরে (৳)</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "ঢাকার বাহিরে (৳)" : "Outside Dhaka (৳)"}
+              </label>
               <input
                 type="number"
                 value={outsideDhakaFee}
@@ -109,7 +125,9 @@ export default function AdminSettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">ফ্রি ডেলিভারি ন্যূনতম কেনাকাটা (৳)</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "ফ্রি ডেলিভারি ন্যূনতম কেনাকাটা (৳)" : "Free Delivery Minimum (৳)"}
+              </label>
               <input
                 type="number"
                 value={freeDeliveryThreshold}
@@ -124,14 +142,22 @@ export default function AdminSettingsPage() {
         <div className="bg-[#0b2218] border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
           <h3 className="text-base font-extrabold text-white pb-3 border-b border-white/10 flex items-center gap-2">
             <i className="fa-solid fa-money-bill-wave text-[#E8AF30]"></i>
-            পেমেন্ট মেথড কনফিগারেশন
+            {isBn ? "পেমেন্ট মেথড কনফিগারেশন" : "Payment Gateways Configuration"}
           </h3>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10">
               <div>
-                <h4 className="text-xs font-bold text-white">ক্যাশ অন ডেলিভারি (Cash on Delivery - COD)</h4>
-                <p className="text-[11px] text-stone-400">পণ্য হাতে পেয়ে মূল্য পরিশোধের সুবিধা</p>
+                <h4 className="text-xs font-bold text-white">
+                  {isBn
+                    ? "ক্যাশ অন ডেলিভারি (Cash on Delivery - COD)"
+                    : "Cash on Delivery (COD)"}
+                </h4>
+                <p className="text-[11px] text-stone-400">
+                  {isBn
+                    ? "পণ্য হাতে পেয়ে মূল্য পরিশোধের সুবিধা"
+                    : "Pay in cash upon doorstep arrival"}
+                </p>
               </div>
               <input
                 type="checkbox"
@@ -144,8 +170,16 @@ export default function AdminSettingsPage() {
             <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-xs font-bold text-white">বিকাশ / নগদ মার্চেন্ট পেমেন্ট (bKash Gateway)</h4>
-                  <p className="text-[11px] text-stone-400">অনলাইন অটোমেটেড মার্চেন্ট ওয়ালেট</p>
+                  <h4 className="text-xs font-bold text-white">
+                    {isBn
+                      ? "বিকাশ / নগদ মার্চেন্ট পেমেন্ট (bKash Gateway)"
+                      : "bKash / Nagad Mobile Wallet"}
+                  </h4>
+                  <p className="text-[11px] text-stone-400">
+                    {isBn
+                      ? "অনলাইন অটোমেটেড মার্চেন্ট ওয়ালেট"
+                      : "Instant automated mobile money checkout"}
+                  </p>
                 </div>
                 <input
                   type="checkbox"
@@ -157,7 +191,9 @@ export default function AdminSettingsPage() {
 
               {enableBkash && (
                 <div>
-                  <label className="block text-xs font-bold text-stone-300 mb-1">মার্চেন্ট বিকাশ নম্বর</label>
+                  <label className="block text-xs font-bold text-stone-300 mb-1">
+                    {isBn ? "মার্চেন্ট বিকাশ নম্বর" : "Merchant bKash Number"}
+                  </label>
                   <input
                     type="text"
                     value={bkashNumber}
@@ -176,7 +212,7 @@ export default function AdminSettingsPage() {
             type="submit"
             className="px-8 py-3 rounded-2xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-xl transition-all"
           >
-            পরিবর্তন সংরক্ষণ করুন (Save Settings)
+            {isBn ? "পরিবর্তন সংরক্ষণ করুন (Save Settings)" : "Save Settings"}
           </button>
         </div>
       </form>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type * as LeafletType from "leaflet";
+import { useLanguage } from "@/context/LanguageContext";
 
 type FleetCourier = {
   id: string;
@@ -113,7 +114,9 @@ type AdminFleetMapProps = {
   isBn?: boolean;
 };
 
-export const AdminFleetMap = ({ isBn = true }: AdminFleetMapProps) => {
+export const AdminFleetMap = ({ isBn: propIsBn }: AdminFleetMapProps) => {
+  const { isBn: contextIsBn } = useLanguage();
+  const isBn = propIsBn !== undefined ? propIsBn : contextIsBn;
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<LeafletType.Map | null>(null);
   const activeLayerRef = useRef<LeafletType.TileLayer | null>(null);

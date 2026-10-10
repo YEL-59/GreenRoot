@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import type { Product } from "@/types";
 import { productCategories } from "@/data/products";
+import { useLanguage } from "@/context/LanguageContext";
 
 export type AddProductModalProps = {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const AddProductModal = ({
   onClose,
   onAddProduct,
 }: AddProductModalProps) => {
+  const { isBn } = useLanguage();
   const [title, setTitle] = useState("");
   const [titleBn, setTitleBn] = useState("");
   const [category, setCategory] = useState("milk-dairy");
@@ -72,9 +74,11 @@ export const AddProductModal = ({
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
           <div>
             <span className="text-[10px] text-[#E8AF30] font-bold uppercase tracking-wider block">
-              ইনভেন্টরি ম্যানেজমেন্ট
+              {isBn ? "ইনভেন্টরি ম্যানেজমেন্ট" : "Inventory Management"}
             </span>
-            <h3 className="text-xl font-extrabold text-white">নতুন অর্গানিক পণ্য আপলোড করুন (Upload Product)</h3>
+            <h3 className="text-xl font-extrabold text-white">
+              {isBn ? "নতুন অর্গানিক পণ্য আপলোড করুন (Upload Product)" : "Upload New Farm Product"}
+            </h3>
           </div>
 
           <button
@@ -88,31 +92,37 @@ export const AddProductModal = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">পণ্যের ইংরেজি নাম *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "পণ্যের ইংরেজি নাম *" : "Product English Name *"}
+              </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Organic Sundarban Honey"
+                placeholder={isBn ? "e.g. Organic Sundarban Honey" : "e.g. Organic Sundarban Honey"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">পণ্যের বাংলা নাম *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "পণ্যের বাংলা নাম *" : "Product Bengali Name *"}
+              </label>
               <input
                 type="text"
                 value={titleBn}
                 onChange={(e) => setTitleBn(e.target.value)}
-                placeholder="যেমন: সুন্দরবনের খাঁটি খলিশা মধু"
+                placeholder={isBn ? "যেমন: সুন্দরবনের খাঁটি খলিশা মধু" : "e.g. খাঁটি গাওয়া ঘি"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">ক্যাটাগরি বিভাগ *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "ক্যাটাগরি বিভাগ *" : "Category Department *"}
+              </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -122,49 +132,57 @@ export const AddProductModal = ({
                   .filter((c) => c.id !== "all")
                   .map((cat) => (
                     <option key={cat.id} value={cat.id}>
-                      {cat.nameBn} ({cat.name})
+                      {isBn ? `${cat.nameBn} (${cat.name})` : `${cat.name} (${cat.nameBn})`}
                     </option>
                   ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">পরিমাপ ইউনিট (Unit) *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "পরিমাপ ইউনিট (Unit) *" : "Unit of Measure *"}
+              </label>
               <input
                 type="text"
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                placeholder="১ কেজি / ১ লিটার / ১ আঁটি"
+                placeholder={isBn ? "১ কেজি / ১ লিটার / ১ আঁটি" : "1 kg / 1 Ltr / 1 Pack"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">বিক্রয় মূল্য (Price ৳) *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "বিক্রয় মূল্য (Price ৳) *" : "Selling Price (৳) *"}
+              </label>
               <input
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                placeholder="যেমন: 450"
+                placeholder={isBn ? "যেমন: 450" : "e.g. 450"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">নিয়মিত মূল্য (Original ৳ - ছাড়ের জন্য)</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "নিয়মিত মূল্য (Original ৳ - ছাড়ের জন্য)" : "Regular Price (৳ - for discount)"}
+              </label>
               <input
                 type="number"
                 value={originalPrice}
                 onChange={(e) => setOriginalPrice(e.target.value)}
-                placeholder="যেমন: 500"
+                placeholder={isBn ? "যেমন: 500" : "e.g. 500"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">মজুদ সংখ্যা (Initial Stock) *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "মজুদ সংখ্যা (Initial Stock) *" : "Initial Stock Quantity *"}
+              </label>
               <input
                 type="number"
                 value={stock}
@@ -176,12 +194,14 @@ export const AddProductModal = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-300 mb-1">খামারের উৎপত্তি স্থান *</label>
+              <label className="block text-xs font-bold text-stone-300 mb-1">
+                {isBn ? "খামারের উৎপত্তি স্থান *" : "Farm Origin Location *"}
+              </label>
               <input
                 type="text"
                 value={originBn}
                 onChange={(e) => setOriginBn(e.target.value)}
-                placeholder="যেমন: সাভার অর্গানিক ফার্ম"
+                placeholder={isBn ? "যেমন: সাভার অর্গানিক ফার্ম" : "e.g. Savar Dairy Farm, Dhaka"}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
                 required
               />
@@ -189,7 +209,9 @@ export const AddProductModal = ({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-300 mb-1">ছবির URL (Product Image URL)</label>
+            <label className="block text-xs font-bold text-stone-300 mb-1">
+              {isBn ? "ছবির URL (Product Image URL)" : "Product Image URL"}
+            </label>
             <input
               type="url"
               value={image}
@@ -200,23 +222,27 @@ export const AddProductModal = ({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-300 mb-1">বাংলা বিবরণ (Description)</label>
+            <label className="block text-xs font-bold text-stone-300 mb-1">
+              {isBn ? "বিবরণ (Description)" : "Description"}
+            </label>
             <textarea
               rows={3}
               value={descriptionBn}
               onChange={(e) => setDescriptionBn(e.target.value)}
-              placeholder="পণ্যের গুণাগুণ ও বিস্তারিত বর্ণনা লিখুন..."
+              placeholder={isBn ? "পণ্যের গুণাগুণ ও বিস্তারিত বর্ণনা লিখুন..." : "Enter product quality details and description..."}
               className="w-full px-3.5 py-2 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-stone-300 mb-1">প্রধান স্বাস্থ্য উপকারিতা (Key Benefit)</label>
+            <label className="block text-xs font-bold text-stone-300 mb-1">
+              {isBn ? "প্রধান স্বাস্থ্য উপকারিতা (Key Benefit)" : "Key Health Benefit"}
+            </label>
             <input
               type="text"
               value={benefit}
               onChange={(e) => setBenefit(e.target.value)}
-              placeholder="যেমন: কোনো রাসায়নিক সার বা কীটনাশক ছাড়া ১০০% প্রাকৃতিক"
+              placeholder={isBn ? "যেমন: কোনো রাসায়নিক সার বা কীটনাশক ছাড়া ১০০% প্রাকৃতিক" : "e.g. 100% pure & organic, chemical free"}
               className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-xs text-white focus:outline-none focus:border-[#E8AF30]"
             />
           </div>
@@ -227,13 +253,13 @@ export const AddProductModal = ({
               onClick={onClose}
               className="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-stone-300 text-xs font-bold transition-all"
             >
-              বাতিল
+              {isBn ? "বাতিল" : "Cancel"}
             </button>
             <button
               type="submit"
               className="px-6 py-2.5 rounded-xl bg-[#E8AF30] hover:bg-amber-400 text-[#002719] text-xs font-extrabold shadow-lg transition-all"
             >
-              পণ্য আপলোড সম্পন্ন করুন ✓
+              {isBn ? "পণ্য আপলোড সম্পন্ন করুন ✓" : "Upload & Save Product ✓"}
             </button>
           </div>
         </form>
